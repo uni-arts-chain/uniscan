@@ -1,0 +1,8 @@
+development:
+  :concurrency: 1
+production:
+  :concurrency: 1
+:queues:
+  - default
+  - erc721_events
+  - erc1155_events
