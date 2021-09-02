@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: accounts
+#
+#  id            :bigint           not null, primary key
+#  address       :string(255)
+#  blockchain_id :integer
+#  level         :integer          default(0)
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
+one:
+  address: "0x4c721c77190a44d640ff55be2699fe80a18ae730"
+  blockchain_id: blockchain_one.id
+
+two:
+  address: "0x63141638f37c77e4ad0189b76d02607a0c80a1e7"
+  blockchain_id: blockchain_one.id
+
