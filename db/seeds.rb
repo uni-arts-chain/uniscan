@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+#
+
+Blockchain.create(
+  [
+    { name: 'Ethereum', testnet: false, explorer_base_url: "https://etherscan.io/token/" },
+    { name: 'Darwinia', testnet: false },
+    { name: 'Moonbeam', testnet: false },
+    { name: 'Pangolin', testnet: true }
+  ]
+)
