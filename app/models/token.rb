@@ -7,7 +7,6 @@
 #  collection_id     :integer
 #  unique            :boolean          default(TRUE)
 #  supply            :integer          default(1)
-#  creator_id        :integer
 #  owner_id          :integer
 #  name              :string(255)
 #  description       :string(255)
@@ -22,8 +21,6 @@
 #
 class Token < ApplicationRecord
   belongs_to :collection
-  # TODO: a background to update creator
-  # belongs_to :creator, class_name: "Account"
   belongs_to :owner, class_name: "Account"
 
   validates :token_id_on_chain, presence: true

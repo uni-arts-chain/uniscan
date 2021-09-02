@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_02_134351) do
+ActiveRecord::Schema.define(version: 2021_09_02_135016) do
 
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "address"
@@ -59,7 +59,6 @@ ActiveRecord::Schema.define(version: 2021_09_02_134351) do
     t.integer "collection_id"
     t.boolean "unique", default: true
     t.integer "supply", default: 1
-    t.integer "creator_id"
     t.integer "owner_id"
     t.string "name"
     t.string "description"

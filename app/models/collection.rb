@@ -15,6 +15,7 @@
 #  creator_id        :integer
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
+#  supply            :integer          default(0)
 #
 class Collection < ApplicationRecord
   belongs_to :blockchain
