@@ -42,11 +42,18 @@ def set_is_permanent(token)
 end
 
 # TODO: more precise
+# https://github.com/ipfs/specs/issues/248
+# https://github.com/ipfs/in-web-browsers/blob/master/ADDRESSING.md
 def is_permanent_uri?(token_uri)
-  token_uri.include?("/ipfs/Qm")
+  token_uri.include?("/ipfs/") || token_uri.start_with?("ipfs://")
 end
 
 def parse_token_uri(token_uri, token)
+  # convert to gateway url if it is an ipfs scheme
+  if token_uri.start_with?("ipfs://")
+    token_uri = "https://dweb.link/ipfs/#{token_uri[7..]}"
+  end
+
   faraday = Faraday.new do |f|
     f.response :follow_redirects
     f.response :json
