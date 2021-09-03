@@ -10,8 +10,11 @@ namespace :token_uri do
         "(token_uri is not null and TRIM(token_uri) != '') and " +
         "token_uri_err is null"
       ).first
-
-      sleep 30 if token.blank?
+      
+      if token.blank?
+        sleep 3 
+        next
+      end
 
       puts token.id
       begin
@@ -23,7 +26,7 @@ namespace :token_uri do
             token.token_uri
           end
 
-        puts token_uri
+        set_is_permanent(token)
         parse_token_uri(token_uri, token)
       rescue => ex
         set_err(token, ex.message)
@@ -32,6 +35,15 @@ namespace :token_uri do
     end
   end
 
+end
+
+def set_is_permanent(token)
+  token.update is_permanent: is_permanent_uri?(token.token_uri)
+end
+
+# TODO: more precise
+def is_permanent_uri?(token_uri)
+  token_uri.include?("/ipfs/Qm")
 end
 
 def parse_token_uri(token_uri, token)
