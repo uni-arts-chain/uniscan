@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_02_135016) do
+ActiveRecord::Schema.define(version: 2021_09_03_004114) do
 
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "address"
@@ -61,15 +61,17 @@ ActiveRecord::Schema.define(version: 2021_09_02_135016) do
     t.integer "supply", default: 1
     t.integer "owner_id"
     t.string "name"
-    t.string "description"
+    t.text "description"
     t.string "image"
     t.text "token_uri"
+    t.text "token_uri_err"
     t.boolean "is_permanent"
-    t.string "explorer_url"
     t.integer "transfers_count", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "holders_count", default: 0
+    t.boolean "invalidated", default: false
+    t.integer "invalidated_reason"
   end
 
   create_table "transfers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
