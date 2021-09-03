@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_03_004114) do
+ActiveRecord::Schema.define(version: 2021_09_03_033327) do
 
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "address"
@@ -42,6 +42,10 @@ ActiveRecord::Schema.define(version: 2021_09_03_004114) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "supply", default: 0
+    t.string "creator_address"
+    t.integer "created_at_block"
+    t.integer "created_at_timestamp"
+    t.string "created_at_tx"
   end
 
   create_table "token_ownerships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

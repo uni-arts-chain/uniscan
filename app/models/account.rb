@@ -10,6 +10,6 @@
 #  updated_at    :datetime         not null
 #
 class Account < ApplicationRecord
+  belongs_to :blockchain
   validates :address, presence: true
-  validates :blockchain_id, presence: true
 end

@@ -11,7 +11,7 @@ namespace :token_uri do
         "token_uri_err is null"
       ).first
       
-      if token.blank?
+      if token.nil?
         sleep 3 
         next
       end

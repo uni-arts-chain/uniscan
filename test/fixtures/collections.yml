@@ -16,6 +16,9 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  supply            :integer          default(0)
+#  creator_address   :string(255)
+#  created_at_block  :integer
+#  created_at_tx     :string(255)
 #
 
 one:

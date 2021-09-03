@@ -16,10 +16,13 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  supply            :integer          default(0)
+#  creator_address   :string(255)
+#  created_at_block  :integer
+#  created_at_tx     :string(255)
 #
 class Collection < ApplicationRecord
   belongs_to :blockchain
-  # belongs_to :creator, class_name: "Account"
+  belongs_to :creator, class_name: "Account", optional: true
   has_many :tokens
 
   validates :blockchain_id, presence: true
