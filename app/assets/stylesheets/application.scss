@@ -1,2 +1,13 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
+$enable-rounded:   false;
 @import "bootstrap";
+
+.img-thumbnail {
+  border: 0px;
+}
+
+h1 {
+  font-family: "Fira Sans",sans-serif;
+  letter-spacing: normal;
+  font-size: 3.5rem;
+}
