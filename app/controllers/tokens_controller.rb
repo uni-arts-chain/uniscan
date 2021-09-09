@@ -17,11 +17,13 @@ class TokensController < ApplicationController
     tokens = query
       .where("tokens.id <= #{@first_token_id}")
 
-    @pagy, @tokens = pagy(tokens)
+    @pagy, @tokens = pagy(tokens, items: 120)
 
     @query_string = request.query_string.split("&").select do |q|
       q.start_with?("q%5B")
     end.join("&")
+
+    session[:q] = params[:q]
 
     respond_to do |format|
       format.html

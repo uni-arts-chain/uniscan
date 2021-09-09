@@ -4,6 +4,7 @@ export default class extends Controller {
   static targets = [ "tokens", "url", "loadMoreBtn" ]
 
   connect() {
+
   }
 
   loadMore() {

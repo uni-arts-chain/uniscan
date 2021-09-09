@@ -1,16 +1,19 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
-$enable-rounded:   false;
+// $enable-rounded:   false;
 @import "bootstrap";
 
 body {
-  background: #f5efe0;
-  font-family: "Inter var",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,sans-serif;
+  background: #fbf7f0;
 }
 
 .img-thumbnail {
-  border-color: #f5efe0;
+  border-color: #fbf7f0;
   // border-radius: 3px;
 }
+
+// .btn-primary {
+//   background: linear-gradient(90deg,#5522fa 0,#0074e4 100%)!important;
+// }
 
 h1 {
   // font-family: "Fira Sans",sans-serif;
