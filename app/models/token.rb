@@ -29,5 +29,17 @@ class Token < ApplicationRecord
   validates :token_id_on_chain, presence: true
   enum invalidated_reason: [ :token_uri_err, :blacklisted ]
 
-  after_create_commit { broadcast_prepend_to('tokens') }
+  after_create_commit { 
+    broadcast_prepend_to('tokens') 
+
+    broadcast_prepend_to("tokens:#{self.collection.blockchain_id}:_")
+    broadcast_prepend_to("tokens:_:#{self.collection.nft_type_before_type_cast}")
+    broadcast_prepend_to("tokens:#{self.collection.blockchain_id}:#{self.collection.nft_type_before_type_cast}")
+  }
+
+  private
+
+  def q_string_of
+    self.collection.blockchain_id
+  end
 end

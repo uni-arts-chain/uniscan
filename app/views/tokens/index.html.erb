@@ -36,7 +36,11 @@
     </div>
   <% end %>
 
-  <%= turbo_stream_from "tokens" %>
+  <% if @stream_name.blank? %>
+    <%= turbo_stream_from "tokens" %>
+  <% else %>
+    <%= turbo_stream_from "tokens", @stream_name %>
+  <% end %>
   <div id="tokens" class="row gx-0" data-welcome-target="tokens">
     <%= render @tokens %>
   </div>
@@ -46,7 +50,7 @@
       <button type="button" class="btn btn-outline-primary rounded-pill mt-4" data-action="welcome#loadMore" data-welcome-target="loadMoreBtn">
         Load More
       </button>
-      <div class="invisible" data-welcome-target="url"><%= tokens_url(page: @pagy.next, first_token_id: @first_token_id) + "&" + @query_string %></div>
+      <div class="invisible" data-welcome-target="url"><%= tokens_url(page: @pagy.next, first_token_id: @first_token_id) + "&" + @q_string %></div>
     </div>
   <% end %>
 
