@@ -1,6 +1,43 @@
 <main class="container py-4" data-controller="welcome">
   <h1 class="pb-4">UNISCAN.pro</h1>
 
+  <div class="pb-4">
+    <%= search_form_for @q, { class: "row g-3" } do |f| %>
+
+      <div class="col-md-3">
+        <%= 
+          f.select(
+            :collection_blockchain_id_eq, 
+            options_for_select(
+              Blockchain.all.map {|b| [b.name, b.id]}, 
+              f.object.collection_blockchain_id_eq
+            ),
+            { include_blank: "Select Chain" }, 
+            { class: "form-control" }
+          )
+        %>
+      </div>
+
+      <div class="col-md-3">
+        <%= 
+          f.select(
+            :collection_nft_type_eq, 
+            options_for_select(
+              Collection.nft_types.map {|name, num| [name, num]}, 
+              f.object.collection_nft_type_eq
+            ),
+            { include_blank: "Select NFT Type" }, 
+            { class: "form-control" }
+          )
+        %>
+      </div>
+
+      <div class="col-md-2">
+        <%= f.submit "Submit", { class: "btn btn-dark" } %>
+      </div>
+    <% end %>
+  </div>
+
   <%= turbo_stream_from "tokens" %>
   <div id="tokens" class="row gx-0" data-welcome-target="tokens">
     <%= render @tokens %>
@@ -10,7 +47,7 @@
     <button type="button" class="btn btn-dark mt-4" data-action="welcome#loadMore" data-welcome-target="loadMoreBtn">
       Load More
     </button>
-    <div data-welcome-target="url"><%= tokens_index_url(page: @pagy.next, first_token_id: @first_token_id) %></div>
+    <div data-welcome-target="url"><%= tokens_url(page: @pagy.next, first_token_id: @first_token_id) + "&" + @query_string %></div>
   <% end %>
 
 </main>

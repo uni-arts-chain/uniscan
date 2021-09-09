@@ -34,6 +34,7 @@ gem 'importmap-rails'
 gem 'hotwire-rails'
 gem 'bootstrap', '~> 5.1.0'
 gem 'pagy'
+gem 'ransack'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -52,6 +53,8 @@ group :development do
 
   # Annotate Rails classes with schema and routes info
   gem 'annotate'
+
+  gem 'faker'
 end
 
 group :test do
