@@ -22,9 +22,12 @@
 #  invalidated_reason :integer
 #
 class Token < ApplicationRecord
+
   belongs_to :collection
   belongs_to :owner, class_name: "Account"
 
   validates :token_id_on_chain, presence: true
   enum invalidated_reason: [ :token_uri_err, :blacklisted ]
+
+  after_create_commit { broadcast_prepend_to('tokens') }
 end

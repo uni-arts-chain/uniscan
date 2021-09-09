@@ -1,12 +1,8 @@
 <main class="container py-5" data-controller="welcome">
   <h1 class="pb-4">UNISCAN.pro</h1>
-  <div class="row items" data-masonry='{"percentPosition": true, "horizontalOrder": true}'>
+  <div class="row items">
 
-    <% @tokens.each do |token| %>
-      <div class="item col-sm-6 col-md-4 col-lg-2 mx-0 my-0 px-0 py-0">
-        <img src="<%= token.image %>" class="img-fluid" alt="<%= token.name.nil? ? '' : token.name %>">
-      </div>
-    <% end %>
+    <%= render @tokens %>
 
   </div>
 </main>

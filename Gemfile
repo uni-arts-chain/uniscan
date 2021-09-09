@@ -33,7 +33,7 @@ gem 'faraday_middleware'
 gem 'importmap-rails'
 gem 'hotwire-rails'
 gem 'bootstrap', '~> 5.1.0'
-gem 'jquery-rails'
+gem 'pagy'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

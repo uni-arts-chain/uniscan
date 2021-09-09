@@ -1,31 +1,36 @@
 import { Controller } from "@hotwired/stimulus"
 
-import $ from "jquery"
-import jQueryBridget from 'jquery-bridget';
-
-import Masonry from 'masonry-layout';
-
-// import ImagesLoaded from "imagesloaded"
-
 export default class extends Controller {
+  static targets = [ "tokens", "url", "loadMoreBtn" ]
+
   connect() {
+  }
 
-    jQueryBridget( 'masonry', Masonry, $ );
-    // jQueryBridget( 'imagesLoaded', ImagesLoaded, $ );
+  loadMore() {
+    // targets
+    let tokensTarget = this.tokensTarget;
+    let urlTarget = this.urlTarget;
+    let loadMoreBtnTarget = this.loadMoreBtnTarget;
 
-    // var $grid = $('.items').imagesLoaded( function() {
-    //   $grid.masonry({
-    //     itemSelector: ".item",
-    //     percentPosition: true
-    //   });
-    // });
+    // get url of next page
+    let url = urlTarget.textContent;
 
-    $(".item img").on("load", function() {
-      $(".items").masonry({
-        itemSelector: ".item",
-        percentPosition: true
-      });
-    })
-
+    // request more tokens
+    var request = new XMLHttpRequest();
+    request.open('GET', url, true);
+    request.setRequestHeader('Accept', 'application/json');
+    request.onload = function() {
+      if (this.status >= 200 && this.status < 400) {
+        var data = JSON.parse(this.response);
+        if(!data.next_page_url) {
+          loadMoreBtnTarget.parentNode.removeChild(loadMoreBtnTarget)
+          urlTarget.parentNode.removeChild(urlTarget)
+        } else {
+          urlTarget.innerHTML= data.next_page_url;
+        }
+        tokensTarget.insertAdjacentHTML("beforeend", data.entries);
+      }
+    };
+    request.send();
   }
 }

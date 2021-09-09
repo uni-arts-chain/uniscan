@@ -2,12 +2,39 @@
 $enable-rounded:   false;
 @import "bootstrap";
 
+body {
+  background: #f5efe0;
+  font-family: "Inter var",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,sans-serif;
+}
+
 .img-thumbnail {
-  border: 0px;
+  border-color: #f5efe0;
+  // border-radius: 3px;
 }
 
 h1 {
-  font-family: "Fira Sans",sans-serif;
+  // font-family: "Fira Sans",sans-serif;
+  // font-family: NonBreakingSpaceOverride,"Hoefler Text",Garamond,"Times New Roman",serif;
+  // letter-spacing: normal;
   letter-spacing: normal;
-  font-size: 3.5rem;
+  font-size: 3rem;
+  margin-bottom: 0;
 }
+
+.rect-img-container {
+  position: relative;
+}
+
+.rect-img-container::after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+.rect-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
