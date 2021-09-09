@@ -3,7 +3,12 @@ class TokensController < ApplicationController
     tokens = Token
       .where(invalidated: false, token_uri_err: nil)
       .where.not(image: nil)
-      .order(created_at: :desc)
+
+    if params[:first_token_id].present?
+      tokens = tokens.where("id <= #{params[:first_token_id]}")
+    end
+
+    tokens = tokens.order(created_at: :desc)
 
     @pagy, @tokens = pagy(tokens)
 
@@ -12,7 +17,7 @@ class TokensController < ApplicationController
       format.json {
         render json: { 
           entries: render_to_string(partial: "tokens", formats: [:html]),
-          next_page_url: @pagy.page == @pagy.last ? nil : tokens_index_url(page: @pagy.next)
+          next_page_url: @pagy.page == @pagy.last ? nil : tokens_index_url(page: @pagy.next, first_token_id: params[:first_token_id])
         }
       }
     end

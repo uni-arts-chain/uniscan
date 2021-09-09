@@ -10,7 +10,7 @@
     <button type="button" class="btn btn-dark mt-4" data-action="welcome#loadMore" data-welcome-target="loadMoreBtn">
       Load More
     </button>
-    <div class="invisible" data-welcome-target="url"><%= tokens_index_url(page: @pagy.next) %></div>
+    <div data-welcome-target="url"><%= tokens_index_url(page: @pagy.next, first_token_id: @tokens.first) %></div>
   <% end %>
 
 </main>
