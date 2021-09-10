@@ -4,24 +4,26 @@ class TokensController < ApplicationController
     params[:q]["s"] = "created_at desc" if params[:q]["s"].blank?
 
     @q = Token.ransack(params[:q])
-    query = @q.result
+    tokens = @q.result
       .where(invalidated: false, token_uri_err: nil)
       .where.not(image: nil)
 
     @first_token_id = 
       if params[:first_token_id].blank?
-        first_token = query.limit(1).first
-        first_token.id
+        first_token = tokens.limit(1).first
+        first_token&.id
       else
         params[:first_token_id]
       end
 
-    if params[:q]["s"].include?(" desc")
-      tokens = query
-        .where("tokens.id <= #{@first_token_id}")
-    else
-      tokens = query
-        .where("tokens.id >= #{@first_token_id}")
+    if @first_token_id
+      if params[:q]["s"].include?(" desc")
+        tokens = tokens 
+          .where("tokens.id <= #{@first_token_id}")
+      else
+        tokens = tokens
+          .where("tokens.id >= #{@first_token_id}")
+      end
     end
 
     @pagy, @tokens = pagy(tokens, items: 120)
