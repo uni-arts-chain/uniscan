@@ -2,15 +2,6 @@
   <h1 class="pb-4 text-center">UNISCAN.pro</h1>
 
   <%= search_form_for @q, { class: "row justify-content-md-left g-3 pb-4" } do |f| %>
-    <div class="col-md-4">
-      <%= 
-        f.search_field(
-          :name_or_description_cont,
-          { class: "form-control rounded-pill" } 
-        )
-        %>
-    </div>
-
     <div class="col-md-2">
       <%= 
         f.select(
@@ -39,8 +30,17 @@
       %>
     </div>
 
+    <div class="col-md-4">
+      <%= 
+        f.search_field(
+          :name_or_description_cont,
+          { class: "form-control rounded-pill", placeholder: "Name or description contains" } 
+        )
+        %>
+    </div>
+
     <div class="col-md-1">
-      <%= f.submit "Submit", { class: "btn btn-dark rounded-pill" } %>
+      <%= f.submit class: "btn btn-dark rounded-pill" %>
     </div>
 
     <div class="col-md-3 text-end">
