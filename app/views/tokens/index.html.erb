@@ -51,11 +51,11 @@
     </div>
   <% end %>
 
-  <% if @q_string.include?("created_at desc") %>
-    <% if @stream_name.blank? %>
+  <% if stream_needed?(@q_string) %>
+    <% if @stream_sub_name.blank? %>
       <%= turbo_stream_from "tokens" %>
     <% else %>
-      <%= turbo_stream_from "tokens", @stream_name %>
+      <%= turbo_stream_from "tokens", @stream_sub_name %>
     <% end %>
   <% end %>
   <div id="tokens" class="row gx-3 gy-4" data-welcome-target="tokens">

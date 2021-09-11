@@ -37,7 +37,7 @@ class TokensController < ApplicationController
         + "&" \
         + @q_string
     end
-    @stream_name = build_stream_name(params[:q])
+    @stream_sub_name = build_stream_sub_name(params[:q])
 
     respond_to do |format|
       format.html
@@ -62,6 +62,9 @@ class TokensController < ApplicationController
     if q["collection_nft_type_eq"].present?
       result_arr << "q[collection_nft_type_eq]=#{q["collection_nft_type_eq"]}"
     end
+    if q["name_or_description_cont"].present?
+      result_arr << "q[name_or_description_cont=#{q["name_or_description_cont"]}"
+    end
     if q["s"].present?
       result_arr << "q[s]=#{q["s"]}"
     end
@@ -75,7 +78,8 @@ class TokensController < ApplicationController
     end
   end
 
-  def build_stream_name(q)
+  # tokens:stream_sub_name
+  def build_stream_sub_name(q)
     return nil if q.blank?
 
     result_arr = []
