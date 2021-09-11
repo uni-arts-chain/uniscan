@@ -12,6 +12,34 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <header class="d-flex flex-wrap justify-content-center py-3 mb-3">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+          <%= image_tag "logo-uniscan.png", size: "100x100" %>
+          <span class="fs-2 mx-2">UNISCAN</span>
+        </a>
+
+        <ul class="nav nav-pills align-items-center">
+          <li class="nav-item"><a href="#" class="nav-link link-dark" aria-current="page">Home</a></li>
+          <li class="nav-item"><a href="#" class="nav-link link-dark">Features</a></li>
+          <li class="nav-item"><a href="#" class="nav-link link-dark">Pricing</a></li>
+          <li class="nav-item"><a href="#" class="nav-link link-dark">FAQs</a></li>
+          <li class="nav-item"><a href="#" class="nav-link link-dark">About</a></li>
+        </ul>
+      </header>
+      <main>
+        <%= yield %>
+      </main>
+      <footer class="text-muted my-5">
+        <p class="float-end mb-1">
+          <a href="#" class="link-dark">Back to top</a>
+        </p>
+        <p class="mb-1">Uniscan NFT Explorer wants to be the best place to analyze, track and discover NFTs.</p>
+        <p class="mb-0">Potential users of the NFT browser include NFT collectors, NFT creators, NFT speculators and other applications.</p>
+        <div class="d-flex justify-content-between py-1">
+          <p>&copy; 2021 Uniscan. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>

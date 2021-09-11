@@ -1,74 +1,71 @@
-<main class="container py-4" data-controller="welcome">
-  <h1 class="pb-4 text-center">UNISCAN.pro</h1>
-
-  <%= search_form_for @q, { class: "row justify-content-md-left g-3 pb-4" } do |f| %>
-    <div class="col-md-2">
-      <%= 
-        f.select(
-          :collection_blockchain_id_eq, 
-          options_for_select(
-            Blockchain.all.map {|b| [b.name, b.id]}, 
-            f.object.collection_blockchain_id_eq
-          ),
-          { include_blank: "Select Chain" }, 
-          { class: "form-control rounded-pill" }
-        )
-      %>
-    </div>
-
-    <div class="col-md-2">
-      <%= 
-        f.select(
-          :collection_nft_type_eq, 
-          options_for_select(
-            Collection.nft_types.map {|name, num| [name, num]}, 
-            f.object.collection_nft_type_eq
-          ),
-          { include_blank: "Select NFT Type" }, 
-          { class: "form-control rounded-pill" }
-        )
-      %>
-    </div>
-
-    <div class="col-md-4">
-      <%= 
-        f.search_field(
-          :name_or_description_cont,
-          { class: "form-control rounded-pill", placeholder: "Name or description contains" } 
-        )
+  <div data-controller="welcome">
+    <%= search_form_for @q, { class: "row justify-content-md-left g-3 pb-4" } do |f| %>
+      <div class="col-md-2">
+        <%= 
+          f.select(
+            :collection_blockchain_id_eq, 
+            options_for_select(
+              Blockchain.all.map {|b| [b.name, b.id]}, 
+              f.object.collection_blockchain_id_eq
+            ),
+            { include_blank: "Select Chain" }, 
+            { class: "form-control rounded-pill" }
+          )
         %>
-    </div>
+      </div>
 
-    <div class="col-md-1">
-      <%= f.submit class: "btn btn-dark rounded-pill" %>
-    </div>
+      <div class="col-md-2">
+        <%= 
+          f.select(
+            :collection_nft_type_eq, 
+            options_for_select(
+              Collection.nft_types.map {|name, num| [name, num]}, 
+              f.object.collection_nft_type_eq
+            ),
+            { include_blank: "Select NFT Type" }, 
+            { class: "form-control rounded-pill" }
+          )
+        %>
+      </div>
 
-    <div class="col-md-3 text-end">
-        <%= sort_link @q, :created_at, "Time", { default_order: :desc }, { class: "btn btn-link link-dark" } %>
-        <%# <%= sort_link @q, :transfers_24h, "TR24H", {}, { class: "btn btn-link link-secondary px-1" } %1> %>
-        <%# <%= sort_link @q, :transfers_7d, "TR7D", {}, { class: "btn btn-link link-secondary px-1" } %1> %>
-        <%# <%= sort_link @q, :latest_transfer_time, "LTR", {}, { class: "btn btn-link link-secondary px-1" } %1> %>
-    </div>
-  <% end %>
+      <div class="col-md-4">
+        <%= 
+          f.search_field(
+            :name_or_description_cont,
+            { class: "form-control rounded-pill", placeholder: "Name or description contains" } 
+          )
+          %>
+      </div>
 
-  <% if stream_needed?(@q_string) %>
-    <% if @stream_sub_name.blank? %>
-      <%= turbo_stream_from "tokens" %>
-    <% else %>
-      <%= turbo_stream_from "tokens", @stream_sub_name %>
+      <div class="col-md-1">
+        <%= f.submit class: "btn btn-dark rounded-pill" %>
+      </div>
+
+      <div class="col-md-3 text-end">
+          <%= sort_link @q, :created_at, "Time", { default_order: :desc }, { class: "btn btn-link link-dark" } %>
+          <%# <%= sort_link @q, :transfers_24h, "TR24H", {}, { class: "btn btn-link link-secondary px-1" } %1> %>
+          <%# <%= sort_link @q, :transfers_7d, "TR7D", {}, { class: "btn btn-link link-secondary px-1" } %1> %>
+          <%# <%= sort_link @q, :latest_transfer_time, "LTR", {}, { class: "btn btn-link link-secondary px-1" } %1> %>
+      </div>
     <% end %>
-  <% end %>
-  <div id="tokens" class="row gx-3 gy-4" data-welcome-target="tokens">
-    <%= render @tokens %>
-  </div>
 
-  <% unless @pagy.page == @pagy.last %>
-    <div class="row gx-0">
-      <button type="button" class="btn btn-outline-dark rounded-pill mt-4" data-action="welcome#loadMore" data-welcome-target="loadMoreBtn">
-        Load More
-      </button>
-      <div class="invisible" data-welcome-target="url"><%= @next_page_url %></div>
+    <% if stream_needed?(@q_string) %>
+      <% if @stream_sub_name.blank? %>
+        <%= turbo_stream_from "tokens" %>
+      <% else %>
+        <%= turbo_stream_from "tokens", @stream_sub_name %>
+      <% end %>
+    <% end %>
+    <div id="tokens" class="row gx-3 gy-4" data-welcome-target="tokens">
+      <%= render @tokens %>
     </div>
-  <% end %>
 
-</main>
+    <% unless @pagy.page == @pagy.last %>
+      <div class="row gx-0">
+        <button type="button" class="btn btn-outline-dark rounded-pill mt-4" data-action="welcome#loadMore" data-welcome-target="loadMoreBtn">
+          Load More
+        </button>
+        <div class="invisible" data-welcome-target="url"><%= @next_page_url %></div>
+      </div>
+    <% end %>
+  </div>
