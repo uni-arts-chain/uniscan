@@ -26,13 +26,16 @@ class TokensController < ApplicationController
       end
     end
 
-    @pagy, @tokens = pagy(tokens, items: 120)
+    @pagy, @tokens = pagy(tokens, items: 36)
 
     @q_string = build_q_string(params[:q])
     if @pagy.page == @pagy.last
       @next_page_url = nil
     else
-      @next_page_url = tokens_url(page: @pagy.next, first_token_id: @first_token_id) + "&" + @q_string
+      @next_page_url = 
+        tokens_url(page: @pagy.next, first_token_id: @first_token_id) \
+        + "&" \
+        + @q_string
     end
     @stream_name = build_stream_name(params[:q])
 

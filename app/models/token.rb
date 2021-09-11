@@ -37,6 +37,9 @@ class Token < ApplicationRecord
     broadcast_prepend_to("tokens:#{self.collection.blockchain_id}:#{self.collection.nft_type_before_type_cast}")
   }
 
+  delegate :blockchain, to: :collection
+  delegate :nft_type, to: :collection
+
   private
 
   def q_string_of
