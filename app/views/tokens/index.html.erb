@@ -1,4 +1,4 @@
-  <div data-controller="welcome">
+  <div data-controller="tokens">
     <%= search_form_for @q, { class: "row justify-content-md-left g-3 pb-4" } do |f| %>
       <div class="col-md-2">
         <%= 
@@ -56,16 +56,16 @@
         <%= turbo_stream_from "tokens", @stream_sub_name %>
       <% end %>
     <% end %>
-    <div id="tokens" class="row gx-3 gy-4" data-welcome-target="tokens">
+    <div id="tokens" class="row gx-3 gy-4" data-tokens-target="tokens">
       <%= render @tokens %>
     </div>
 
     <% unless @pagy.page == @pagy.last %>
       <div class="row gx-0">
-        <button type="button" class="btn btn-outline-dark rounded-pill mt-4" data-action="welcome#loadMore" data-welcome-target="loadMoreBtn">
+        <button type="button" class="btn btn-outline-dark rounded-pill mt-4" data-action="tokens#loadMore" data-tokens-target="loadMoreBtn">
           Load More
         </button>
-        <div class="invisible" data-welcome-target="url"><%= @next_page_url %></div>
+        <div class="invisible" data-tokens-target="url"><%= @next_page_url %></div>
       </div>
     <% end %>
   </div>
