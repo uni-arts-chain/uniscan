@@ -38,18 +38,23 @@ h1 {
   // background-color: $indigo-400;
 }
 
+.card:hover {
+  box-shadow: 0 1rem 3rem rgba($black, .175);
+  z-index: 100;
+}
+
 .outline {
   outline-style: ridge;
-  outline-width: 4px;
+  outline-width: 5px;
   outline-color: $warning;
   border-style: inset;
-  border-width: 6px;
+  border-width: 5px;
   border-color: $warning;
 }
 
 .outline-normal {
   border-style: solid;
-  border-width: 6px;
+  border-width: 5px;
   border-color: #fff;
 }
 
