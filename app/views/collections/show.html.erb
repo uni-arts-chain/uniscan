@@ -1,0 +1,29 @@
+<section class="py-5 text-center container">
+  <div class="row">
+    <div class="col-lg-6 col-md-8 mx-auto">
+
+      <%= image_tag @collection.representative_token.image, size: "160x160", style: "border-radius: 50%" %>
+      <h1 class="fw-light mt-2"><%= @collection.name %></h1>
+
+      <p>
+        <span><%= @collection.supply %> <%= @collection.symbol %></span>
+        <span><%= @collection.holders_count %> Holders</span>
+        <span><%= @collection.transfers_count %> Tranfers</span>
+      </p>
+
+      <p>
+        <span>Creator: <%= @collection.creator.address %></span>
+      </p>
+
+    </div>
+  </div>
+</section>
+
+<div class="row gx-3 gy-4">
+  <%= render partial: "token", collection: @tokens %>
+</div>
+
+
+<p>
+  <%== pagy_bootstrap_nav(@pagy) %>
+</p>

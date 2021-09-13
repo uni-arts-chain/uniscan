@@ -34,4 +34,8 @@ class Collection < ApplicationRecord
   def explorer_url
     self.blockchain.explorer_base_url + self.contract_address
   end
+
+  def representative_token
+    self.tokens.first
+  end
 end
