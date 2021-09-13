@@ -80,6 +80,18 @@ h1 {
   // object-fit: contain;
 }
 
-.pagy-bootstrap-nav {
-  border: 0;
+.page-link {
+  color: #212529;
 }
+
+.page-item a:hover {
+  color: #212529;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #212529;
+    border-color: #212529;
+}
+

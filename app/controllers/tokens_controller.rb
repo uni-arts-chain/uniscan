@@ -50,6 +50,10 @@ class TokensController < ApplicationController
     end
   end
 
+  def show
+    @token = Token.find(params[:id])
+  end
+
   private
 
   def build_q_string(q)

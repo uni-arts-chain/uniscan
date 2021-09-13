@@ -1,0 +1,20 @@
+<div class="px-4 pt-4 text-center">
+  <div class="container px-5">
+    <img src="<%= @token.image %>" class="img-fluid border rounded-3 shadow-lg mb-5" alt="Example image" width="700" height="500" loading="lazy">
+  </div>
+
+  <h1 class="display-4 fw-bold"><%= @token.name %></h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4"><%= @token.description %></p>
+  </div>
+
+  <div class="col-lg-6 mx-auto">
+    <% if @token.is_permanent? %>
+      <div class="text-muted">This is a permanent NFT"</div>
+    <% end %>
+    <div class="text-muted">Bootstrap Parcel starter (coming soon!)</div>
+    <div class="text-muted">Bootstrap Parcel starter (coming soon!)</div>
+    <div class="text-muted">Bootstrap Parcel starter (coming soon!)</div>
+  </div>
+
+</div>

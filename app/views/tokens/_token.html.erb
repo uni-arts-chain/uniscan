@@ -9,7 +9,11 @@
     </div>
     <div class="card-body px-2 py-1">
 
-      <div class="text-truncate small"><%= token.name.nil? ? '_' : token.name %></div>
+      <div class="text-truncate small">
+        <%= link_to url_for(token_path(token)) do %>
+          <%= token.name.nil? ? '_' : token.name %>
+        <% end %>
+      </div>
 
       <div class="text-truncate py-1" style="font-size: 0.7rem;">
         <%= image_tag("ethereum.svg", size: "16x16", class: "rounded-circle") %>
