@@ -9,7 +9,7 @@
   </div>
 
   <div class="col-lg-6 mx-auto">
-    <% if @token.is_permanent? %>
+    <% if @token.ipfs? %>
       <div class="text-muted">This is a permanent NFT"</div>
     <% end %>
     <div class="text-muted">Bootstrap Parcel starter (coming soon!)</div>

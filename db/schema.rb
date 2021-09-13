@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_03_033327) do
+ActiveRecord::Schema.define(version: 2021_09_13_072856) do
 
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "address"
@@ -48,6 +48,14 @@ ActiveRecord::Schema.define(version: 2021_09_03_033327) do
     t.string "created_at_tx"
   end
 
+  create_table "properties", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.text "value"
+    t.integer "token_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "token_ownerships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "token_id"
     t.integer "account_id"
@@ -69,13 +77,12 @@ ActiveRecord::Schema.define(version: 2021_09_03_033327) do
     t.string "image"
     t.text "token_uri"
     t.text "token_uri_err"
-    t.boolean "is_permanent"
+    t.boolean "ipfs", default: false
     t.integer "transfers_count", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "holders_count", default: 0
-    t.boolean "invalidated", default: false
-    t.integer "invalidated_reason"
+    t.boolean "token_uri_parsed", default: false
   end
 
   create_table "transfers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

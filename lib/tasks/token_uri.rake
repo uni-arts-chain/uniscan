@@ -4,11 +4,8 @@ namespace :token_uri do
     while true
 
       token = Token.where(
-        "name is null and " +
-        "description is null and " +
-        "image is null and " +
-        "(token_uri is not null and TRIM(token_uri) != '') and " +
-        "token_uri_err is null"
+        "token_uri_parsed = false and " +
+        "(token_uri is not null and TRIM(token_uri) != '')"
       ).first
       
       if token.nil?
@@ -26,7 +23,6 @@ namespace :token_uri do
             token.token_uri
           end
 
-        set_is_permanent(token)
         parse_token_uri(token_uri, token)
       rescue => ex
         set_err(token, ex.message)
@@ -37,17 +33,17 @@ namespace :token_uri do
 
 end
 
-def set_is_permanent(token)
-  token.update is_permanent: is_permanent_uri?(token.token_uri)
-end
-
 # TODO: more precise
 # https://github.com/ipfs/specs/issues/248
 # https://github.com/ipfs/in-web-browsers/blob/master/ADDRESSING.md
-def is_permanent_uri?(token_uri)
-  token_uri.include?("/ipfs/") || token_uri.start_with?("ipfs://")
+def is_ipfs_uri?(uri)
+  uri.include?("/ipfs/") || uri.start_with?("ipfs://")
 end
 
+# infos:
+# https://eips.ethereum.org/EIPS/eip-721
+# https://eips.ethereum.org/EIPS/eip-1155#metadata
+# https://docs.opensea.io/docs/metadata-standards
 def parse_token_uri(token_uri, token)
   # convert to gateway url if it is an ipfs scheme
   if token_uri.start_with?("ipfs://")
@@ -63,19 +59,46 @@ def parse_token_uri(token_uri, token)
   
   if response.status == 200
     body = response.body
-    if body["name"] or body["description"] or body["image"]
-      token.update(
-        name: body["name"],
-        description: body["description"],
-        image: body["image"]
-      ) 
-    else # if all nil
-      err_msg = "The name, description and image are all null"
-      set_err(token, err_msg)
-    end
+    clean(token)
+    parse_content(token, body)
   else
     err_msg = "Response status is #{response.status}"
     set_err(token, err_msg)
+  end
+end
+
+def clean(token)
+  token.update(
+    token_uri_err: nil,
+  )
+
+  Property.where(token: token).delete_all
+end
+
+def parse_content(token, body)
+  if body["image"].nil?
+    err_msg = "The `image` is a required property."
+    set_err(token, err_msg)
+  else
+    is_ipfs = is_ipfs_uri?(token.token_uri) && is_ipfs_uri?(body["image"])
+    token.update(
+      name: body["name"],
+      description: body["description"],
+      image: body["image"],
+      token_uri_parsed: true,
+      ipfs: is_ipfs
+    ) 
+
+    body.each_pair do |name, value|
+      unless %w[name description image].include?(name)
+        Property.create(
+          name: name,
+          value: value.to_s,
+          token: token
+        )
+      end
+    end
+
   end
 end
 
@@ -83,7 +106,6 @@ def set_err(token, err_msg)
   puts err_msg
   token.update(
     token_uri_err: err_msg,
-    invalidated: true,
-    invalidated_reason: Token.invalidated_reasons[:token_uri_err]
+    token_uri_parsed: true
   )
 end

@@ -2,23 +2,24 @@
 #
 # Table name: collections
 #
-#  id                :bigint           not null, primary key
-#  name              :string(255)
-#  symbol            :string(255)
-#  blockchain_id     :integer
-#  contract_platform :integer          default("evm")
-#  contract_address  :string(255)
-#  nft_type          :integer          default("erc721")
-#  total_supply      :integer
-#  holders_count     :integer          default(0)
-#  transfers_count   :integer          default(0)
-#  creator_id        :integer
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  supply            :integer          default(0)
-#  creator_address   :string(255)
-#  created_at_block  :integer
-#  created_at_tx     :string(255)
+#  id                   :bigint           not null, primary key
+#  name                 :string(255)
+#  symbol               :string(255)
+#  blockchain_id        :integer
+#  contract_platform    :integer          default("evm")
+#  contract_address     :string(255)
+#  nft_type             :integer          default("erc721")
+#  total_supply         :integer
+#  holders_count        :integer          default(0)
+#  transfers_count      :integer          default(0)
+#  creator_id           :integer
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  supply               :integer          default(0)
+#  creator_address      :string(255)
+#  created_at_block     :integer
+#  created_at_timestamp :integer
+#  created_at_tx        :string(255)
 #
 
 one:

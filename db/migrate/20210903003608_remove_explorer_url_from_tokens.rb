@@ -1,5 +1,5 @@
 class RemoveExplorerUrlFromTokens < ActiveRecord::Migration[6.1]
   def change
-    remove_column :tokens, :explorer_url
+    remove_column :tokens, :explorer_url, :string
   end
 end

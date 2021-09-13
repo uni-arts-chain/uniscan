@@ -5,7 +5,7 @@ class TokensController < ApplicationController
 
     @q = Token.ransack(params[:q])
     tokens = @q.result
-      .where(invalidated: false, token_uri_err: nil)
+      .where(token_uri_err: nil)
       .where.not(image: nil)
 
     @first_token_id = 
