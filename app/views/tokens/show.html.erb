@@ -1,20 +1,38 @@
 <div class="px-4 pt-4 text-center">
-  <div class="container px-5">
-    <img src="<%= @token.image %>" class="img-fluid border rounded-3 shadow-lg mb-5" alt="Example image" width="700" height="500" loading="lazy">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col col-lg-7 position-relative">
+        <img src="<%= @token.image %>" class="img-fluid border rounded-3 shadow-lg" style="width: 100%">
+          <span class="badge position-absolute bottom-0 end-0" style="right: 13px !important;background-color: #6acad1">
+            IPFS
+          </span>
+          <span class="badge <%= @token.nft_type == "erc721" ? "bg-dark" : "bg-light text-dark" %> position-absolute bottom-0 end-0" style="right: 56px !important;">
+            <%= @token.nft_type %>
+          </span>
+        </img>
+      </div>
   </div>
 
-  <h1 class="display-4 fw-bold"><%= @token.name %></h1>
+  <h1 class="display-4 fw-bold mt-5"><%= @token.name %></h1>
   <div class="col-lg-6 mx-auto">
     <p class="lead mb-4"><%= @token.description %></p>
   </div>
 
   <div class="col-lg-6 mx-auto">
-    <% if @token.ipfs? %>
-      <div class="text-muted">This is a permanent NFT"</div>
+    <h2 class="text-start">Properties</h2>
+    
+    <div class="text-muted mb-2 text-start"><strong>Image</strong></div>
+    <div class="text-muted mb-2 text-start">
+      <pre><%= @token.image %></pre>
+    </div>
+
+    <% @token.properties.each do |p| %>
+      <div class="text-muted mb-2 text-start"><strong><%= p.name %></strong></div>
+      <div class="text-muted mb-2 text-start">
+        <pre><%= property_value(p.value) %></pre>
+      </div>
     <% end %>
-    <div class="text-muted">Bootstrap Parcel starter (coming soon!)</div>
-    <div class="text-muted">Bootstrap Parcel starter (coming soon!)</div>
-    <div class="text-muted">Bootstrap Parcel starter (coming soon!)</div>
+
   </div>
 
 </div>

@@ -91,9 +91,14 @@ def parse_content(token, body)
 
     body.each_pair do |name, value|
       unless %w[name description image].include?(name)
+        v = if value.class == Hash || value.class == Array
+              value.to_json
+            else
+              value.to_s
+            end
         Property.create(
           name: name,
-          value: value.to_s,
+          value: v,
           token: token
         )
       end

@@ -25,4 +25,13 @@ module TokensHelper
     q["q"]["s"] == "created_at desc" && q["q"]["name_or_description_cont"].blank?
   end
 
+  def property_value(value)
+    begin
+      v = JSON.pretty_generate(JSON.parse(value))
+      puts v
+      v
+    rescue => ex
+      value
+    end
+  end
 end
