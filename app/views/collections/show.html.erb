@@ -12,7 +12,10 @@
       </p>
 
       <p>
-        <span>Creator: <%= @collection.creator.address %></span>
+        <span>Contract: <%= link_to @collection.contract_address, @collection.explorer_url %></span>
+      </p>
+      <p>
+        <span>Created by: <%= link_to @collection.creator.address, @collection.creator.explorer_url %></span>
       </p>
 
     </div>

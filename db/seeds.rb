@@ -9,7 +9,12 @@
 
 Blockchain.create(
   [
-    { name: 'Ethereum', testnet: false, explorer_base_url: "https://etherscan.io/token/" },
+    { 
+      name: 'Ethereum', 
+      testnet: false, 
+      explorer_token_url: "https://etherscan.io/token/", 
+      explorer_address_url: "https://etherscan.io/address/"
+    },
     { name: 'Darwinia', testnet: false },
     { name: 'Moonbeam', testnet: false },
     { name: 'Pangolin', testnet: true }

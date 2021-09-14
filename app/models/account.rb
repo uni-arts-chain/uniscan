@@ -28,4 +28,9 @@ class Account < ApplicationRecord
 
     result
   end
+
+  def explorer_url
+    self.blockchain.explorer_address_url + self.address
+  end
+
 end
