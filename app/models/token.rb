@@ -40,6 +40,15 @@ class Token < ApplicationRecord
   delegate :blockchain, to: :collection
   delegate :nft_type, to: :collection
 
+  scope :eligible, -> {
+    where(
+      "token_uri_err is null and " + 
+      "TRIM(token_uri) != '' and " +
+      "image is not null and " + 
+      "TRIM(image) != ''"
+    )
+  }
+
   def historical_owners_count
     Transfer.where(token: self).distinct.count(:token_id)
   end

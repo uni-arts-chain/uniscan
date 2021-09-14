@@ -2,11 +2,6 @@
   <div class="position-relative">
     <img src="<%= token.image %>" alt="<%= token.name.nil? ? '' : token.name %>" style="width: 100%" />
 
-    <% if for_transfered %>
-      <span class="position-absolute top-0 start-100 translate-middle badge bg-dark">
-        <%= token.transfers_count %> 
-      </span>
-    <% end %>
     <% if token.ipfs? %>
       <span class="badge position-absolute bottom-0 end-0" style="background-color: #6acad1">
         IPFS
@@ -29,18 +24,18 @@
     </div>
 
     <div class="text-truncate py-1" style="font-size: 0.7rem;">
-      <%= image_tag("ethereum.svg", size: "16x16", class: "rounded-circle") %>
-      <span class="small align-bottom">
-        <% if token.owners.count == 1 %>
-          <%= link_to account_path(token.owners[0]) do %>
-            <%= short_address(token.owner.address) %>
-          <% end %>
-        <% elsif token.owners.count > 1 %>
-          owned by <%= token.owners.count %> addresses
-        <% else %>
-            -
+      <div class="small align-bottom">
+        From: 
+        <%= link_to account_path(transfer.from) do %>
+          <%= short_address(transfer.from.address) %>
         <% end %>
-      </span>
+      </div>
+      <div class="small align-bottom">
+        To: 
+        <%= link_to account_path(transfer.to) do %>
+          <%= short_address(transfer.to.address) %>
+        <% end %>
+      </div>
     </div>
 
     <div class="text-truncate py-1" style="font-size: 0.7rem;">

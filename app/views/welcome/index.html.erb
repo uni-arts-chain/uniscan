@@ -1,6 +1,38 @@
 <div data-controller="welcome">
-  <h2 class="pb-4">New NFTs</h2>
-  <div class="my-container" data-welcome-target="newNfts">
-    <%= render partial: "welcome/token", collection: @tokens %>
+  <div class="py-3 pe-3">
+    <h2 class="float-start">New NFTs</h2>
+    <a href="<%= url_for tokens_path %>" class="float-end">Expand</a>
+  </div>
+  <div class="my-container pt-2 pb-2 mb-5" data-welcome-target="newNfts" style="width: 110%">
+    <%= render partial: "welcome/token", collection: @tokens, locals: { for_transfered: false } %>
+  </div>
+
+  <div class="py-5 pe-3">
+    <h2 class="float-start">Latest transfers</h2>
+  </div>
+  <div class="my-container pt-2 pb-2 mb-5" data-welcome-target="" style="width: 110%">
+    <% @transfers.each do |transfer| %>
+      <%= render partial: "welcome/transfer", locals: { token: transfer.token, transfer: transfer } %>
+    <% end %>
+  </div>
+
+  <div class="py-5 pe-3">
+    <h2 class="float-start">Highest 24h transfered</h2>
+    <a href="<%= url_for tokens_path %>" class="float-end">Expand</a>
+  </div>
+  <div class="my-container pt-2 pb-2 mb-5" data-welcome-target="" style="width: 110%">
+    <% @highest_24h.each do |token| %>
+      <%= render partial: "welcome/token", locals: { token: token, for_transfered: true } %>
+    <% end %>
+  </div>
+
+  <div class="py-5 pe-3">
+    <h2 class="float-start">Highest 7d transfered</h2>
+    <a href="<%= url_for tokens_path %>" class="float-end">Expand</a>
+  </div>
+  <div class="my-container pt-3 pb-2 mb-5" data-welcome-target="" style="width: 110%">
+    <% @highest_7d.each do |token| %>
+      <%= render partial: "welcome/token", locals: { token: token, for_transfered: true } %>
+    <% end %>
   </div>
 </div>

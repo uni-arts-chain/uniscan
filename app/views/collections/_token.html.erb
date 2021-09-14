@@ -9,7 +9,7 @@
     </div>
     <div class="card-body px-2 py-1">
 
-      <div class="text-truncate small">
+      <div class="text-truncate small py-1">
         <%= link_to url_for(token_path(token)) do %>
           <%= token.name.nil? ? '_' : token.name %>
         <% end %>

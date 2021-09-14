@@ -1,11 +1,21 @@
 class WelcomeController < ApplicationController
   def index
-    @tokens = Token.where(
-      "token_uri_err is null and " + 
-      "TRIM(token_uri) != '' and " +
-      "image is not null and " + 
-      "TRIM(image) != ''"
-    ).order(created_at: :asc).offset(23).limit(50)
+    @tokens = Token.eligible
+      .order(created_at: :desc)
+      .limit(50)
+
+    @transfers = Transfer.order(created_at: :desc)
+      .limit(50)
+
+    @highest_24h = Token.eligible
+      .where('created_at > ?', 1024.hours.ago)
+      .order(transfers_count: :desc)
+      .limit(50)
+
+    @highest_7d = Token.eligible
+      .where('created_at > ?', 7.days.ago)
+      .order(transfers_count: :desc)
+      .limit(50)
   end
 
   def hello
