@@ -27,9 +27,7 @@ module TokensHelper
 
   def property_value(value)
     begin
-      v = JSON.pretty_generate(JSON.parse(value))
-      puts v
-      v
+      JSON.pretty_generate(JSON.parse(value))
     rescue => ex
       value
     end

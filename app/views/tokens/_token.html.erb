@@ -18,7 +18,15 @@
       <div class="text-truncate py-1" style="font-size: 0.7rem;">
         <%= image_tag("ethereum.svg", size: "16x16", class: "rounded-circle") %>
         <span class="small align-bottom">
-          <%= token.owner.nil? ? '_' : short_address(token.owner.address) %>
+          <% if token.owners.count == 1 %>
+            <%= link_to account_path(token.owners[0]) do %>
+              <%= short_address(token.owner.address) %>
+            <% end %>
+          <% elsif token.owners.count > 1 %>
+            owned by <%= token.owners.count %> addresses
+          <% else %>
+              -
+          <% end %>
         </span>
       </div>
 

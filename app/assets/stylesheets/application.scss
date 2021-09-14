@@ -1,5 +1,5 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
-$enable-rounded:   false;
+$enable-rounded: false;
 @import "bootstrap";
 @import "bootstrap-icons";
 
@@ -7,6 +7,10 @@ body {
   // background: #fbf7f0;
   // background: #33415b;
   // color: #d0d3da;
+}
+
+a {
+  color: #212529;
 }
 
 .img-thumbnail {

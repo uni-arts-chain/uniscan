@@ -4,8 +4,7 @@ namespace :token_uri do
     while true
 
       token = Token.where(
-        "token_uri_parsed = false and " +
-        "(token_uri is not null and TRIM(token_uri) != '')"
+        "token_uri_parsed = false"
       ).first
       
       if token.nil?

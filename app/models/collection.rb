@@ -24,7 +24,7 @@
 class Collection < ApplicationRecord
   belongs_to :blockchain
   belongs_to :creator, class_name: "Account", optional: true
-  has_many :tokens
+  has_many :tokens, -> { where('token_uri_err is null') }
 
   validates :blockchain_id, presence: true
   validates :contract_address, presence: true
