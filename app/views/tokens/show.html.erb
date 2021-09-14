@@ -18,14 +18,44 @@
     <p class="lead mb-4"><%= @token.description %></p>
   </div>
 
+  <% if @token.nft_type == "erc721" %>
+    <div class="col-lg-6 mx-auto">
+      <h2 class="text-start">ERC721</h2>
+      <div class="text-muted mb-2 text-start"><strong>Owner</strong></div>
+      <div class="text-muted mb-2 text-start"><%= @token.owner.address %></div>
+      <div class="text-muted mb-2 text-start">It owns <%= @token.owner.tokens.count %> NFTs</div>
+      <div class="text-muted mb-2 text-start"><strong>Historically owned by</strong></div>
+      <div class="text-muted mb-2 text-start"><%= pluralize(@token.historical_owners_count, 'address') %></div>
+    </div>
+  <% else %>
+    <div class="col-lg-6 mx-auto">
+      <h2 class="text-start">ERC1155</h2>
+      <div class="text-muted mb-2 text-start"><strong>Supply</strong></div>
+      <div class="text-muted mb-2 text-start"><%= @token.supply.nil? ? "-" : @token.supply %></div>
+      <div class="text-muted mb-2 text-start"><strong>Owner</strong></div>
+      <div class="text-muted mb-2 text-start">Owned by <%= @token.accounts.length %> addresses</div>
+      <div class="text-muted mb-2 text-start"><strong>Historically owned by</strong></div>
+      <div class="text-muted mb-2 text-start"><%= @token.historical_owners_count %></div>
+    </div>
+  <% end %>
+
   <div class="col-lg-6 mx-auto">
-    <h2 class="text-start">Properties</h2>
-    
+    <h2 class="text-start">Storage links</h2>
+    <div class="text-muted mb-2 text-start"><strong>Metadata URI</strong></div>
+    <div class="text-muted mb-2 text-start">
+      <pre><%= @token.token_uri %></pre>
+    </div>
+
     <div class="text-muted mb-2 text-start"><strong>Image</strong></div>
     <div class="text-muted mb-2 text-start">
       <pre><%= @token.image %></pre>
     </div>
 
+  </div>
+
+  <div class="col-lg-6 mx-auto">
+    <h2 class="text-start">Properties</h2>
+    
     <% @token.properties.each do |p| %>
       <div class="text-muted mb-2 text-start"><strong><%= p.name %></strong></div>
       <div class="text-muted mb-2 text-start">

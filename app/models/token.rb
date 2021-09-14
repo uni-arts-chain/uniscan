@@ -25,6 +25,8 @@ class Token < ApplicationRecord
   belongs_to :collection
   belongs_to :owner, class_name: "Account"
   has_many :properties
+  has_many :token_ownerships
+  has_many :accounts, through: :token_ownerships
 
   validates :token_id_on_chain, presence: true
 
@@ -38,6 +40,10 @@ class Token < ApplicationRecord
 
   delegate :blockchain, to: :collection
   delegate :nft_type, to: :collection
+
+  def historical_owners_count
+    Transfer.where(token: self).distinct.count(:token_id)
+  end
 
   private
 
