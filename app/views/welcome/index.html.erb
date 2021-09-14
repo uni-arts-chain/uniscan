@@ -1,8 +1,6 @@
-<main class="container py-5" data-controller="welcome">
-  <h1 class="pb-4">UNISCAN.pro</h1>
-  <div class="row items">
-
-    <%= render @tokens %>
-
+<div data-controller="welcome">
+  <h2 class="pb-4">New NFTs</h2>
+  <div class="my-container" data-welcome-target="newNfts">
+    <%= render partial: "welcome/token", collection: @tokens %>
   </div>
-</main>
+</div>

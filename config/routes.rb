@@ -1,7 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  get 'accounts/show'
+  root 'welcome#index'
   resources :tokens, only: [:index, :show]
   resources :collections, only: [:show]
   resources :accounts, only: [:show]

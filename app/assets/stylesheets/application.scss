@@ -13,6 +13,10 @@ a {
   color: #212529;
 }
 
+a:hover {
+  color: #212529;
+}
+
 .img-thumbnail {
   // border-color: #fbf7f0;
   // background-color: #2b3954;
@@ -43,7 +47,8 @@ h1 {
 }
 
 .card:hover {
-  box-shadow: 0 1rem 3rem rgba($black, .175);
+  // box-shadow: 0 1rem 3rem rgba($black, .175);
+  background-color: lightgray;
   z-index: 100;
 }
 
@@ -99,3 +104,27 @@ h1 {
     border-color: #212529;
 }
 
+
+.my-container::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+.my-container::-webkit-scrollbar {
+	height: 8px;
+}
+
+.my-container::-webkit-scrollbar-thumb {
+	background-color: lightgray;
+}
+
+.my-container {
+  display: flex;
+  width: 100%;
+  align-items: flex-end;
+  // background-color: #222;
+  overflow-x: scroll;
+}
+
+.my-item {
+  flex: none
+}
