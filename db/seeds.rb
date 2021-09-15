@@ -15,24 +15,23 @@ Blockchain.create(
       explorer_token_url: "https://etherscan.io/token/", 
       explorer_address_url: "https://etherscan.io/address/"
     },
-    { name: 'Darwinia', testnet: false },
-    { name: 'Moonbeam', testnet: false },
-    { name: 'Pangolin', testnet: true }
+    { 
+      name: 'Darwinia', 
+      testnet: false,
+      explorer_token_url: "https://darwinia.subscan.io/account/",
+      explorer_address_url: "https://darwinia.subscan.io/account/"
+    },
+    { 
+      name: 'Moonriver', 
+      testnet: false,
+      explorer_token_url: "https://moonbeam-explorer.netlify.app/address/{address}?network=Moonriver",
+      explorer_address_url: "https://moonbeam-explorer.netlify.app/address/{address}?network=Moonriver"
+    },
+    { 
+      name: 'Pangolin', 
+      testnet: true,
+      explorer_token_url: "https://pangolin.subscan.io/account/",
+      explorer_address_url: "https://pangolin.subscan.io/account/"
+    }
   ]
 )
-
-if Rails.env == "development"
-  owner = Account.first 
-  10000.times do |i|
-    collection = Collection.find (rand(20) + i) % 19 + 1
-    Token.create(
-      collection: collection,
-      token_id_on_chain: rand(1000000000).to_s,
-      token_uri: "https://faker",
-      owner: owner,
-      name: Faker::Name.name,
-      image: "https://loremflickr.com/300/300?random=#{rand(1000000000)}"
-    )
-    sleep 1
-  end
-end

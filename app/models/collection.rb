@@ -33,7 +33,7 @@ class Collection < ApplicationRecord
   enum nft_type: [ :erc721, :erc1155 ]
 
   def explorer_url
-    self.blockchain.explorer_token_url + self.contract_address
+    self.blockchain.explorer_token_url.gsub("{address}", self.contract_address)
   end
 
   def representative_token
