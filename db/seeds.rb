@@ -12,14 +12,14 @@ Blockchain.create(
     { 
       name: 'Ethereum', 
       testnet: false, 
-      explorer_token_url: "https://etherscan.io/token/", 
-      explorer_address_url: "https://etherscan.io/address/"
+      explorer_token_url: "https://etherscan.io/token/{address}", 
+      explorer_address_url: "https://etherscan.io/address/{address}"
     },
     { 
       name: 'Darwinia', 
       testnet: false,
-      explorer_token_url: "https://darwinia.subscan.io/account/",
-      explorer_address_url: "https://darwinia.subscan.io/account/"
+      explorer_token_url: "https://darwinia.subscan.io/account/{address}",
+      explorer_address_url: "https://darwinia.subscan.io/account/{address}"
     },
     { 
       name: 'Moonriver', 
@@ -30,8 +30,8 @@ Blockchain.create(
     { 
       name: 'Pangolin', 
       testnet: true,
-      explorer_token_url: "https://pangolin.subscan.io/account/",
-      explorer_address_url: "https://pangolin.subscan.io/account/"
+      explorer_token_url: "https://pangolin.subscan.io/account/{address}",
+      explorer_address_url: "https://pangolin.subscan.io/account/{address}"
     }
   ]
 )
