@@ -51,7 +51,6 @@ class ProcessErc1155EventWorker
         collection: collection,
         token_id_on_chain: token_id,
         token_uri: token_uri,
-        owner: to_account, # WRONG here
         unique: false
       )
     else

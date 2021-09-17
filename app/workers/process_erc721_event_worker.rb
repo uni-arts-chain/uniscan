@@ -60,8 +60,7 @@ class ProcessErc721EventWorker
       token = Token.create(
         collection: collection,
         token_id_on_chain: token_id,
-        token_uri: token_uri,
-        owner: to_account
+        token_uri: token_uri
       )
     end
 
