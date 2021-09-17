@@ -5,7 +5,7 @@ namespace :token_uri do
 
       token = Token.where(
         "token_uri_parsed = false"
-      ).first
+      ).order(created_at: :asc).first
       
       if token.nil?
         sleep 3 
@@ -102,6 +102,8 @@ def parse_content(token, body)
         )
       end
     end
+
+    token.broadcast
 
   end
 end
