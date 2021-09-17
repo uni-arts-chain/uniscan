@@ -5,7 +5,7 @@ class Etherscan
   # https://api.etherscan.io/api?module=account&action=txlistinternal&address=0x0b2a13bc4a09bf1ee822964c3619f79791719ec0&startblock=0&endblock=99999999&page=1&offset=1&sort=asc&apikey=xxx
   def self.get_contract_creation_transacton(address)
     contract_creation_request_url = 
-      "https://api.etherscan.io/api" +
+      "https://api.etherscan.com/api" +
         "?module=account" +
         "&action=txlist" +
         "&address=#{address}" +
@@ -24,7 +24,7 @@ class Etherscan
     if tx["to"].present? && tx["contractAddress"].blank?
       sleep 5
       contract_creation_request_url = 
-        "https://api.etherscan.io/api" +
+        "https://api.etherscan.com/api" +
           "?module=account" +
           "&action=txlistinternal" +
           "&address=#{address}" +
