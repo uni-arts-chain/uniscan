@@ -15,7 +15,7 @@ class ProcessErc721EventWorker
     token_uri = args[:token_uri]
     name = args[:name]
     symbol = args[:symbol]
-    total_supply = args[:total_supply]
+    # total_supply = args[:total_supply]
 
     # TODO: Check args
 
@@ -28,14 +28,14 @@ class ProcessErc721EventWorker
         blockchain: blockchain,
         contract_address: address,
         name: name,
-        symbol: symbol,
-        total_supply: total_supply
+        symbol: symbol
+        # total_supply: total_supply
       )
     else
       collection.update(
         name: name,
-        symbol: symbol,
-        total_supply: total_supply
+        symbol: symbol
+        # total_supply: total_supply
       )
     end
     
