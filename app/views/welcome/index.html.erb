@@ -1,38 +1,112 @@
 <div data-controller="welcome">
-  <div class="py-3 pe-3">
-    <h2 class="float-start">New NFTs</h2>
-    <a href="<%= url_for tokens_path %>" class="float-end">Expand</a>
-  </div>
-  <div class="my-container pt-2 pb-2 mb-5" data-welcome-target="newNfts" style="width: 110%">
-    <%= render partial: "welcome/token", collection: @tokens, locals: { for_transfered: false } %>
-  </div>
 
-  <div class="py-5 pe-3">
-    <h2 class="float-start">Latest transfers</h2>
-  </div>
-  <div class="my-container pt-2 pb-2 mb-5" data-welcome-target="" style="width: 110%">
-    <% @transfers.each do |transfer| %>
-      <%= render partial: "welcome/transfer", locals: { token: transfer.token, transfer: transfer } %>
-    <% end %>
-  </div>
+  <% if @tokens.length > 0 %>
+    <div class="container px-0">
+      <div class="row">
+        <div class="col align-self-start">
+          <h2 class="">New NFTs</h2>
+        </div>
+        <div class="col align-self-end">
+          <a href="<%= url_for tokens_path %>" class="float-end">Expand</a>
+        </div>
+      </div>
+    </div>
 
-  <div class="py-5 pe-3">
-    <h2 class="float-start">Highest 24h transfered</h2>
-    <a href="<%= url_for tokens_path %>" class="float-end">Expand</a>
-  </div>
-  <div class="my-container pt-2 pb-2 mb-5" data-welcome-target="" style="width: 110%">
-    <% @highest_24h.each do |token| %>
-      <%= render partial: "welcome/token", locals: { token: token, for_transfered: true } %>
-    <% end %>
-  </div>
+    <div class="glide" id="glide1">
+      <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides" style="padding-top: 40px; padding-bottom: 60px">
+          <%= render partial: "welcome/token", collection: @tokens, locals: { for_transfered: false } %>
+        </ul>
+      </div>
+      <div class="glide__arrows" data-glide-el="controls">
+        <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="bi bi-caret-left-fill text-black-50"></i></button>
+        <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="bi bi-caret-right-fill text-black-50"></i></button>
+      </div>
+    </div>
+  <% end %>
 
-  <div class="py-5 pe-3">
-    <h2 class="float-start">Highest 7d transfered</h2>
-    <a href="<%= url_for tokens_path %>" class="float-end">Expand</a>
-  </div>
-  <div class="my-container pt-3 pb-2 mb-5" data-welcome-target="" style="width: 110%">
-    <% @highest_7d.each do |token| %>
-      <%= render partial: "welcome/token", locals: { token: token, for_transfered: true } %>
-    <% end %>
-  </div>
+
+
+  <% if @transfers.length > 0 %>
+    <div class="container px-0">
+      <div class="row">
+        <div class="col align-self-start">
+          <h2 class="">Latest transfers</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="glide" id="glide2">
+      <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides" style="padding-top: 40px; padding-bottom: 60px">
+          <% @transfers.each do |transfer| %>
+            <%= render partial: "welcome/transfer", locals: { token: transfer.token, transfer: transfer } %>
+          <% end %>
+        </ul>
+      </div>
+      <div class="glide__arrows" data-glide-el="controls">
+        <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="bi bi-caret-left-fill text-black-50"></i></button>
+        <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="bi bi-caret-right-fill text-black-50"></i></button>
+      </div>
+    </div>
+  <% end %>
+
+
+
+  <% if @highest_24h.length > 0 %>
+    <div class="container px-0">
+      <div class="row">
+        <div class="col align-self-start">
+          <h2 class="">Highest 24h transfered</h2>
+        </div>
+        <div class="col align-self-end">
+          <a href="<%= url_for tokens_path %>" class="float-end">Expand</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="glide" id="glide3">
+      <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides" style="padding-top: 40px; padding-bottom: 60px">
+          <% @highest_24h.each do |token| %>
+            <%= render partial: "welcome/token", locals: { token: token, for_transfered: true } %>
+          <% end %>
+        </ul>
+      </div>
+      <div class="glide__arrows" data-glide-el="controls">
+        <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="bi bi-caret-left-fill text-black-50"></i></button>
+        <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="bi bi-caret-right-fill text-black-50"></i></button>
+      </div>
+    </div>
+  <% end %>
+
+
+
+  <% if @highest_7d.length > 0 %>
+    <div class="container px-0">
+      <div class="row">
+        <div class="col align-self-start">
+          <h2 class="">Highest 7d transfered</h2>
+        </div>
+        <div class="col align-self-end">
+          <a href="<%= url_for tokens_path %>" class="float-end">Expand</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="glide" id="glide4">
+      <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides" style="padding-top: 40px; padding-bottom: 60px">
+          <% @highest_7d.each do |token| %>
+            <%= render partial: "welcome/token", locals: { token: token, for_transfered: true } %>
+          <% end %>
+        </ul>
+      </div>
+      <div class="glide__arrows" data-glide-el="controls">
+        <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="bi bi-caret-left-fill text-black-50"></i></button>
+        <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="bi bi-caret-right-fill text-black-50"></i></button>
+      </div>
+    </div>
+  <% end %>
+
 </div>

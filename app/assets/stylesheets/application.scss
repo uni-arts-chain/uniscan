@@ -1,5 +1,7 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
-$enable-rounded: false;
+// $enable-rounded: false;
+@import "glide.core";
+@import "glide.theme";
 @import "bootstrap";
 @import "bootstrap-icons";
 
@@ -11,6 +13,7 @@ body {
 
 a {
   color: #212529;
+  text-decoration: none;
 }
 
 a:hover {
@@ -47,8 +50,8 @@ h1 {
 }
 
 .card:hover {
-  // box-shadow: 0 1rem 3rem rgba($black, .175);
-  background-color: lightgray;
+  box-shadow: 0 1rem 3rem rgba($black, .175);
+  // background-color: lightgray;
   z-index: 100;
 }
 
