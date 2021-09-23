@@ -50,6 +50,8 @@ test:
 #
 production:
   <<: *default
+  host: '127.0.0.1'
+  port: 3306
   database: uniscan_production
   username: <%= ENV['UNISCAN_DATABASE_USERNAME'] %>
   password: <%= ENV['UNISCAN_DATABASE_PASSWORD'] %>
