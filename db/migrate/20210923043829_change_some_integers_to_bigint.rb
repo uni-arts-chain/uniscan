@@ -1,10 +1,10 @@
 class ChangeSomeIntegersToBigint < ActiveRecord::Migration[6.1]
   def up 
-    change_column :transfers, :amount, :bigint
-    change_column :tokens, :supply, :bigint
-    change_column :collections, :supply, :bigint
-    change_column :collections, :total_supply, :bigint
-    change_column :token_ownerships, :balance, :bigint
+    change_column :transfers, :amount, :decimal, precision: 65, scale: 0
+    change_column :tokens, :supply, :decimal, precision: 65, scale: 0
+    change_column :collections, :supply, :decimal, precision: 65, scale: 0
+    change_column :collections, :total_supply, :decimal, precision: 65, scale: 0
+    change_column :token_ownerships, :balance, :decimal, precision: 65, scale: 0
   end
 
   def down

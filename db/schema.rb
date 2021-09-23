@@ -36,13 +36,13 @@ ActiveRecord::Schema.define(version: 2021_09_23_043829) do
     t.integer "contract_platform", default: 0
     t.string "contract_address"
     t.integer "nft_type", default: 0
-    t.bigint "total_supply"
+    t.decimal "total_supply", precision: 65
     t.integer "holders_count", default: 0
     t.integer "transfers_count", default: 0
     t.integer "creator_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "supply", default: 0
+    t.decimal "supply", precision: 65, default: "0"
     t.string "creator_address"
     t.integer "created_at_block"
     t.integer "created_at_timestamp"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2021_09_23_043829) do
   create_table "token_ownerships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "token_id"
     t.integer "account_id"
-    t.bigint "balance", default: 1
+    t.decimal "balance", precision: 65, default: "1"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "collection_id"
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 2021_09_23_043829) do
     t.string "token_id_on_chain"
     t.integer "collection_id"
     t.boolean "unique", default: true
-    t.bigint "supply", default: 1
+    t.decimal "supply", precision: 65, default: "1"
     t.integer "owner_id"
     t.string "name"
     t.text "description"
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 2021_09_23_043829) do
   create_table "transfers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "collection_id"
     t.integer "token_id"
-    t.bigint "amount", default: 1
+    t.decimal "amount", precision: 65, default: "1"
     t.integer "from"
     t.integer "to"
     t.integer "block_number"
