@@ -12,9 +12,6 @@ class WelcomeController < ApplicationController
       .order(transfers_count: :desc)
       .limit(50)
 
-    puts "-------------------------"
-    puts @highest_24h.count
-
     @highest_7d = Token.eligible
       .where('created_at > ?', 7.days.ago)
       .order(transfers_count: :desc)

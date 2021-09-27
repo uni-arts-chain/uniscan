@@ -2,6 +2,8 @@
 // $enable-rounded: false;
 @import "glide.core";
 @import "glide.theme";
+@import "slick";
+@import "slick-theme";
 @import "bootstrap";
 @import "bootstrap-icons";
 
@@ -18,6 +20,7 @@ a {
 
 a:hover {
   color: #212529;
+  text-decoration: underline;
 }
 
 .img-thumbnail {
@@ -49,8 +52,14 @@ h1 {
   // background-color: $indigo-400;
 }
 
+.card {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  // box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+}
+
 .card:hover {
-  box-shadow: 0 1rem 3rem rgba($black, .175);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  // box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   // background-color: lightgray;
   z-index: 100;
 }
@@ -72,6 +81,21 @@ h1 {
 
 .card {
   border: 0;
+  border-radius: 10px;
+  -webkit-border-radius: 10px; 
+  -moz-border-radius: 10px; 
+}
+
+.nft-img {
+  border-radius: 10px;
+  -webkit-border-radius: 10px; 
+  -moz-border-radius: 10px; 
+}
+
+.badge {
+  border-radius: 10px;
+  -webkit-border-radius: 10px; 
+  -moz-border-radius: 10px; 
 }
 
 .rect-img-container {
@@ -131,3 +155,8 @@ h1 {
 .my-item {
   flex: none
 }
+
+.blockchain-icon {
+  display: inline !important;
+}
+

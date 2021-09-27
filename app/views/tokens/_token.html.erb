@@ -1,12 +1,31 @@
 <div class="token col-sm-6 col-md-3 col-lg-2">
   <div class="card px-0 py-0 <%= bg_of_blockchain(token) %>">
-    <div class="rect-img-container position-relative">
-        <img src="<%= token.image %>" class="rect-img" alt="<%= token.name.nil? ? '' : token.name %>" style="padding: 6px">
-          <span class="badge <%= token.nft_type == "erc721" ? "bg-dark" : "bg-light text-dark" %> position-absolute bottom-0 end-0">
-            <%= token.nft_type %>
-          </span>
-        </img>
+
+
+
+    <div class="position-relative">
+
+      <%= link_to url_for(token_path(token)), class: "" do %>
+        <img src="<%= token.image.nil? ? image_url("logo-uniscan") : token.image %>" alt="<%= token.name.nil? ? '' : token.name %>" style="width: 100%" class="nft-img" />
+      <% end %>
+
+      <% if token.ipfs? %>
+        <span class="badge position-absolute bottom-0 end-0" style="background-color: #6acad1">
+          IPFS
+        </span>
+        <span class="badge <%= token.nft_type == "erc721" ? "bg-dark" : "bg-light text-dark" %> position-absolute bottom-0 end-0" style="right: 43px !important;">
+          <%= token.nft_type %>
+        </span>
+      <% else %>
+        <span class="badge <%= token.nft_type == "erc721" ? "bg-dark" : "bg-light text-dark" %> position-absolute bottom-0 end-0" >
+          <%= token.nft_type %>
+        </span>
+      <% end %>
     </div>
+
+
+
+
     <div class="card-body px-2 py-1">
 
       <div class="text-truncate small py-1">

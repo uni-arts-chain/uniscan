@@ -1,7 +1,10 @@
-<li class="glide__slide">
-  <div class="card my-item" style="width: 100%; margin-right: 26px; padding: 6px;">
+<div>
+  <div class="card" style="background-clip: padding-box;">
     <div class="position-relative">
-      <img src="<%= token.image %>" alt="<%= token.name.nil? ? '' : token.name %>" style="width: 100%" />
+
+      <%= link_to url_for(token_path(token)), class: "" do %>
+        <img src="<%= image_url("logo-uniscan") %>" data-lazy="<%= token.image.nil? ? image_url("logo-uniscan") : token.image %>" alt="<%= token.name.nil? ? '' : token.name %>" style="width: 100%" class="nft-img" />
+      <% end %>
 
       <% if for_transfered %>
         <span class="position-absolute top-0 start-100 translate-middle badge bg-dark">
@@ -24,14 +27,14 @@
 
     <div class="card-body px-2 py-1">
       <div class="text-truncate small py-1">
-        <%= link_to url_for(token_path(token)) do %>
+        <%= link_to url_for(token_path(token)), class: "" do %>
           <%= token.name.nil? ? '_' : token.name %>
         <% end %>
       </div>
 
       <div class="text-truncate py-1" style="font-size: 0.7rem;">
-        <%= image_tag("ethereum.svg", size: "16x16", class: "rounded-circle") %>
         <span class="small align-bottom">
+          <%= image_tag("ethereum.svg", size: "16x16", class: "blockchain-icon rounded-circle") %>
           <% if token.owners.count == 1 %>
             <%= link_to account_path(token.owners[0]) do %>
               <%= short_address(token.owner.address) %>
@@ -46,7 +49,7 @@
 
       <div class="text-truncate py-1" style="font-size: 0.7rem;">
         <span class="small align-bottom">
-          #<%= token.token_id_on_chain %>
+          # <%= token.token_id_on_chain %>
         </span>
       </div>
 
@@ -57,5 +60,5 @@
       </div>
     </div>
   </div>
+</div>
 
-</li>

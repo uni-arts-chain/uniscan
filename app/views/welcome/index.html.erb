@@ -1,111 +1,80 @@
 <div data-controller="welcome">
 
+
   <% if @tokens.length > 0 %>
-    <div class="container px-0">
-      <div class="row">
-        <div class="col align-self-start">
-          <h2 class="">New NFTs</h2>
+    <div class="container px-0 mt-3">
+      <div class="row justify-content-start align-items-center">
+        <div class="col-3">
+          <h2 class="display-4">New NFTs</h2>
         </div>
-        <div class="col align-self-end">
-          <a href="<%= url_for tokens_path %>" class="float-end">Expand</a>
+        <div class="col-9 text-end" style="padding-top: 26px">
+          <a href="<%= url_for tokens_path %>" >More</a>
         </div>
       </div>
     </div>
 
-    <div class="glide" id="glide1">
-      <div class="glide__track" data-glide-el="track">
-        <ul class="glide__slides" style="padding-top: 40px; padding-bottom: 60px">
-          <%= render partial: "welcome/token", collection: @tokens, locals: { for_transfered: false } %>
-        </ul>
-      </div>
-      <div class="glide__arrows" data-glide-el="controls">
-        <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="bi bi-caret-left-fill text-black-50"></i></button>
-        <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="bi bi-caret-right-fill text-black-50"></i></button>
-      </div>
+    <div class="my-slick" id="slick1">
+      <%= render partial: "welcome/token", collection: @tokens, locals: { for_transfered: false } %>
     </div>
   <% end %>
 
 
 
   <% if @transfers.length > 0 %>
-    <div class="container px-0">
-      <div class="row">
-        <div class="col align-self-start">
-          <h2 class="">Latest transfers</h2>
+    <div class="container px-0 mt-5">
+      <div class="row justify-content-start align-items-center">
+        <div class="col-4">
+          <h2 class="display-4">Latest transfers</h2>
         </div>
       </div>
     </div>
 
-    <div class="glide" id="glide2">
-      <div class="glide__track" data-glide-el="track">
-        <ul class="glide__slides" style="padding-top: 40px; padding-bottom: 60px">
-          <% @transfers.each do |transfer| %>
-            <%= render partial: "welcome/transfer", locals: { token: transfer.token, transfer: transfer } %>
-          <% end %>
-        </ul>
-      </div>
-      <div class="glide__arrows" data-glide-el="controls">
-        <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="bi bi-caret-left-fill text-black-50"></i></button>
-        <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="bi bi-caret-right-fill text-black-50"></i></button>
-      </div>
+    <div class="my-slick" id="slick2">
+      <% @transfers.each do |transfer| %>
+        <%= render partial: "welcome/transfer", locals: { token: transfer.token, transfer: transfer } %>
+      <% end %>
     </div>
   <% end %>
 
 
 
   <% if @highest_24h.length > 0 %>
-    <div class="container px-0">
-      <div class="row">
-        <div class="col align-self-start">
-          <h2 class="">Highest 24h transfered</h2>
+    <div class="container px-0 mt-5">
+      <div class="row justify-content-start align-items-center">
+        <div class="col-6">
+          <h2 class="display-4">Highest 24h transfered</h2>
         </div>
-        <div class="col align-self-end">
-          <a href="<%= url_for tokens_path %>" class="float-end">Expand</a>
+        <div class="col-6 text-end" style="padding-top: 26px">
+          <a href="<%= url_for tokens_path %>" >More</a>
         </div>
       </div>
     </div>
 
-    <div class="glide" id="glide3">
-      <div class="glide__track" data-glide-el="track">
-        <ul class="glide__slides" style="padding-top: 40px; padding-bottom: 60px">
-          <% @highest_24h.each do |token| %>
-            <%= render partial: "welcome/token", locals: { token: token, for_transfered: true } %>
-          <% end %>
-        </ul>
-      </div>
-      <div class="glide__arrows" data-glide-el="controls">
-        <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="bi bi-caret-left-fill text-black-50"></i></button>
-        <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="bi bi-caret-right-fill text-black-50"></i></button>
-      </div>
+    <div class="my-slick" id="slick3">
+      <% @highest_24h.each do |token| %>
+        <%= render partial: "welcome/token", locals: { token: token, for_transfered: true } %>
+      <% end %>
     </div>
   <% end %>
 
 
 
   <% if @highest_7d.length > 0 %>
-    <div class="container px-0">
-      <div class="row">
-        <div class="col align-self-start">
-          <h2 class="">Highest 7d transfered</h2>
+    <div class="container px-0 mt-5">
+      <div class="row justify-content-start align-items-center">
+        <div class="col-6">
+          <h2 class="display-4">Highest 7d transfered</h2>
         </div>
-        <div class="col align-self-end">
-          <a href="<%= url_for tokens_path %>" class="float-end">Expand</a>
+        <div class="col-6 text-end" style="padding-top: 26px">
+          <a href="<%= url_for tokens_path %>" >More</a>
         </div>
       </div>
     </div>
 
-    <div class="glide" id="glide4">
-      <div class="glide__track" data-glide-el="track">
-        <ul class="glide__slides" style="padding-top: 40px; padding-bottom: 60px">
-          <% @highest_7d.each do |token| %>
-            <%= render partial: "welcome/token", locals: { token: token, for_transfered: true } %>
-          <% end %>
-        </ul>
-      </div>
-      <div class="glide__arrows" data-glide-el="controls">
-        <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="bi bi-caret-left-fill text-black-50"></i></button>
-        <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="bi bi-caret-right-fill text-black-50"></i></button>
-      </div>
+    <div class="my-slick" id="slick4">
+      <% @highest_7d.each do |token| %>
+        <%= render partial: "welcome/token", locals: { token: token, for_transfered: true } %>
+      <% end %>
     </div>
   <% end %>
 

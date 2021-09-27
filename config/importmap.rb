@@ -13,3 +13,5 @@ pin "@hotwired/stimulus-importmap-autoloader", to: "stimulus-importmap-autoloade
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin "@hotwired/turbo-rails", to: "turbo.js"
 pin "@glidejs/glide", to: "https://cdn.jsdelivr.net/npm/@glidejs/glide@3.4.1/dist/glide.esm.js"
+pin "jquery", to: "https://ga.jspm.io/npm:jquery@3.6.0/dist/jquery.js"
+pin "slick-carousel", to: "https://ga.jspm.io/npm:slick-carousel@1.8.1/slick/slick.js"
