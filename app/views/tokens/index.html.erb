@@ -55,9 +55,9 @@
       <div class="col-md-3 text-end">
         <% unless @refresh %>
           <%= sort_link @q, :created_at, "Time", { default_order: :desc }, { class: "btn btn-link link-dark" } %>
-          <%= sort_link @q, :transfers_24h, "TR24H", {}, { class: "btn btn-link link-secondary px-1" } %>
-          <%= sort_link @q, :transfers_7d, "TR7D", {}, { class: "btn btn-link link-secondary px-1" } %>
-          <%= sort_link @q, :latest_transfer_time, "LTR", {}, { class: "btn btn-link link-secondary px-1" } %>
+          <%= sort_link @q, :transfers_count_24h, "TR24H", {}, { class: "btn btn-link link-secondary px-1" } %>
+          <%= sort_link @q, :transfers_count_7d, "TR7D", {}, { class: "btn btn-link link-secondary px-1" } %>
+          <%= sort_link @q, :last_transfer_time, "LTR", {}, { class: "btn btn-link link-secondary px-1" } %>
         <% end %>
       </div>
     <% end %>

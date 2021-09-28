@@ -8,13 +8,11 @@ class WelcomeController < ApplicationController
       .limit(50)
 
     @highest_24h = Token.eligible
-      .where('created_at > ?', 1024.hours.ago)
-      .order(transfers_count: :desc)
+      .order(transfers_count_24h: :desc)
       .limit(50)
 
     @highest_7d = Token.eligible
-      .where('created_at > ?', 7.days.ago)
-      .order(transfers_count: :desc)
+      .order(transfers_count_7d: :desc)
       .limit(50)
 
     render layout: "welcome"

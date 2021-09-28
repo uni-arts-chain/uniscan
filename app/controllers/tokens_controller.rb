@@ -10,24 +10,6 @@ class TokensController < ApplicationController
       .where(token_uri_err: nil)
       .where.not(image: nil)
 
-    @first_token_id = 
-      if params[:first_token_id].blank?
-        first_token = tokens.limit(1).first
-        first_token&.id
-      else
-        params[:first_token_id]
-      end
-
-    if @first_token_id
-      if params[:q]["s"].include?(" desc")
-        tokens = tokens 
-          .where("tokens.id <= #{@first_token_id}")
-      else
-        tokens = tokens
-          .where("tokens.id >= #{@first_token_id}")
-      end
-    end
-
     @pagy, @tokens = pagy(tokens, items: 36)
 
     @q_string = build_q_string(params[:q])
@@ -35,7 +17,7 @@ class TokensController < ApplicationController
       @next_page_url = nil
     else
       @next_page_url = 
-        tokens_url(page: @pagy.next, first_token_id: @first_token_id) \
+        tokens_url(page: @pagy.next) \
         + "&" \
         + @q_string
     end

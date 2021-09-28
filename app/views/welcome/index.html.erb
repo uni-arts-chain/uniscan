@@ -11,7 +11,7 @@
               <h2 class="display-4">New NFTs</h2>
             </div>
             <div class="col-8 text-end" style="padding-top: 26px">
-              <a href="<%= url_for tokens_path %>" >More</a>
+              <a href="<%= url_for tokens_path("q[s]" => "created_at desc") %>" >More</a>
             </div>
           </div>
         </div>
@@ -48,7 +48,7 @@
               <h2 class="display-4">Highest 24h transfered</h2>
             </div>
             <div class="col-5 text-end" style="padding-top: 26px">
-              <a href="<%= url_for tokens_path %>" >More</a>
+              <a href="<%= url_for tokens_path("q[s]" => "transfers_count_24h desc") %>" >More</a>
             </div>
           </div>
         </div>
@@ -69,7 +69,7 @@
               <h2 class="display-4">Highest 7d transfered</h2>
             </div>
             <div class="col-5 text-end" style="padding-top: 26px">
-              <a href="<%= url_for tokens_path %>" >More</a>
+              <a href="<%= url_for tokens_path("q[s]" => "transfers_count_7d desc") %>" >More</a>
             </div>
           </div>
         </div>
