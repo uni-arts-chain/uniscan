@@ -3,6 +3,8 @@ class TokensController < ApplicationController
     params[:q] = { "s" => "created_at desc" } if params[:q].nil? 
     params[:q]["s"] = "created_at desc" if params[:q]["s"].blank?
 
+    @refresh = params[:refresh].blank? ? false : params[:refresh] == "true"
+
     @q = Token.ransack(params[:q])
     tokens = @q.result
       .where(token_uri_err: nil)

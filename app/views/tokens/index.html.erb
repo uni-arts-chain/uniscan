@@ -28,7 +28,7 @@
         %>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-3">
         <%= 
           f.search_field(
             :name_or_description_cont,
@@ -38,18 +38,31 @@
       </div>
 
       <div class="col-md-1">
+        <input name="refresh" type="hidden" value="<%= @refresh ? "true" : "false" %>">
         <%= f.submit class: "btn btn-dark rounded-pill" %>
       </div>
 
+      <div class="col-md-1" style="margin-top:23px">
+        <a href="<%= url_for tokens_path(refresh: (not @refresh))  %>" class="link-dark" role="button" data-bs-toggle="button">
+          <% if @refresh %>
+            <i class="bi bi-check-circle"></i> Refresh
+          <% else %>
+            <i class="bi bi-circle"></i> Refresh
+          <% end %>
+        </a>
+      </div>
+
       <div class="col-md-3 text-end">
+        <% unless @refresh %>
           <%= sort_link @q, :created_at, "Time", { default_order: :desc }, { class: "btn btn-link link-dark" } %>
-          <%# <%= sort_link @q, :transfers_24h, "TR24H", {}, { class: "btn btn-link link-secondary px-1" } %1> %>
-          <%# <%= sort_link @q, :transfers_7d, "TR7D", {}, { class: "btn btn-link link-secondary px-1" } %1> %>
-          <%# <%= sort_link @q, :latest_transfer_time, "LTR", {}, { class: "btn btn-link link-secondary px-1" } %1> %>
+          <%= sort_link @q, :transfers_24h, "TR24H", {}, { class: "btn btn-link link-secondary px-1" } %>
+          <%= sort_link @q, :transfers_7d, "TR7D", {}, { class: "btn btn-link link-secondary px-1" } %>
+          <%= sort_link @q, :latest_transfer_time, "LTR", {}, { class: "btn btn-link link-secondary px-1" } %>
+        <% end %>
       </div>
     <% end %>
 
-    <% if stream_needed?(@q_string) %>
+    <% if @refresh %>
       <% if @stream_sub_name.blank? %>
         <%= turbo_stream_from "tokens" %>
       <% else %>
