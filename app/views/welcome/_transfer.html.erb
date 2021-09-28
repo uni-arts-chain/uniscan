@@ -1,7 +1,9 @@
 <div>
   <div class="card">
     <div class="position-relative">
-      <img data-lazy="<%= token.image.nil? ? image_url("logo-uniscan") : token.image %>" alt="<%= token.name.nil? ? '' : token.name %>" style="width: 100%" class="nft-img" />
+      <%= link_to url_for(token_path(token)), class: "" do %>
+        <img src="<%= image_url("logo-uniscan") %>" data-lazy="<%= token.image.nil? ? image_url("logo-uniscan") : token.image %>" alt="<%= token.name.nil? ? '' : token.name %>" style="width: 100%" class="nft-img" />
+      <% end %>
 
       <% if token.ipfs? %>
         <span class="badge position-absolute bottom-0 end-0" style="background-color: #6acad1">
