@@ -17,7 +17,7 @@ class WelcomeController < ApplicationController
       .order(transfers_count: :desc)
       .limit(50)
 
-    puts @highest_7d.count
+    render layout: "welcome"
   end
 
   def hello

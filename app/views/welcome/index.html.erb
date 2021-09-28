@@ -1,81 +1,86 @@
-<div data-controller="welcome">
+
+<div class="container-fluid">
+  <div class="col-11 offset-1">
+    <div data-controller="welcome">
 
 
-  <% if @tokens.length > 0 %>
-    <div class="container px-0 mt-3">
-      <div class="row justify-content-start align-items-center">
-        <div class="col-3">
-          <h2 class="display-4">New NFTs</h2>
+      <% if @tokens.length > 0 %>
+        <div class="container-fluid px-0 mt-3">
+          <div class="row justify-content-start align-items-center">
+            <div class="col-3">
+              <h2 class="display-4">New NFTs</h2>
+            </div>
+            <div class="col-8 text-end" style="padding-top: 26px">
+              <a href="<%= url_for tokens_path %>" >More</a>
+            </div>
+          </div>
         </div>
-        <div class="col-9 text-end" style="padding-top: 26px">
-          <a href="<%= url_for tokens_path %>" >More</a>
+
+        <div class="my-slick" id="slick1">
+          <%= render partial: "welcome/token", collection: @tokens, locals: { for_transfered: false } %>
         </div>
-      </div>
-    </div>
-
-    <div class="my-slick" id="slick1">
-      <%= render partial: "welcome/token", collection: @tokens, locals: { for_transfered: false } %>
-    </div>
-  <% end %>
-
-
-
-  <% if @transfers.length > 0 %>
-    <div class="container px-0 mt-5">
-      <div class="row justify-content-start align-items-center">
-        <div class="col-4">
-          <h2 class="display-4">Latest transfers</h2>
-        </div>
-      </div>
-    </div>
-
-    <div class="my-slick" id="slick2">
-      <% @transfers.each do |transfer| %>
-        <%= render partial: "welcome/transfer", locals: { token: transfer.token, transfer: transfer } %>
       <% end %>
-    </div>
-  <% end %>
 
 
 
-  <% if @highest_24h.length > 0 %>
-    <div class="container px-0 mt-5">
-      <div class="row justify-content-start align-items-center">
-        <div class="col-6">
-          <h2 class="display-4">Highest 24h transfered</h2>
+      <% if @transfers.length > 0 %>
+        <div class="container-fluid px-0 mt-5">
+          <div class="row justify-content-start align-items-center">
+            <div class="col-4">
+              <h2 class="display-4">Latest transfers</h2>
+            </div>
+          </div>
         </div>
-        <div class="col-6 text-end" style="padding-top: 26px">
-          <a href="<%= url_for tokens_path %>" >More</a>
-        </div>
-      </div>
-    </div>
 
-    <div class="my-slick" id="slick3">
-      <% @highest_24h.each do |token| %>
-        <%= render partial: "welcome/token", locals: { token: token, for_transfered: true } %>
+        <div class="my-slick" id="slick2">
+          <% @transfers.each do |transfer| %>
+            <%= render partial: "welcome/transfer", locals: { token: transfer.token, transfer: transfer } %>
+          <% end %>
+        </div>
       <% end %>
-    </div>
-  <% end %>
 
 
 
-  <% if @highest_7d.length > 0 %>
-    <div class="container px-0 mt-5">
-      <div class="row justify-content-start align-items-center">
-        <div class="col-6">
-          <h2 class="display-4">Highest 7d transfered</h2>
+      <% if @highest_24h.length > 0 %>
+        <div class="container-fluid px-0 mt-5">
+          <div class="row justify-content-start align-items-center">
+            <div class="col-6">
+              <h2 class="display-4">Highest 24h transfered</h2>
+            </div>
+            <div class="col-5 text-end" style="padding-top: 26px">
+              <a href="<%= url_for tokens_path %>" >More</a>
+            </div>
+          </div>
         </div>
-        <div class="col-6 text-end" style="padding-top: 26px">
-          <a href="<%= url_for tokens_path %>" >More</a>
-        </div>
-      </div>
-    </div>
 
-    <div class="my-slick" id="slick4">
-      <% @highest_7d.each do |token| %>
-        <%= render partial: "welcome/token", locals: { token: token, for_transfered: true } %>
+        <div class="my-slick" id="slick3">
+          <% @highest_24h.each do |token| %>
+            <%= render partial: "welcome/token", locals: { token: token, for_transfered: true } %>
+          <% end %>
+        </div>
       <% end %>
-    </div>
-  <% end %>
 
+
+
+      <% if @highest_7d.length > 0 %>
+        <div class="container-fluid px-0 mt-5">
+          <div class="row justify-content-start align-items-center">
+            <div class="col-6">
+              <h2 class="display-4">Highest 7d transfered</h2>
+            </div>
+            <div class="col-5 text-end" style="padding-top: 26px">
+              <a href="<%= url_for tokens_path %>" >More</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="my-slick" id="slick4">
+          <% @highest_7d.each do |token| %>
+            <%= render partial: "welcome/token", locals: { token: token, for_transfered: true } %>
+          <% end %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
 </div>
