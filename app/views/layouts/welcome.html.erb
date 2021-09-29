@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Uniscan</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_importmap_tags %>
+    <%= yield :head %>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <div class="col-10 offset-2">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-3">
+          <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <%= image_tag "logo-uniscan.png", size: "150x150" %>
+            <h1 class="display-3">UNISCAN</h1>
+          </a>
+
+          <ul class="nav nav-pills align-items-center">
+            <%# <li class="nav-item"><a href="#" class="nav-link link-dark" aria-current="page">Home</a></li> %>
+            <%# <li class="nav-item"><a href="#" class="nav-link link-dark">Features</a></li> %>
+            <%# <li class="nav-item"><a href="#" class="nav-link link-dark">Pricing</a></li> %>
+            <%# <li class="nav-item"><a href="#" class="nav-link link-dark">FAQs</a></li> %>
+            <%# <li class="nav-item"><a href="#" class="nav-link link-dark">About</a></li> %>
+          </ul>
+        </header>
+      </div>
+
+      <div class="col-10 offset-2">
+        <main>
+          <%= yield %>
+        </main>
+      </div>
+
+      <div class="col-10 offset-2">
+        <footer class="text-muted my-5">
+          <p class="float-end mb-1">
+            <a href="#" class="link-dark">Back to top</a>
+          </p>
+          <p class="mb-1">Uniscan NFT Explorer wants to be the best place to analyze, track and discover NFTs.</p>
+          <div class="d-flex justify-content-between py-1">
+            <p>&copy; 2021 Uniscan. All rights reserved.</p>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
+

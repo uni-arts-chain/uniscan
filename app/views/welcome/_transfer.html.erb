@@ -1,7 +1,9 @@
 <li class="glide__slide">
-  <div class="card my-item" style="margin-right: 26px; padding: 6px;">
+  <div class="card my-item" style="width: 100%;">
     <div class="position-relative">
-      <img src="<%= token.image %>" alt="<%= token.name.nil? ? '' : token.name %>" style="width: 100%" />
+      <%= link_to url_for(token_path(token)), class: "" do %>
+        <img loading="lazy" src="<%= token.image.nil? ? image_url("logo-uniscan") : token.image %>" alt="<%= token.name.nil? ? '' : token.name %>" style="width: 100%" class="nft-img" />
+      <% end %>
 
       <% if token.ipfs? %>
         <span class="badge position-absolute bottom-0 end-0" style="background-color: #6acad1">
