@@ -11,13 +11,13 @@ function buildGlide(glideId) {
     gap: 20,
     // peek: 60,
     breakpoints: {
-      1400: {
+      2400: {
         perView: 6
       },
-      800: {
+      1200: {
         perView: 4
       },
-      480: {
+      800: {
         perView: 2
       }
     }
