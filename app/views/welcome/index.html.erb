@@ -4,9 +4,9 @@
     <div class="container-fluid px-0 mt-3">
       <div class="row justify-content-start align-items-center">
         <div class="col-3">
-          <h1 class="display-6">New NFTs</h1>
+          <h3>New NFTs</h3>
         </div>
-        <div class="col-9 text-end" style="padding-top: 26px">
+        <div class="col-8 text-end" style="padding-top: 26px">
           <a href="<%= url_for tokens_path("q[s]" => "created_at desc") %>" >More</a>
         </div>
       </div>
@@ -34,7 +34,7 @@
     <div class="container-fluid px-0 mt-5">
       <div class="row justify-content-start align-items-center">
         <div class="col-4">
-          <h1 class="display-6">Latest transfers</h1>
+          <h3>Latest transfers</h3>
         </div>
       </div>
     </div>
@@ -63,9 +63,9 @@
     <div class="container-fluid px-0 mt-5">
       <div class="row justify-content-start align-items-center">
         <div class="col-6">
-          <h1 class="display-6">Highest 24h transfered</h1>
+          <h3>Highest 24h transfered</h3>
         </div>
-        <div class="col-6 text-end" style="padding-top: 26px">
+        <div class="col-5 text-end" style="padding-top: 26px">
           <a href="<%= url_for tokens_path("q[s]" => "transfers_count_24h desc") %>" >More</a>
         </div>
       </div>
@@ -95,9 +95,9 @@
     <div class="container-fluid px-0 mt-5">
       <div class="row justify-content-start align-items-center">
         <div class="col-6">
-          <h1 class="display-6">Highest 7d transfered</h1>
+          <h3>Highest 7d transfered</h3>
         </div>
-        <div class="col-6 text-end" style="padding-top: 26px">
+        <div class="col-5 text-end" style="padding-top: 26px">
           <a href="<%= url_for tokens_path("q[s]" => "transfers_count_7d desc") %>" >More</a>
         </div>
       </div>

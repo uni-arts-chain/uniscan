@@ -8,7 +8,7 @@ function buildGlide(glideId) {
     type: 'carousel',
     perView: 8,
     focusAt: 0,
-    gap: 28,
+    gap: 20,
     // peek: 60,
     breakpoints: {
       1400: {

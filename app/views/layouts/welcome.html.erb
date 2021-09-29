@@ -13,11 +13,11 @@
 
   <body>
     <div class="container-fluid">
-      <div class="col-10 offset-2">
+      <div class="col-8 offset-2">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-3">
           <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-            <%= image_tag "logo-uniscan.png", size: "150x150" %>
-            <h1 class="display-3">UNISCAN</h1>
+            <%= image_tag "logo-uniscan.png", size: "100x100" %>
+            <span class="fs-2 mx-2">UNISCAN</span>
           </a>
 
           <ul class="nav nav-pills align-items-center">
@@ -31,12 +31,10 @@
       </div>
 
       <div class="col-10 offset-2">
-        <main>
-          <%= yield %>
-        </main>
+        <%= yield %>
       </div>
 
-      <div class="col-10 offset-2">
+      <div class="col-8 offset-2">
         <footer class="text-muted my-5">
           <p class="float-end mb-1">
             <a href="#" class="link-dark">Back to top</a>
