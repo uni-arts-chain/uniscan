@@ -18,6 +18,7 @@ a {
 
 a:hover {
   color: #212529;
+  text-decoration: underline;
 }
 
 .img-thumbnail {
@@ -148,4 +149,16 @@ h1 {
 
 .my-item {
   flex: none
+}
+
+.pagination>li:first-child>a,
+.pagination>li:first-child>span {
+    border-top-left-radius: 50rem !important;
+    border-bottom-left-radius: 50rem !important;
+}
+
+.pagination>li:last-child>a,
+.pagination>li:last-child>span {
+    border-top-right-radius: 50rem !important;
+    border-bottom-right-radius: 50rem !important;
 }
