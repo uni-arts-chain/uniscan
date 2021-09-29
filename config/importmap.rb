@@ -13,3 +13,4 @@ pin "@hotwired/stimulus-importmap-autoloader", to: "stimulus-importmap-autoloade
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin "@hotwired/turbo-rails", to: "turbo.js"
 pin "@glidejs/glide", to: "glide.esm.js"
+pin "lazyload", to: "https://ga.jspm.io/npm:lazyload@2.0.0-rc.2/lazyload.js"

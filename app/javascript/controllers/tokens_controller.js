@@ -1,10 +1,12 @@
 import { Controller } from "@hotwired/stimulus"
+import LazyLoad from 'lazyload'
 
 export default class extends Controller {
   static targets = [ "tokens", "url", "loadMoreBtn" ]
 
   connect() {
-
+    let images = document.querySelectorAll(".nft-img");
+    new LazyLoad(images);
   }
 
   loadMore() {
@@ -30,6 +32,8 @@ export default class extends Controller {
           urlTarget.innerHTML= data.next_page_url;
         }
         tokensTarget.insertAdjacentHTML("beforeend", data.entries);
+        let images = document.querySelectorAll(".nft-img");
+        new LazyLoad(images);
       }
     };
     request.send();

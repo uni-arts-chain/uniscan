@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="container" data-controller="accounts">
   <h4 class="pb-4"><%= @account.address %></h4>
 
   <% @account.tokens_by_collection.each_pair do |collection, tokens| %>

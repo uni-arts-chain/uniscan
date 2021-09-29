@@ -1,5 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 import Glide from '@glidejs/glide'
+import LazyLoad from 'lazyload'
 
 function buildGlide(glideId) {
   var glide1Hidden = document.querySelector("#" + glideId + "-hidden");
@@ -34,6 +35,8 @@ export default class extends Controller {
     buildGlide("glide2")
     buildGlide("glide3")
     buildGlide("glide4")
+    let images = document.querySelectorAll(".nft-img");
+    new LazyLoad(images);
   }
 
   loadMore() {
