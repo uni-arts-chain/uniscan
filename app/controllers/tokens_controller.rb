@@ -2,29 +2,13 @@ class TokensController < ApplicationController
   def index
     params[:q] = { "s" => "created_at desc" } if params[:q].nil? 
     params[:q]["s"] = "created_at desc" if params[:q]["s"].blank?
+    
+    @refresh = params[:refresh].blank? ? false : params[:refresh] == "true"
 
     @q = Token.ransack(params[:q])
     tokens = @q.result
       .where(token_uri_err: nil)
       .where.not(image: nil)
-
-    @first_token_id = 
-      if params[:first_token_id].blank?
-        first_token = tokens.limit(1).first
-        first_token&.id
-      else
-        params[:first_token_id]
-      end
-
-    if @first_token_id
-      if params[:q]["s"].include?(" desc")
-        tokens = tokens 
-          .where("tokens.id <= #{@first_token_id}")
-      else
-        tokens = tokens
-          .where("tokens.id >= #{@first_token_id}")
-      end
-    end
 
     @pagy, @tokens = pagy(tokens, items: 36)
 
@@ -33,7 +17,7 @@ class TokensController < ApplicationController
       @next_page_url = nil
     else
       @next_page_url = 
-        tokens_url(page: @pagy.next, first_token_id: @first_token_id) \
+        tokens_url(page: @pagy.next) \
         + "&" \
         + @q_string
     end

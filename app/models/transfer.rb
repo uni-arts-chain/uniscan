@@ -19,7 +19,7 @@ class Transfer < ApplicationRecord
   belongs_to :from, class_name: "Account", foreign_key: "from"
   belongs_to :to, class_name: "Account", foreign_key: "to"
 
-  after_create :update_balances
+  after_create :update_balances, :update_token_last_transfer_time
 
   def update_balances
     # calc `from` account balance
@@ -57,5 +57,11 @@ class Transfer < ApplicationRecord
           )
         end
       end
+  end
+
+  def update_token_last_transfer_time
+    self.token.update(
+      last_transfer_time: self.created_at
+    )
   end
 end
