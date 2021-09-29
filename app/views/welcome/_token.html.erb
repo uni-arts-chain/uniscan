@@ -32,7 +32,7 @@
       </div>
 
       <div class="text-truncate py-1" style="font-size: 0.7rem;">
-        <%= image_tag("ethereum.svg", size: "16x16", class: "rounded-circle") %>
+        <%= image_tag("#{token.blockchain.name.downcase}.png", size: "16x16", class: "rounded-circle") %>
         <span class="small align-bottom">
           <% if token.owners.count == 1 %>
             <%= link_to account_path(token.owners[0]) do %>
