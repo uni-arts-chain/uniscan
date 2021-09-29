@@ -4,10 +4,10 @@
       <div class="col col-lg-7 p-0 position-relative">
         <img src="<%= @token.image %>" class="nft-img shadow-lg" style="width: 100%" />
         <% if @token.ipfs? %>
-          <span class="badge position-absolute bottom-0 end-0" style="right: 13px !important;background-color: #6acad1">
+          <span class="badge position-absolute bottom-0 end-0" style="background-color: #6acad1">
             IPFS
           </span>
-          <span class="badge <%= @token.nft_type == "erc721" ? "bg-dark" : "bg-light text-dark" %> position-absolute bottom-0 end-0" style="right: 56px !important;">
+          <span class="badge <%= @token.nft_type == "erc721" ? "bg-dark" : "bg-light text-dark" %> position-absolute bottom-0 end-0" style="right: 43px !important;">
             <%= @token.nft_type %>
           </span>
         <% else %>
