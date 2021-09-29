@@ -24,6 +24,8 @@ class WelcomeController < ApplicationController
   end
 
   def hello
-    render :layout => false
+    @tokens = Token.eligible
+      .order(created_at: :desc)
+      .limit(50)
   end
 end
