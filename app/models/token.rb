@@ -150,7 +150,8 @@ class Token < ApplicationRecord
     response = faraday.get the_token_uri
     
     if response.status == 200
-      return JSON.parse(response.body)
+      body = response.body.gsub("\xEF\xBB\xBF".force_encoding("ASCII-8BIT"), '')
+      return JSON.parse(body)
     else
       raise "token_uri's response status is #{response.status}"
     end
