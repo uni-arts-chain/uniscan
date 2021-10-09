@@ -5,7 +5,7 @@
 #  id            :bigint           not null, primary key
 #  token_id      :integer
 #  account_id    :integer
-#  balance       :integer          default(1)
+#  balance       :decimal(65, )    default(1)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  collection_id :integer

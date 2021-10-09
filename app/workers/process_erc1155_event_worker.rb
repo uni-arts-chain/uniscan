@@ -13,7 +13,7 @@ class ProcessErc1155EventWorker
     to = args[:to]
     token_id = args[:token_id]
     amount = args[:amount]
-    token_uri = args[:token_uri]
+    token_uri = args[:token_uri]&.strip
 
     # TODO: Check args
 

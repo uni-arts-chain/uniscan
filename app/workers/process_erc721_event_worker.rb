@@ -12,7 +12,7 @@ class ProcessErc721EventWorker
     from = args[:from]
     to = args[:to]
     token_id = args[:token_id]
-    token_uri = args[:token_uri]
+    token_uri = args[:token_uri]&.strip
     name = args[:name]
     symbol = args[:symbol]
     # total_supply = args[:total_supply]

@@ -29,12 +29,15 @@ gem 'sidekiq'
 # gem 'ethereum.rb'
 gem 'faraday'
 gem 'faraday_middleware'
+gem "down", "~> 5.0"
+gem 'image_processing'
 
 gem 'importmap-rails'
 gem 'hotwire-rails'
 gem 'bootstrap', '~> 5.1.0'
 gem 'pagy'
 gem 'ransack'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

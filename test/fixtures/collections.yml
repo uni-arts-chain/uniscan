@@ -9,13 +9,13 @@
 #  contract_platform    :integer          default("evm")
 #  contract_address     :string(255)
 #  nft_type             :integer          default("erc721")
-#  total_supply         :integer
+#  total_supply         :decimal(65, )
 #  holders_count        :integer          default(0)
 #  transfers_count      :integer          default(0)
 #  creator_id           :integer
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
-#  supply               :integer          default(0)
+#  supply               :decimal(65, )    default(0)
 #  creator_address      :string(255)
 #  created_at_block     :integer
 #  created_at_timestamp :integer

@@ -5,7 +5,7 @@
 #  id            :bigint           not null, primary key
 #  collection_id :integer
 #  token_id      :integer
-#  amount        :integer          default(1)
+#  amount        :decimal(65, )    default(1)
 #  from          :integer
 #  to            :integer
 #  block_number  :integer

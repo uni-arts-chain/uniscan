@@ -8,7 +8,7 @@ class TokensController < ApplicationController
     @q = Token.ransack(params[:q])
     tokens = @q.result
       .where(token_uri_err: nil)
-      .where.not(image: nil)
+      .where.not(image_uri: nil)
 
     @pagy, @tokens = pagy(tokens, items: 36)
 
