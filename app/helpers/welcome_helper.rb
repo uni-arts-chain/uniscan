@@ -5,10 +5,10 @@ module WelcomeHelper
         # url_for token.image
         url_for token.image.variant(resize: "300x300", loader: { page: nil }) 
       else
-        image_url("logo-uniscan")
+        image_url("logo-uniscan.png")
       end
     else
-      image_url("logo-uniscan")
+      image_url("logo-uniscan.png")
     end
   end
 end
