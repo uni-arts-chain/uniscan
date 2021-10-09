@@ -120,6 +120,7 @@ class Token < ApplicationRecord
       image_uri: image_uri,
       ipfs: is_ipfs,
 
+      token_uri_err: nil,
       token_uri_processed: true
     ) 
 
