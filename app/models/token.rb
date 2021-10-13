@@ -23,6 +23,7 @@
 #  transfers_count_7d  :integer          default(0)
 #  last_transfer_time  :datetime
 #
+require 'mime/types'
 class Token < ApplicationRecord
 
   belongs_to :collection
@@ -130,10 +131,12 @@ class Token < ApplicationRecord
     puts "#{e.class} (#{e.message})"
     puts e.backtrace.join("\n")
     self.update(
-      token_uri_err: "#{e.class} (#{e.message})\n#{e.backtrace.join("\n")}",
+      token_uri_err: "#{e.class} (#{e.message})",
       token_uri_processed: true
     )
   end
+
+  private
 
   def get_token_uri_json
     the_token_uri = get_token_uri
@@ -156,8 +159,6 @@ class Token < ApplicationRecord
       raise "token_uri's response status is #{response.status}"
     end
   end
-
-  private
 
   def q_string_of
     self.collection.blockchain_id
@@ -184,8 +185,11 @@ class Token < ApplicationRecord
 
   def attach_image(image_uri)
     tempfile = Down.download(image_uri, max_size: 5 * 1024 * 1024) # 5 MB
-    sha256 = Digest::SHA256.file(tempfile)
-    filename = sha256.hexdigest
+
+    name = Digest::SHA1.hexdigest(image_uri)
+    ext = MIME::Types[tempfile.content_type].first.extensions.first
+    filename = "#{name}.#{ext}"
+
     self.image.attach(io: tempfile, filename: filename)
   end
 

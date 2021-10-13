@@ -28,6 +28,7 @@ one:
   token_id_on_chain: "1234"
   collection_id: 1
   token_uri: "https://astrofrens-metadata.s3.amazonaws.com/AstroFrens/{id}.json"
+  ipfs: false
   unique: false
 
 two:

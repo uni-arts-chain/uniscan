@@ -32,4 +32,16 @@ module TokensHelper
       value
     end
   end
+
+  def token_image_big(token)
+    if token.image.present? && token.image.attached?
+      if token.image.variable?
+        url_for token.image.variant(resize: "600x600", loader: { page: nil }) 
+      else
+        url_for token.image
+      end
+    else
+      image_path("logo-uniscan.png")
+    end
+  end
 end

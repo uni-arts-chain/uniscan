@@ -5,6 +5,7 @@ export default class extends Controller {
   static targets = [ "tokens", "url", "loadMoreBtn" ]
 
   connect() {
+    console.log("--------------------")
     let images = document.querySelectorAll(".nft-img");
     new LazyLoad(images);
   }

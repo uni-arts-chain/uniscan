@@ -105,12 +105,12 @@ ActiveRecord::Schema.define(version: 2021_10_08_032705) do
     t.text "description"
     t.string "image_uri"
     t.text "token_uri"
-    t.text "token_uri_err"
     t.boolean "ipfs", default: false
     t.integer "transfers_count", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "holders_count", default: 0
+    t.text "token_uri_err"
     t.boolean "token_uri_processed", default: false
     t.integer "transfers_count_24h", default: 0
     t.integer "transfers_count_7d", default: 0

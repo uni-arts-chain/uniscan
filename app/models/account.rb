@@ -30,7 +30,7 @@ class Account < ApplicationRecord
   end
 
   def explorer_url
-    self.blockchain.explorer_address_url.gsub("{address}", self.address)
+    self.blockchain.explorer_address_url&.gsub("{address}", self.address)
   end
 
 end

@@ -11,11 +11,11 @@
 #  explorer_address_url :string(255)
 #
 
-one:
+blockchain_one:
   name: Ethereum
   testnet: false
-  explorer_base_url: "https://etherscan.io/token/"
+  explorer_token_url: "https://etherscan.io/token/{address}"
 
-two:
+blockchain_two:
   name: Pangolin
   testnet: true

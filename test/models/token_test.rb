@@ -30,4 +30,40 @@ class TokenTest < ActiveSupport::TestCase
     token = Token.new
     assert_not token.save, "Saved the token without a token_id_on_chain"
   end
+
+  test "should fill infos by processing token uri" do
+    token = tokens[0]
+
+    assert_nil token.name
+    assert_nil token.description
+    assert_nil token.image_uri
+    assert_equal token.token_uri_processed, false
+
+    token.process_token_uri
+
+    assert_not_nil token.name
+    assert_not_nil token.description
+    assert_not_nil token.image_uri
+    assert_equal token.token_uri_processed, true
+  end
+
+  test "can be clean" do
+    token = tokens[0]
+    token.update(
+      name: "hello",
+      description: "world",
+      image_uri: "https://hello.world",
+      token_uri_processed: true
+    )
+
+    assert_not_nil token.name
+    assert_not_nil token.description
+    assert_not_nil token.image_uri
+
+    token.clean()
+
+    assert_nil token.name
+    assert_nil token.description
+    assert_nil token.image_uri
+  end
 end

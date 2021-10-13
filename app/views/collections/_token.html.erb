@@ -1,9 +1,9 @@
-<div class="token col-sm-6 col-md-3 col-lg-2">
+<div class="token col-sm-6 col-md-3 col-lg-2" data-controller="tokens">
   <div class="card px-0 py-0">
 
     <div class="position-relative">
       <%= link_to url_for(token_path(token)), class: "" do %>
-        <img src="<%= image_url("logo-uniscan") %>" data-src="<%= token.image.nil? ? image_url("logo-uniscan") : token.image %>" alt="<%= token.name.nil? ? '' : token.name %>" style="width: 100%" class="nft-img" />
+        <img src="<%= image_url("logo-uniscan.png") %>" data-src="<%= token_image(token) %>" alt="<%= token.name.nil? ? '' : token.name %>" style="width: 100%" class="nft-img" />
       <% end %>
 
       <% if token.ipfs? %>
