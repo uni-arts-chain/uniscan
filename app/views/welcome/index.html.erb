@@ -15,7 +15,7 @@
     <div class="glide" id="glide1-hidden" hidden>
       <div class="glide__track" data-glide-el="track">
         <ul class="glide__slides" style="padding-top: 40px; padding-bottom: 60px">
-          <%= render partial: "welcome/token", collection: @tokens, locals: { for_transfered: false } %>
+          <%= render partial: "welcome/token", collection: @tokens %>
         </ul>
       </div>
       <div class="glide__arrows" data-glide-el="controls">
@@ -75,7 +75,7 @@
       <div class="glide__track" data-glide-el="track">
         <ul class="glide__slides" style="padding-top: 40px; padding-bottom: 60px">
           <% @highest_24h.each do |token| %>
-            <%= render partial: "welcome/token", locals: { token: token, for_transfered: true } %>
+            <%= render partial: "welcome/token", locals: { token: token, for_transfered_24h: true } %>
           <% end %>
         </ul>
       </div>
@@ -107,7 +107,7 @@
       <div class="glide__track" data-glide-el="track">
         <ul class="glide__slides" style="padding-top: 40px; padding-bottom: 60px">
           <% @highest_7d.each do |token| %>
-            <%= render partial: "welcome/token", locals: { token: token, for_transfered: true } %>
+            <%= render partial: "welcome/token", locals: { token: token, for_transfered_7d: true } %>
           <% end %>
         </ul>
       </div>

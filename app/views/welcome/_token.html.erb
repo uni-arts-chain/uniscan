@@ -5,9 +5,14 @@
         <img src="<%= image_url("logo-uniscan.png") %>" data-src="<%= token_image(token) %>" alt="<%= token.name.nil? ? '' : token.name %>" style="width: 100%" class="nft-img" />
       <% end %>
 
-      <% if for_transfered %>
+      <% if defined?(for_transfered_7d) %>
         <span class="position-absolute top-0 start-100 translate-middle badge bg-dark">
-          <%= token.transfers_count %> 
+          <%= token.transfers_count_7d %> 
+        </span>
+      <% end %>
+      <% if defined?(for_transfered_24h) %>
+        <span class="position-absolute top-0 start-100 translate-middle badge bg-dark">
+          <%= token.transfers_count_24h %> 
         </span>
       <% end %>
       <% if token.ipfs? %>
