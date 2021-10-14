@@ -45,9 +45,9 @@
       <div class="col-md-1" style="margin-top:23px">
         <a href="<%= url_for tokens_path(refresh: (not @refresh))  %>" class="link-dark" role="button" data-bs-toggle="button">
           <% if @refresh %>
-            <i class="bi bi-check-circle"></i> Refresh
+            <i class="bi bi-check-circle"></i> Push
           <% else %>
-            <i class="bi bi-circle"></i> Refresh
+            <i class="bi bi-circle"></i> Push
           <% end %>
         </a>
       </div>
@@ -62,7 +62,7 @@
       </div>
     <% end %>
 
-    <% if stream_needed?(@q_string) %>
+    <% if @refresh %>
       <% if @stream_sub_name.blank? %>
         <%= turbo_stream_from "tokens" %>
       <% else %>
