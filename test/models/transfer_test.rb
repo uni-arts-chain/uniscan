@@ -110,4 +110,38 @@ class TransferTest < ActiveSupport::TestCase
 
     assert_equal collections[0].transfers_count, 1
   end
+
+  test "should not create a new record with same info" do
+    Transfer.create(
+      collection: collections[0],
+      token: tokens[0],
+      from: accounts[0],
+      to: accounts[1],
+      block_number: 12994590,
+      txhash: "0x4bdc7b8f1a9ca6fffe16fe2a8d543fc9c491f0e5a54954562afe5f819c261480",
+      amount: 1
+    )
+
+    t1 = Transfer.create(
+      collection: collections[0],
+      token: tokens[0],
+      from: accounts[0],
+      to: accounts[1],
+      block_number: 12994590,
+      txhash: "0x6bdc7b8f1a9ca6fffe16fe2a8d543fc9c491f0e5a54954562afe5f819c261480", # <- changed
+      amount: 1
+    )
+    assert t1.errors.empty?
+
+    t2 = Transfer.create(
+      collection: collections[0],
+      token: tokens[0],
+      from: accounts[0],
+      to: accounts[1],
+      block_number: 12994590,
+      txhash: "0x4bdc7b8f1a9ca6fffe16fe2a8d543fc9c491f0e5a54954562afe5f819c261480", # <- same
+      amount: 1
+    )
+    assert_equal t2.errors.full_messages[0], "Txhash has already been taken"
+  end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_08_032705) do
+ActiveRecord::Schema.define(version: 2021_10_14_061124) do
 
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "address"
@@ -105,12 +105,12 @@ ActiveRecord::Schema.define(version: 2021_10_08_032705) do
     t.text "description"
     t.string "image_uri"
     t.text "token_uri"
+    t.text "token_uri_err"
     t.boolean "ipfs", default: false
     t.integer "transfers_count", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "holders_count", default: 0
-    t.text "token_uri_err"
     t.boolean "token_uri_processed", default: false
     t.integer "transfers_count_24h", default: 0
     t.integer "transfers_count_7d", default: 0
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 2021_10_08_032705) do
     t.string "txhash"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["collection_id", "token_id", "from", "to", "txhash"], name: "transfers_uniq_index", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

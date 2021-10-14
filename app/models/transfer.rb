@@ -19,6 +19,8 @@ class Transfer < ApplicationRecord
   belongs_to :from, class_name: "Account", foreign_key: "from"
   belongs_to :to, class_name: "Account", foreign_key: "to"
 
+  validates_uniqueness_of :txhash, scope: [:collection_id, :token_id, :from, :to]
+
   after_create :update_balances, :update_token_last_transfer_time
 
   def update_balances

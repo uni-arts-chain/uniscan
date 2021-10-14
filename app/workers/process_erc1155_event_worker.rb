@@ -59,7 +59,13 @@ class ProcessErc1155EventWorker
       )
     end
 
-    transfer = Transfer.find_by(txhash: transaction_hash)
+    transfer = Transfer.find_by(
+      collection: collection,
+      token: token,
+      from: from_account,
+      to: to_account,
+      txhash: transaction_hash
+    )
     if transfer.blank?
       transfer = Transfer.create(
         collection: collection,
