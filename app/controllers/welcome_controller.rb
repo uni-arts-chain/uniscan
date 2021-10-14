@@ -4,7 +4,10 @@ class WelcomeController < ApplicationController
       .order(created_at: :desc)
       .limit(50)
 
-    @transfers = Transfer.order(created_at: :desc)
+    # test
+    @transfers = Transfer.joins(:token)
+      .where("tokens.token_uri_processed=true and tokens.token_uri_err is null")
+      .order("transfers.created_at desc")
       .limit(50)
 
     @highest_24h = Token.eligible
