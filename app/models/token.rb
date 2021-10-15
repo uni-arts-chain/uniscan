@@ -92,6 +92,8 @@ class Token < ApplicationRecord
 
     raise "The `image` is required" if image_uri.blank?
 
+    raise "This nft is deprecated" if image_uri == 'https://mcp3d.com/api/image/deprecated'
+
     token_uri = self.token_uri&.strip
     is_ipfs = is_ipfs_uri?(token_uri) && is_ipfs_uri?(image_uri)
 
@@ -128,10 +130,16 @@ class Token < ApplicationRecord
     # 4.
     broadcast
   rescue => e
-    puts "#{e.class} (#{e.message})"
-    puts e.backtrace.join("\n")
+    token_uri_err = 
+      if e.class == RuntimeError
+        e.message
+      else
+        "#{e.class} (#{e.message})"
+      end
+    puts "  #{token_uri_err}"
+    # puts e.backtrace.join("\n")
     self.update(
-      token_uri_err: "#{e.class} (#{e.message})",
+      token_uri_err: token_uri_err,
       token_uri_processed: true
     )
   end
