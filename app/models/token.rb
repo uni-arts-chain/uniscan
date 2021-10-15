@@ -157,7 +157,7 @@ class Token < ApplicationRecord
       if body.strip.start_with?("{") 
         return JSON.parse(body)
       else
-        raise "token_uri's response body is json"
+        raise "token_uri's response body is not json"
       end
     else
       raise "token_uri's response status is #{response.status}"
