@@ -144,8 +144,15 @@ class Token < ApplicationRecord
     )
   end
 
-  private
+  def update_image
+    if self.image_uri.present?
+      attach_image self.image_uri
+    end
+  end
 
+  ##################
+  ### help methods
+  ##################
   def get_token_uri_json
     the_token_uri = get_token_uri
 
@@ -196,13 +203,24 @@ class Token < ApplicationRecord
   end
 
   def attach_image(image_uri)
-    tempfile = Down.download(image_uri, max_size: 5 * 1024 * 1024) # 5 MB
+    tempfile = download_image(image_uri)
 
     name = Digest::SHA1.hexdigest(image_uri)
-    ext = MIME::Types[tempfile.content_type].first.extensions.first
+    ext = MIME::Types.type_for(tempfile.path).first.extensions.first
     filename = "#{name}.#{ext}"
 
     self.image.attach(io: tempfile, filename: filename)
+  end
+
+  def download_image(image_uri)
+    tempfile = Down.download(image_uri, max_size: 5 * 1024 * 1024) # 5 MB
+    if tempfile.content_type.include?("svg")
+      tempfile = ImageProcessing::MiniMagick
+        .source(tempfile)
+        .convert("png")
+        .call
+    end
+    tempfile
   end
 
 end
