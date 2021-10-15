@@ -39,7 +39,7 @@ task update_creator: :environment do
       end
     rescue => ex
       puts ex.message
-      sleep 30
+      sleep 10
     end
 
     # etherscan speed limit
