@@ -21,7 +21,12 @@ class Transfer < ApplicationRecord
 
   validates_uniqueness_of :txhash, scope: [:collection_id, :token_id, :from, :to]
 
-  after_create :update_balances, :update_token_last_transfer_time
+  after_create( 
+    :update_balances, 
+    :update_token_last_transfer_time,
+    :update_token_transfers_count_7d,
+    :update_token_transfers_count_24h
+  )
 
   def update_balances
     # calc `from` account balance
@@ -65,5 +70,23 @@ class Transfer < ApplicationRecord
     self.token.update(
       last_transfer_time: self.created_at
     )
+  end
+
+  def update_token_transfers_count_7d
+    count = Transfer
+      .where(token: self.token)
+      .where('created_at >= ?', 1.week.ago)
+      .count
+
+    self.token.update(transfers_count_7d: count)
+  end
+
+  def update_token_transfers_count_24h
+    count = Transfer
+      .where(token: self.token)
+      .where('created_at >= ?', 1.day.ago)
+      .count
+
+    self.token.update(transfers_count_24h: count)
   end
 end

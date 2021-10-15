@@ -144,4 +144,26 @@ class TransferTest < ActiveSupport::TestCase
     )
     assert_equal t2.errors.full_messages[0], "Txhash has already been taken"
   end
+
+  test "update token's transfers count after a transfer created" do
+    token = tokens[0]
+
+    assert_equal token.transfers_count, 0
+    assert_equal token.transfers_count_24h, 0
+    assert_equal token.transfers_count_7d, 0
+
+    Transfer.create(
+      collection: collections[0],
+      token: token,
+      from: accounts[0],
+      to: accounts[1],
+      block_number: 12994590,
+      txhash: "0x4bdc7b8f1a9ca6fffe16fe2a8d543fc9c491f0e5a54954562afe5f819c261480",
+      amount: 1
+    )
+
+    assert_equal token.transfers_count, 1
+    assert_equal token.transfers_count_24h, 1
+    assert_equal token.transfers_count_7d, 1
+  end
 end
