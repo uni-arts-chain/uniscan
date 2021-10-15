@@ -154,7 +154,11 @@ class Token < ApplicationRecord
     
     if response.status == 200
       body = response.body.gsub("\xEF\xBB\xBF".force_encoding("ASCII-8BIT"), '')
-      return JSON.parse(body)
+      if body.strip.start_with?("{") 
+        return JSON.parse(body)
+      else
+        raise "token_uri's response body is json"
+      end
     else
       raise "token_uri's response status is #{response.status}"
     end
