@@ -4,7 +4,7 @@ class Etherscan
   # https://api.etherscan.io/api?module=account&action=txlist&address=0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270&startblock=0&endblock=99999999&page=1&offset=1&sort=asc&apikey=xxx
   # https://api.etherscan.io/api?module=account&action=txlistinternal&address=0x0b2a13bc4a09bf1ee822964c3619f79791719ec0&startblock=0&endblock=99999999&page=1&offset=1&sort=asc&apikey=xxx
   def self.get_contract_creation_transacton(address)
-    sleep 1
+    sleep 0.5
 
     contract_creation_request_url = 
       "https://api-cn.etherscan.com/api" +
@@ -39,7 +39,7 @@ class Etherscan
   end
 
   def self.get_contract_creation_internal_transacton(address)
-    sleep 1
+    sleep 0.5
     contract_creation_request_url = 
       "https://api-cn.etherscan.com/api" +
         "?module=account" +
