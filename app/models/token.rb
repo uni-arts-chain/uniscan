@@ -203,24 +203,13 @@ class Token < ApplicationRecord
   end
 
   def attach_image(image_uri)
-    tempfile = download_image(image_uri)
+    tempfile, content_type = Download.download_image(image_uri)
 
     name = Digest::SHA1.hexdigest(image_uri)
-    ext = MIME::Types.type_for(tempfile.path).first.extensions.first
+    ext = MIME::Types[content_type].first.extensions.first
     filename = "#{name}.#{ext}"
 
     self.image.attach(io: tempfile, filename: filename)
-  end
-
-  def download_image(image_uri)
-    tempfile = Down.download(image_uri, max_size: 5 * 1024 * 1024) # 5 MB
-    if tempfile.content_type.include?("svg")
-      tempfile = ImageProcessing::MiniMagick
-        .source(tempfile)
-        .convert("png")
-        .call
-    end
-    tempfile
   end
 
 end
