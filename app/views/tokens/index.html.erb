@@ -38,13 +38,13 @@
       </div>
 
       <div class="col-md-1">
-        <input name="refresh" type="hidden" value="<%= @refresh ? "true" : "false" %>">
+        <input name="push" type="hidden" value="<%= @push ? "true" : "false" %>">
         <%= f.submit class: "btn btn-dark rounded-pill" %>
       </div>
 
       <div class="col-md-1" style="margin-top:23px">
-        <a href="<%= url_for tokens_path(refresh: (not @refresh))  %>" class="link-dark" role="button" data-bs-toggle="button">
-          <% if @refresh %>
+        <a href="<%= url_for tokens_path(push: (not @push))  %>" class="link-dark" role="button" data-bs-toggle="button">
+          <% if @push %>
             <i class="bi bi-check-circle"></i> Push
           <% else %>
             <i class="bi bi-circle"></i> Push
@@ -53,7 +53,7 @@
       </div>
 
       <div class="col-md-3 text-end">
-        <% unless @refresh %>
+        <% unless @push %>
           <%= sort_link @q, :created_at, "Time", { default_order: :desc }, { class: "btn btn-link link-dark" } %>
           <%= sort_link @q, :transfers_count_24h, "TR24H", {}, { class: "btn btn-link link-secondary px-1" } %>
           <%= sort_link @q, :transfers_count_7d, "TR7D", {}, { class: "btn btn-link link-secondary px-1" } %>
@@ -62,7 +62,7 @@
       </div>
     <% end %>
 
-    <% if @refresh %>
+    <% if @push %>
       <% if @stream_sub_name.blank? %>
         <%= turbo_stream_from "tokens" %>
       <% else %>
