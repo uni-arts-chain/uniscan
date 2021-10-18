@@ -86,14 +86,11 @@ class Token < ApplicationRecord
   def process_token_uri
     data = get_token_uri_json
 
-    name = data["name"]
-    description = data["description"]
+    name = data["name"].present? ? StringHelper.fix_encoding(data["name"]) : data['name']
+    description = data["description"].present? ? StringHelper.fix_encoding(data["description"]) : data["description"]
     image_uri = data["image"]
 
-    name.fix_encoding!
-    description.fix_encoding!
-
-    raise "The `image` is required" if image_uri.blank?
+    raise "The `image_uri` is required" if image_uri.blank?
 
     raise "This nft is deprecated" if image_uri == 'https://mcp3d.com/api/image/deprecated'
 
