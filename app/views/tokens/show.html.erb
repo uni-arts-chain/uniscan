@@ -26,9 +26,15 @@
   <% if @token.nft_type == "erc721" %>
     <div class="col-lg-6 mx-auto">
       <h2 class="text-start">ERC721</h2>
+
       <div class="text-muted mb-2 text-start"><strong>Owner</strong></div>
-      <div class="text-muted mb-2 text-start"><%= @token.owner&.address %></div>
+      <div class="text-muted mb-2 text-start">
+        <%= link_to account_path(@token.owners[0]) do %>
+          <%= @token.owner&.address %>
+        <% end %>
+      </div>
       <div class="text-muted mb-2 text-start">It owns <%= @token.owner&.tokens&.count %> NFTs</div>
+
       <div class="text-muted mb-2 text-start"><strong>Historically owned by</strong></div>
       <div class="text-muted mb-2 text-start"><%= pluralize(@token.historical_owners_count, 'address') %></div>
     </div>
@@ -37,8 +43,10 @@
       <h2 class="text-start">ERC1155</h2>
       <div class="text-muted mb-2 text-start"><strong>Supply</strong></div>
       <div class="text-muted mb-2 text-start"><%= @token.supply.nil? ? "-" : @token.supply %></div>
+
       <div class="text-muted mb-2 text-start"><strong>Owner</strong></div>
       <div class="text-muted mb-2 text-start">Owned by <%= @token.accounts.length %> addresses</div>
+
       <div class="text-muted mb-2 text-start"><strong>Historically owned by</strong></div>
       <div class="text-muted mb-2 text-start"><%= @token.historical_owners_count %></div>
     </div>
