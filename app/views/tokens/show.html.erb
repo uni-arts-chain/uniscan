@@ -33,7 +33,7 @@
           <%= @token.owner&.address %>
         <% end %>
       </div>
-      <div class="text-muted mb-2 text-start">It owns <%= @token.owner&.tokens&.count %> NFTs</div>
+      <div class="text-muted mb-2 text-start">Who owns <%= @token.owner&.tokens&.count %> NFTs</div>
 
       <div class="text-muted mb-2 text-start"><strong>Historically owned by</strong></div>
       <div class="text-muted mb-2 text-start"><%= pluralize(@token.historical_owners_count, 'address') %></div>
