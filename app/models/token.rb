@@ -168,7 +168,8 @@ class Token < ApplicationRecord
     response = faraday.get the_token_uri
     
     if response.status == 200
-      body = response.body.gsub("\xEF\xBB\xBF".force_encoding("ASCII-8BIT"), '')
+      # body = response.body.gsub("\xEF\xBB\xBF".force_encoding("ASCII-8BIT"), '')
+      body = response.body
       fixed_body = StringHelper.fix_encoding(body)
       if fixed_body.strip.start_with?("{") 
         return JSON.parse(fixed_body)
