@@ -31,6 +31,7 @@ gem 'faraday'
 gem 'faraday_middleware'
 gem "down", "~> 5.0"
 gem 'image_processing'
+gem 'charlock_holmes'
 
 gem 'importmap-rails'
 gem 'hotwire-rails'

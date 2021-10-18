@@ -90,6 +90,9 @@ class Token < ApplicationRecord
     description = data["description"]
     image_uri = data["image"]
 
+    name.fix_encoding!
+    description.fix_encoding!
+
     raise "The `image` is required" if image_uri.blank?
 
     raise "This nft is deprecated" if image_uri == 'https://mcp3d.com/api/image/deprecated'
@@ -185,6 +188,7 @@ class Token < ApplicationRecord
 
   def get_token_uri
     raise "token_uri is blank" if self.token_uri.blank?
+    raise "token_uri is wrong" if self.token_uri
 
     if self.collection.erc1155? && self.token_uri.include?("{id}")
       hex_token_id_on_chain = self.token_id_on_chain.to_i.to_s(16).rjust(64, "0")
