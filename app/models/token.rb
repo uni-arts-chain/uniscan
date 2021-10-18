@@ -86,8 +86,8 @@ class Token < ApplicationRecord
   def process_token_uri
     data = get_token_uri_json
 
-    name = data["name"].present? ? StringHelper.fix_encoding(data["name"]) : data['name']
-    description = data["description"].present? ? StringHelper.fix_encoding(data["description"]) : data["description"]
+    name = data["name"]
+    description = data["description"]
     image_uri = data["image"]
 
     raise "The `image_uri` is required" if image_uri.blank?
@@ -169,8 +169,9 @@ class Token < ApplicationRecord
     
     if response.status == 200
       body = response.body.gsub("\xEF\xBB\xBF".force_encoding("ASCII-8BIT"), '')
-      if body.strip.start_with?("{") 
-        return JSON.parse(body)
+      fixed_body = StringHelper.fix_encoding(body)
+      if fixed_body.strip.start_with?("{") 
+        return JSON.parse(fixed_body)
       else
         raise "token_uri's response body is not json"
       end
