@@ -188,7 +188,7 @@ class Token < ApplicationRecord
 
   def get_token_uri
     raise "token_uri is blank" if self.token_uri.blank?
-    raise "token_uri is wrong" if self.token_uri
+    raise "token_uri is not valid" if self.token_uri =~ URI::regexp
 
     if self.collection.erc1155? && self.token_uri.include?("{id}")
       hex_token_id_on_chain = self.token_id_on_chain.to_i.to_s(16).rjust(64, "0")
