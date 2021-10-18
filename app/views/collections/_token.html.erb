@@ -3,7 +3,7 @@
 
     <div class="position-relative">
       <%= link_to url_for(token_path(token)), class: "" do %>
-        <img src="<%= image_url("logo-uniscan.png") %>" data-src="<%= token_image(token) %>" alt="<%= token.name.nil? ? '' : token.name %>" style="width: 100%" class="nft-img" />
+        <img src="<%= image_url("image-loading.png") %>" data-src="<%= token_image(token) %>" alt="<%= token.name.nil? ? '' : token.name %>" style="width: 100%" class="nft-img" />
       <% end %>
 
       <% if token.ipfs? %>
