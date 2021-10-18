@@ -16,6 +16,7 @@ class ProcessErc1155EventWorker
     token_uri = args[:token_uri]&.strip
 
     # TODO: Check args
+    return unless token_uri =~ URI::regexp
 
     blockchain = Blockchain.find_by_name(blockchain)
     return if blockchain.blank?
