@@ -1,6 +1,9 @@
-class Download
+# Token image help methods
+class ImageHelper
 
-  def self.download_image(image_uri)
+  # Download the file of image_uri.
+  # Convert to image if the image_uri is a svg
+  def self.download_and_convert_image(image_uri)
     tempfile = Down.download(image_uri, max_size: 50 * 1024 * 1024) # 50 MB
 
     if tempfile.content_type.include?("svg")
