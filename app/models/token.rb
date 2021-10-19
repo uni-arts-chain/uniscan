@@ -91,16 +91,20 @@ class Token < ApplicationRecord
     image_uri = data["image"]
 
     raise "The `image_uri` is required" if image_uri.blank?
-
     raise "This nft is deprecated" if image_uri == 'https://mcp3d.com/api/image/deprecated'
 
     token_uri = self.token_uri&.strip
     is_ipfs = is_ipfs_uri?(token_uri) && is_ipfs_uri?(image_uri)
 
-    # 1. attach image
-    attach_image(image_uri)
+    # 1. save base info to db
+    self.update(
+      name: name,
+      description: description,
+      image_uri: image_uri,
+      ipfs: is_ipfs,
+    ) 
 
-    # 2. save properties
+    # 2. save properties to db
     data.each_pair do |name, value|
       unless %w[name description image].include?(name)
         v = if value.class == Hash || value.class == Array
@@ -116,13 +120,11 @@ class Token < ApplicationRecord
       end
     end
 
-    # 3. save infos
-    self.update(
-      name: name,
-      description: description,
-      image_uri: image_uri,
-      ipfs: is_ipfs,
+    # 3. attach image
+    attach_image(image_uri)
 
+    # 4. fininshed
+    self.update(
       token_uri_err: nil,
       token_uri_processed: true
     ) 
