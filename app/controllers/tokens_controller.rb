@@ -7,6 +7,10 @@ class TokensController < ApplicationController
 
     @q = Token.ransack(params[:q])
     tokens = @q.result
+      .eligible
+      .includes(collection: [:blockchain])
+      .includes(:accounts)
+      .with_attached_image
       .where(token_uri_err: nil)
       .where.not(image_uri: nil)
 

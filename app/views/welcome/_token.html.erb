@@ -44,7 +44,7 @@
               <%= short_address(token.owner.address) %>
             <% end %>
           <% elsif token.owners.length > 1 %>
-            owned by <%= token.owners.count %> addresses
+            owned by <%= token.owners.length %> addresses
           <% else %>
               -
           <% end %>
