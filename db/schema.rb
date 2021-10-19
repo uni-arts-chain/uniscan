@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_15_144813) do
+ActiveRecord::Schema.define(version: 2021_10_19_033058) do
 
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "address"
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 2021_10_15_144813) do
     t.integer "owner_id"
     t.text "name"
     t.text "description"
-    t.string "image_uri"
+    t.text "image_uri"
     t.text "token_uri"
     t.text "token_uri_err"
     t.boolean "ipfs", default: false
