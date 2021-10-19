@@ -150,6 +150,21 @@ class Token < ApplicationRecord
     end
   end
 
+  # Return attached image
+  #
+  # Reprocess token_uri if attached image has an svg attachement.
+  def get_image
+    if self.image.attached? 
+      if self.image.blob.content_type.include?("svg")
+        process_token_uri
+      end
+      self.image
+    else
+      process_token_uri
+      self.image
+    end
+  end
+
   ##################
   ### help methods
   ##################
