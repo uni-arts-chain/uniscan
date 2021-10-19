@@ -223,7 +223,7 @@ class Token < ApplicationRecord
   end
 
   def attach_image(image_uri)
-    tempfile, content_type = Download.download_image(image_uri)
+    tempfile, content_type = ImageHelper.download_and_convert_image(image_uri)
 
     name = Digest::SHA1.hexdigest(image_uri)
     ext = MIME::Types[content_type].first.extensions.first
