@@ -24,7 +24,12 @@
 class Collection < ApplicationRecord
   belongs_to :blockchain
   belongs_to :creator, class_name: "Account", optional: true
-  has_many :tokens, -> { where('token_uri_err is null') }
+  has_many :tokens, -> { 
+    includes(collection: [:blockchain])
+      .includes(:accounts)
+      .with_attached_image
+      .where('token_uri_processed=true and token_uri_err is null') 
+  }
 
   validates :blockchain_id, presence: true
   validates :contract_address, presence: true
