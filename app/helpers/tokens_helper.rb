@@ -35,7 +35,7 @@ module TokensHelper
 
   def token_image_big(token)
     if token.image.present? && token.image.attached?
-      token.image.url(params: { "x-oss-process" => "image/resize,h_600,w_600" })
+      token.image.url(params: { "x-oss-process" => "image/resize,w_600" })
     else
       image_path("logo-uniscan.png")
     end
