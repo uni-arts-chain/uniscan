@@ -6,9 +6,10 @@ class ImageHelper
   def self.download_and_convert_image(image_uri)
     tempfile = Down.download(image_uri, max_size: 50 * 1024 * 1024) # 50 MB
     content_type = tempfile.content_type
+    ori_content_type = content_type
 
     # Convert svg to png
-    if content_type.include?("svg")
+    if ori_content_type.include?("svg")
       tempfile = ImageProcessing::MiniMagick
         .source(tempfile)
         .convert("png")
@@ -17,7 +18,7 @@ class ImageHelper
     end
 
     # Convert video to gif
-    if content_type.start_with?("video")
+    if ori_content_type.start_with?("video")
       tempfile = video_to_gif(tempfile)
       content_type = "image/gif"
     end
@@ -31,7 +32,7 @@ class ImageHelper
       .strip
       .call
 
-    [ tempfile, content_type ]
+    [ tempfile, content_type, ori_content_type ]
   end
 
   def self.video_to_gif(video_file)
