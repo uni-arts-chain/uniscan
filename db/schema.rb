@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 2021_10_20_090014) do
     t.integer "transfers_count_7d", default: 0
     t.datetime "last_transfer_time"
     t.string "image_ori_content_type"
-    t.integer "image_size"
+    t.integer "image_size", default: 0
   end
 
   create_table "transfers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
