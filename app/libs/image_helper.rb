@@ -5,15 +5,21 @@ class ImageHelper
   # Convert to image if the image_uri is a svg
   def self.download_and_convert_image(image_uri)
     tempfile = Down.download(image_uri, max_size: 50 * 1024 * 1024) # 50 MB
+    content_type = tempfile.content_type
 
-    if tempfile.content_type.include?("svg")
+    # Convert svg to png
+    if content_type.include?("svg")
       tempfile = ImageProcessing::MiniMagick
         .source(tempfile)
         .convert("png")
         .call
       content_type = "image/png"
-    else
-      content_type = tempfile.content_type
+    end
+
+    # Convert video to gif
+    if content_type.start_with?("video")
+      tempfile = video_to_gif(tempfile)
+      content_type = "image/gif"
     end
 
     # Shrink Larger Images
@@ -28,4 +34,9 @@ class ImageHelper
     [ tempfile, content_type ]
   end
 
+  def self.video_to_gif(video_file)
+    gif_file = Tempfile.new(["", ".gif"])
+    `#{Rails.root.join("scripts", "vid-to-gif.sh").to_s} -f 10 -w 600 #{video.path} #{gif_file.path}`
+    gif_file
+  end
 end
