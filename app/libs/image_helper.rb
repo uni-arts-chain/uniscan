@@ -17,11 +17,11 @@ class ImageHelper
     end
 
     # Shrink Larger Images
-      # if tempfile.size > 5 * 1024 * 1024
-      # end
+    ext = MIME::Types[content_type].first.extensions.first
     tempfile = ImageProcessing::MiniMagick
       .source(tempfile)
       .resize_to_limit(600, 600)
+      .convert(ext)
       .strip
       .call
 
