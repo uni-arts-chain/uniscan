@@ -24,17 +24,16 @@ if (( $# == 0 )); then
     usage >&2
 fi
 
-# set input variable to the first option after the arguments
+# set input & output variable to the first option after the arguments
 input="$1"
+output="$2"
 
-# Extract filename from input file without the extension
-filename=$(basename "$input")
-#extension="${filename##*.}"
-filename="${filename%.*}.gif"
+# Extract filename from output file
+filename=$(basename "$output")
 
 # Debug display to show what the script is using as inputs
-echo "Input: $#"
-echo "Output: $filename"
+echo "Input: $input"
+echo "Output: $output"
 echo "FPS: $fps"
 echo "Width: $width"
 
@@ -47,9 +46,9 @@ filters="fps=$fps,scale=$width:-1:flags=lanczos"
 # ffmpeg first pass
 ffmpeg -v warning -i "$input" -vf "$filters,palettegen" -y $palette
 # ffmpeg second pass
-ffmpeg -v warning -i "$input" -i $palette -lavfi "$filters [x]; [x][1:v] paletteuse=dither=bayer:bayer_scale=3" -y "$filename"
+ffmpeg -v warning -i "$input" -i $palette -lavfi "$filters [x]; [x][1:v] paletteuse=dither=bayer:bayer_scale=3" -y "$output"
 
 # display output file size
-filesize=$(du -h "$filename" | cut -f1)
+filesize=$(du -h "$output" | cut -f1)
 echo "Output File Name: $filename"
 echo "Output File Size: $filesize"
