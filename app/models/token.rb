@@ -231,6 +231,7 @@ class Token < ApplicationRecord
 
     self.image.attach(io: tempfile, filename: filename)
     self.update(
+      image_size: tempfile.size, # it is not the originally image file size
       image_ori_content_type: ori_content_type
     )
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_20_084746) do
+ActiveRecord::Schema.define(version: 2021_10_20_090014) do
 
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "address"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 2021_10_20_084746) do
     t.integer "transfers_count_7d", default: 0
     t.datetime "last_transfer_time"
     t.string "image_ori_content_type"
+    t.integer "image_size"
   end
 
   create_table "transfers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
