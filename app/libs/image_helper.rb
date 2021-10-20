@@ -20,7 +20,7 @@ class ImageHelper
       # if tempfile.size > 5 * 1024 * 1024
       # end
     tempfile = ImageProcessing::MiniMagick
-      .source(image)
+      .source(tempfile)
       .resize_to_limit(600, 600)
       .strip
       .call
