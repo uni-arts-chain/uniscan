@@ -36,7 +36,7 @@ class ImageHelper
 
   def self.video_to_gif(video_file)
     gif_file = Tempfile.new(["", ".gif"])
-    `#{Rails.root.join("scripts", "vid-to-gif.sh").to_s} -f 10 -w 600 #{video.path} #{gif_file.path}`
+    `#{Rails.root.join("scripts", "vid-to-gif.sh").to_s} -f 10 -w 600 #{video_file.path} #{gif_file.path}`
     gif_file
   end
 end
