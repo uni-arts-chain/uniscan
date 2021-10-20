@@ -16,10 +16,14 @@ class ImageHelper
       content_type = tempfile.content_type
     end
 
-    # TODO: compress big image
-    # if tempfile.size > 5 * 1024 * 1024
-    # end
-
+    # Shrink Larger Images
+      # if tempfile.size > 5 * 1024 * 1024
+      # end
+    tempfile = ImageProcessing::MiniMagick
+      .source(image)
+      .resize_to_limit(600, 600)
+      .strip
+      .call
 
     [ tempfile, content_type ]
   end
