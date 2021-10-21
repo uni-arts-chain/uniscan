@@ -6,7 +6,7 @@
     <% if tokens.length > 0 %>
       <div class="d-flex align-items-center">
         <div class="flex-shrink-0">
-          <img loading="lazy" src="<%= token_image(collection.representative_token) %>" alt="<%= token.name.nil? ? '' : token.name %>" style="width: 60;border-radius: 50%" class="border" />
+          <img loading="lazy" src="<%= token_image(collection.representative_token) %>" style="width: 60;border-radius: 50%" class="border" />
         </div>
         <div class="flex-grow-1 ms-3">
           <h5><%= collection.name %></h5>
