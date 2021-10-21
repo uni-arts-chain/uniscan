@@ -29,7 +29,7 @@
 
       <div class="text-muted mb-2 text-start"><strong>Owner</strong></div>
       <div class="text-muted mb-2 text-start">
-        <% if @tokens.owners&.length > 0 %>
+        <% if @token.owners&.length > 0 %>
           <%= link_to account_path(@token.owners[0]) do %>
             <%= @token.owner&.address %>
           <% end %>
