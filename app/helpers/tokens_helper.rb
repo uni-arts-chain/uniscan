@@ -35,11 +35,15 @@ module TokensHelper
 
   def token_image_big(token)
     if token.image.present? && token.image.attached?
-      if token.image_size < 20971520
-        # Aliyun only support image resize when image size is less than 20971520
-        token.image.url(params: { "x-oss-process" => "image/resize,w_600" })
+      if Rails.env == "production"
+        if token.image_size < 20971520
+          # Aliyun only support image resize when image size is less than 20971520
+          token.image.url(params: { "x-oss-process" => "image/resize,w_600" })
+        else
+          token.image.url
+        end
       else
-        token.image.url
+        url_for token.image
       end
     else
       image_path("logo-uniscan.png")
