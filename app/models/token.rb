@@ -123,7 +123,7 @@ class Token < ApplicationRecord
     end
 
     # 3. attach image
-    attach_image(image_uri)
+    attach_image
 
     # 4. fininshed
     self.update(
@@ -146,12 +146,6 @@ class Token < ApplicationRecord
       token_uri_err: token_uri_err,
       token_uri_processed: true
     )
-  end
-
-  def update_image
-    if self.image_uri.present?
-      attach_image self.image_uri
-    end
   end
 
   # Return attached image
@@ -224,10 +218,10 @@ class Token < ApplicationRecord
     uri.include?("/ipfs/") || uri.start_with?("ipfs://")
   end
 
-  def attach_image(image_uri)
-    tempfile, content_type, ori_content_type = ImageHelper.download_and_convert_image(image_uri)
+  def attach_image
+    tempfile, content_type, ori_content_type = ImageHelper.download_and_convert_image(self.image_uri)
 
-    name = Digest::SHA1.hexdigest(image_uri)
+    name = Digest::SHA1.hexdigest(self.image_uri)
     ext = MIME::Types[content_type].first.extensions.first
     filename = "#{name}.#{ext}"
 
