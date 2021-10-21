@@ -3,19 +3,20 @@
   <h4 class="pb-4"><%= @account.address %></h4>
 
   <% @account.tokens_by_collection.each_pair do |collection, tokens| %>
-    <div class="d-flex align-items-center">
-      <div class="flex-shrink-0">
-        <%= image_tag collection.representative_token.image, size: "60x60", style: "border-radius: 50%", class: "border" %>
+    <% if tokens.length > 0 %>
+      <div class="d-flex align-items-center">
+        <div class="flex-shrink-0">
+          <img loading="lazy" src="<%= token_image(collection.representative_token) %>" alt="<%= token.name.nil? ? '' : token.name %>" style="width: 60;border-radius: 50%" class="border" />
+        </div>
+        <div class="flex-grow-1 ms-3">
+          <h5><%= collection.name %></h5>
+        </div>
       </div>
-      <div class="flex-grow-1 ms-3">
-        <h5><%= collection.name %></h5>
+
+      <div class="row g-3 my-3 mx-3">
+        <%= render partial: "collections/token", collection: tokens %>
       </div>
-    </div>
-
-    <div class="row g-3 my-3 mx-3">
-      <%= render partial: "collections/token", collection: tokens %>
-    </div>
-
+    <% end %>
   <% end %>
 
 </div>
