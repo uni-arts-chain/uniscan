@@ -27,8 +27,8 @@ class Collection < ApplicationRecord
   has_many :tokens, -> { 
     includes(collection: [:blockchain])
       .includes(:accounts)
+      .eligible
       .with_attached_image
-      .where('token_uri_processed=true and token_uri_err is null') 
   }
 
   validates :blockchain_id, presence: true

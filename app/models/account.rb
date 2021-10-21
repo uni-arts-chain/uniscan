@@ -18,7 +18,7 @@ class Account < ApplicationRecord
 
   def tokens_by_collection
     result = {}
-    self.tokens.each do |token|
+    self.tokens.eligible.each do |token|
       if result[token.collection].nil?
         result[token.collection] = []
       end
