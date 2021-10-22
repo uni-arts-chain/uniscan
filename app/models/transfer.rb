@@ -1,3 +1,17 @@
+# If it is an erc721 transfer on chain, it will generate a transfer record.
+# {https://github.com/uni-arts-chain/evm-nft-tracker/#erc-721}
+#
+# If it is an erc1155 transfer on chain, it may generate a transfer record, 
+# or it may generate multiple transfer records.
+# {https://github.com/uni-arts-chain/evm-nft-tracker/#erc---1155}
+#
+# The +amount+ field indicates the amount of transfer. 
+# The +amount+ field of erc721 transfer will only be 1. 
+# The +amount+ field of erc1155 transfer may be any value greater than or 
+# equal to 1 (less than 2**256).
+#
+# Unique index: <tt>[:collection_id, :token_id, :from, :to, :txhash]</tt>
+#
 # == Schema Information
 #
 # Table name: transfers
@@ -28,6 +42,11 @@ class Transfer < ApplicationRecord
     :update_token_transfers_count_24h
   )
 
+  # Update the transfer's token's balances of the +from+ and +to+ account.
+  #
+  # This method will be called after a new transfer record is created.
+  #
+  # Excluding 0x0 account.
   def update_balances
     # calc `from` account balance
     unless self.from.address == "0x0000000000000000000000000000000000000000" # if not mint
@@ -40,6 +59,10 @@ class Transfer < ApplicationRecord
     end
   end
 
+  # Update a nft's balance of a account.
+  #
+  # @param account [Account] the account to update
+  # @param token [Token] the token of the account to update
   def self.update_balance(account, token)
       sub = Transfer.where(from: account, token: token).sum(:amount)
       add = Transfer.where(to: account, token: token).sum(:amount)
@@ -66,12 +89,18 @@ class Transfer < ApplicationRecord
       end
   end
 
+  # Update the last transfer time of the token.
+  #
+  # This method will be called after a new transfer record is created.
   def update_token_last_transfer_time
     self.token.update(
       last_transfer_time: self.created_at
     )
   end
 
+  # Update the transfers count of latest 7 days of the token.
+  #
+  # This method will be called after a new transfer record is created.
   def update_token_transfers_count_7d
     count = Transfer
       .where(token: self.token)
@@ -81,6 +110,9 @@ class Transfer < ApplicationRecord
     self.token.update(transfers_count_7d: count)
   end
 
+  # Update the transfers count of latest 24 hours of the token.
+  #
+  # This method will be called after a new transfer record is created.
   def update_token_transfers_count_24h
     count = Transfer
       .where(token: self.token)

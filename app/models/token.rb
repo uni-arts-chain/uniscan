@@ -1,3 +1,18 @@
+require 'mime/types'
+
+# Represents NFTs, currently includes ERC721 and ERC1155 NFTs.
+# A +token+ is a NFT.
+#
+# +token_id_on_chain+ is the token_id from the contract.  
+# +owner_id+ only used by ERC721.  
+# +unique+ is true if the token is a ERC721 NFT.  
+# +supply+ is not from chain, but calculating after the token_ownership updated.  
+# +name+, +description+, and +image_uri+ are from token_uri's metadata.  
+# +image_ori_content_type+ records the ori content type of the token image. Because
+# the ori image may be converted(svg, video).  
+# +image_size+ records the converted image's size. Used by displaying the image.
+# Online OSS(Object Storage Service) resize function always has a limit in size.
+#
 # == Schema Information
 #
 # Table name: tokens
@@ -25,7 +40,6 @@
 #  image_ori_content_type :string(255)
 #  image_size             :integer          default(0)
 #
-require 'mime/types'
 class Token < ApplicationRecord
 
   belongs_to :collection
@@ -50,18 +64,28 @@ class Token < ApplicationRecord
     )
   }
 
+  # Owned by how many people in history.
+  # @return [Integer] the owners count in history.
   def historical_owners_count
     Transfer.where(token: self).distinct.count(:token_id)
   end
 
+  # The current owner of the token.
+  #
+  # Returns the first owner if it is a ERC1155 token that can have multi owners.
+  # @return [Account] the token's owner.
   def owner
     self.accounts[0]
   end
 
+  # The current owners of the token.
+  #
+  # @return [Array<Account>] the token's owners.
   def owners
     self.accounts
   end
 
+  # Broadcast the token html segemnt to user's browser through websocket.
   def broadcast
     broadcast_prepend_to('tokens') 
 
@@ -70,6 +94,12 @@ class Token < ApplicationRecord
     broadcast_prepend_to("tokens:#{self.collection.blockchain_id}:#{self.collection.nft_type_before_type_cast}")
   end
 
+  # Clean the token uri processed infos.
+  # 
+  # 1. purge image
+  # 2. delete all properties
+  # 3. clean the metadata
+  # 3. revert the status
   def clean
     self.image.purge
 
@@ -85,6 +115,13 @@ class Token < ApplicationRecord
     )
   end
 
+  # Get and save the metadata of the token by processing the token uri.
+  #
+  # 1. Read content from the token_uri.
+  # 2. Save content to database.
+  # 3. Process the image (convert if needed).
+  # 4. Attach the image.
+  # 5. Save the processing status(ok or fail) to database.
   def process_token_uri
     data = get_token_uri_json
 
@@ -148,7 +185,7 @@ class Token < ApplicationRecord
     )
   end
 
-  # Return attached image
+  # Returns the attached image
   #
   # Reprocess token_uri if attached image has an svg attachement.
   def get_image
@@ -163,9 +200,9 @@ class Token < ApplicationRecord
     end
   end
 
-  ##################
-  ### help methods
-  ##################
+  # Get the token_uri's content which is a json object.
+  #
+  # @return [Object] the token_uri's content.
   def get_token_uri_json
     the_token_uri = get_token_uri
 
@@ -194,10 +231,11 @@ class Token < ApplicationRecord
     end
   end
 
-  def q_string_of
-    self.collection.blockchain_id
-  end
-
+  # Get the final token uri.
+  #
+  # Raise error if it is a bad uri.
+  # Preprocess if the token is a ERC1155 NFT.
+  # @return [String] the final token uri
   def get_token_uri
     raise "token_uri is blank" if self.token_uri.blank?
     raise "token_uri is not valid" unless self.token_uri =~ URI::regexp
@@ -211,13 +249,16 @@ class Token < ApplicationRecord
   end
   
 
-  # TODO: more precise
-  # https://github.com/ipfs/specs/issues/248
-  # https://github.com/ipfs/in-web-browsers/blob/master/ADDRESSING.md
+  # Check if a url is an ipfs uri.
+  #
+  # TODO: more precise  
+  # {https://github.com/ipfs/specs/issues/248}  
+  # {https://github.com/ipfs/in-web-browsers/blob/master/ADDRESSING.md}  
   def is_ipfs_uri?(uri)
     uri.include?("/ipfs/") || uri.start_with?("ipfs://")
   end
 
+  # Download, convert, and attach(upload) the image of the token.
   def attach_image
     tempfile, content_type, ori_content_type = ImageHelper.download_and_convert_image(self.image_uri)
 
