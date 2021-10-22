@@ -122,6 +122,8 @@ class Token < ApplicationRecord
   # 3. Process the image (convert if needed).
   # 4. Attach the image.
   # 5. Save the processing status(ok or fail) to database.
+  #
+  # This method is called by rake task +token_uri:parse+
   def process_token_uri
     data = get_token_uri_json
 

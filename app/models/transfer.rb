@@ -46,7 +46,7 @@ class Transfer < ApplicationRecord
   #
   # This method will be called after a new transfer record is created.
   #
-  # Excluding 0x0 account.
+  # Excluding 0x0 address.
   def update_balances
     # calc `from` account balance
     unless self.from.address == "0x0000000000000000000000000000000000000000" # if not mint
