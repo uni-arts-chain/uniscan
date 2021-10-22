@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Etherscan
+  
+    &mdash; Documentation by YARD 0.9.26
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Etherscan";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (E)</a> &raquo;
+    
+    
+    <span class="title">Etherscan</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Etherscan
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Etherscan</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/libs/etherscan.rb</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_contract_creation_internal_transacton-class_method" title="get_contract_creation_internal_transacton (class method)">.<strong>get_contract_creation_internal_transacton</strong>(address)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_contract_creation_transacton-class_method" title="get_contract_creation_transacton (class method)">.<strong>get_contract_creation_transacton</strong>(address)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the creator address of a contract address.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="get_contract_creation_internal_transacton-class_method">
+  
+    .<strong>get_contract_creation_internal_transacton</strong>(address)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/libs/etherscan.rb', line 42</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_contract_creation_internal_transacton'>get_contract_creation_internal_transacton</span><span class='lparen'>(</span><span class='id identifier rubyid_address'>address</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_sleep'>sleep</span> <span class='float'>0.5</span>
+  <span class='id identifier rubyid_contract_creation_request_url'>contract_creation_request_url</span> <span class='op'>=</span> 
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://api-cn.etherscan.com/api</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>?module=account</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&amp;action=txlistinternal</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&amp;address=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_address'>address</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&amp;startblock=0</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&amp;endblock=99999999</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&amp;page=1</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&amp;offset=1</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&amp;sort=asc</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&amp;apikey=</span><span class='embexpr_beg'>#{</span><span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>ETHERSCAN_APIKEY</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_contract_creation_request_url'>contract_creation_request_url</span>
+  <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='const'>Faraday</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span> <span class='id identifier rubyid_contract_creation_request_url'>contract_creation_request_url</span>
+  <span class='id identifier rubyid_body'>body</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span>
+  <span class='id identifier rubyid_tx'>tx</span> <span class='op'>=</span> <span class='id identifier rubyid_body'>body</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>result</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_contract_creation_transacton-class_method">
+  
+    .<strong>get_contract_creation_transacton</strong>(address)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the creator address of a contract address.</p>
+
+<p>Only for ethereum now. <a href="https://api.etherscan.io/api?module=account&action=txlist&address=0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270&startblock=0&endblock=99999999&page=1&offset=1&sort=asc&apikey=xxx">api.etherscan.io/api?module=account&action=txlist&address=0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270&startblock=0&endblock=99999999&page=1&offset=1&sort=asc&apikey=xxx</a> <a href="https://api.etherscan.io/api?module=account&action=txlistinternal&address=0x0b2a13bc4a09bf1ee822964c3619f79791719ec0&startblock=0&endblock=99999999&page=1&offset=1&sort=asc&apikey=xxx">api.etherscan.io/api?module=account&action=txlistinternal&address=0x0b2a13bc4a09bf1ee822964c3619f79791719ec0&startblock=0&endblock=99999999&page=1&offset=1&sort=asc&apikey=xxx</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/libs/etherscan.rb', line 7</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_contract_creation_transacton'>get_contract_creation_transacton</span><span class='lparen'>(</span><span class='id identifier rubyid_address'>address</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_sleep'>sleep</span> <span class='float'>0.5</span>
+
+  <span class='id identifier rubyid_contract_creation_request_url'>contract_creation_request_url</span> <span class='op'>=</span> 
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://api-cn.etherscan.com/api</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>?module=account</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&amp;action=txlist</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&amp;address=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_address'>address</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&amp;startblock=0</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&amp;endblock=99999999</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&amp;page=1</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&amp;offset=1</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&amp;sort=asc</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&amp;apikey=</span><span class='embexpr_beg'>#{</span><span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>ETHERSCAN_APIKEY</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_contract_creation_request_url'>contract_creation_request_url</span>
+  <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='const'>Faraday</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span> <span class='id identifier rubyid_contract_creation_request_url'>contract_creation_request_url</span>
+  <span class='id identifier rubyid_body'>body</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_body'>body</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>result</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>!=</span> <span class='const'>Array</span> <span class='op'>||</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>==</span> <span class='int'>0</span>
+
+    <span class='id identifier rubyid_tx'>tx</span> <span class='op'>=</span> <span class='id identifier rubyid_get_contract_creation_internal_transacton'>get_contract_creation_internal_transacton</span><span class='lparen'>(</span><span class='id identifier rubyid_address'>address</span><span class='rparen'>)</span>
+
+  <span class='kw'>else</span>
+
+    <span class='id identifier rubyid_tx'>tx</span> <span class='op'>=</span> <span class='id identifier rubyid_result'>result</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+    <span class='comment'># if it is not the creation transaction, find in internal tx list
+</span>    <span class='kw'>if</span> <span class='id identifier rubyid_tx'>tx</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>to</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_present?'>present?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_tx'>tx</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>contractAddress</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>
+      <span class='id identifier rubyid_tx'>tx</span> <span class='op'>=</span> <span class='id identifier rubyid_get_contract_creation_internal_transacton'>get_contract_creation_internal_transacton</span><span class='lparen'>(</span><span class='id identifier rubyid_address'>address</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_tx'>tx</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Fri Oct 22 17:02:54 2021 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.26 (ruby-2.7.2).
+</div>
+
+    </div>
+  </body>
+</html>

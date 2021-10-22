@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Transfer
+  
+    &mdash; Documentation by YARD 0.9.26
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Transfer";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (T)</a> &raquo;
+    
+    
+    <span class="title">Transfer</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Transfer
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="ApplicationRecord.html" title="ApplicationRecord (class)">ApplicationRecord</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveRecord::Base</li>
+          
+            <li class="next"><span class='object_link'><a href="ApplicationRecord.html" title="ApplicationRecord (class)">ApplicationRecord</a></span></li>
+          
+            <li class="next">Transfer</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/models/transfer.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>If it is an erc721 transfer on chain, it will generate a transfer record. <a href="https://github.com/uni-arts-chain/evm-nft-tracker/#erc-721" target="_parent" title="https://github.com/uni-arts-chain/evm-nft-tracker/#erc-721">https://github.com/uni-arts-chain/evm-nft-tracker/#erc-721</a></p>
+
+<p>If it is an erc1155 transfer on chain, it may generate a transfer record,  or it may generate multiple transfer records. <a href="https://github.com/uni-arts-chain/evm-nft-tracker/#erc---1155" target="_parent" title="https://github.com/uni-arts-chain/evm-nft-tracker/#erc---1155">https://github.com/uni-arts-chain/evm-nft-tracker/#erc---1155</a></p>
+
+<p>The <code>amount</code> field indicates the amount of transfer.  The <code>amount</code> field of erc721 transfer will only be 1.  The <code>amount</code> field of erc1155 transfer may be any value greater than or  equal to 1 (less than 2**256).</p>
+
+<p>Unique index: <code>[:collection_id, :token_id, :from, :to, :txhash]</code></p>
+
+<h2 id="label-Schema+Information">Schema Information</h2>
+
+<p>Table name: transfers</p>
+
+<pre class="code ruby"><code class="ruby">id            :bigint           not null, primary key
+collection_id :integer
+token_id      :integer
+amount        :decimal(65, )    default(1)
+from          :integer
+to            :integer
+block_number  :integer
+txhash        :string(255)
+created_at    :datetime         not null
+updated_at    :datetime         not null
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_balance-class_method" title="update_balance (class method)">.<strong>update_balance</strong>(account, token)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Update a nft&#39;s balance of a account.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_balances-instance_method" title="#update_balances (instance method)">#<strong>update_balances</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Update the transfer&#39;s token&#39;s balances of the <code>from</code> and <code>to</code> account.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_token_last_transfer_time-instance_method" title="#update_token_last_transfer_time (instance method)">#<strong>update_token_last_transfer_time</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Update the last transfer time of the token.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_token_transfers_count_24h-instance_method" title="#update_token_transfers_count_24h (instance method)">#<strong>update_token_transfers_count_24h</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Update the transfers count of latest 24 hours of the token.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_token_transfers_count_7d-instance_method" title="#update_token_transfers_count_7d (instance method)">#<strong>update_token_transfers_count_7d</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Update the transfers count of latest 7 days of the token.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="update_balance-class_method">
+  
+    .<strong>update_balance</strong>(account, token)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Update a nft&#39;s balance of a account.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>account</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Account.html" title="Account (class)">Account</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the account to update</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>token</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Token.html" title="Token (class)">Token</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the token of the account to update</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/transfer.rb', line 66</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_update_balance'>update_balance</span><span class='lparen'>(</span><span class='id identifier rubyid_account'>account</span><span class='comma'>,</span> <span class='id identifier rubyid_token'>token</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Transfer (class)">Transfer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>from:</span> <span class='id identifier rubyid_account'>account</span><span class='comma'>,</span> <span class='label'>token:</span> <span class='id identifier rubyid_token'>token</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_sum'>sum</span><span class='lparen'>(</span><span class='symbol'>:amount</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_add'>add</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Transfer (class)">Transfer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>to:</span> <span class='id identifier rubyid_account'>account</span><span class='comma'>,</span> <span class='label'>token:</span> <span class='id identifier rubyid_token'>token</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_sum'>sum</span><span class='lparen'>(</span><span class='symbol'>:amount</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_balance'>balance</span> <span class='op'>=</span> <span class='id identifier rubyid_add'>add</span> <span class='op'>-</span> <span class='id identifier rubyid_sub'>sub</span>
+
+    <span class='id identifier rubyid_token_ownership'>token_ownership</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="TokenOwnership.html" title="TokenOwnership (class)">TokenOwnership</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find_by'>find_by</span><span class='lparen'>(</span><span class='label'>account:</span> <span class='id identifier rubyid_account'>account</span><span class='comma'>,</span> <span class='label'>token:</span> <span class='id identifier rubyid_token'>token</span><span class='rparen'>)</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_token_ownership'>token_ownership</span><span class='period'>.</span><span class='id identifier rubyid_present?'>present?</span>
+
+      <span class='kw'>if</span> <span class='id identifier rubyid_balance'>balance</span> <span class='op'>==</span> <span class='int'>0</span>
+        <span class='id identifier rubyid_token_ownership'>token_ownership</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span>
+      <span class='kw'>else</span>
+        <span class='id identifier rubyid_token_ownership'>token_ownership</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span> <span class='label'>balance:</span> <span class='id identifier rubyid_balance'>balance</span>
+      <span class='kw'>end</span>
+
+    <span class='kw'>else</span>
+      
+      <span class='kw'>if</span> <span class='id identifier rubyid_balance'>balance</span> <span class='op'>!=</span> <span class='int'>0</span>
+        <span class='const'><span class='object_link'><a href="TokenOwnership.html" title="TokenOwnership (class)">TokenOwnership</a></span></span><span class='period'>.</span><span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span>
+          <span class='label'>account:</span> <span class='id identifier rubyid_account'>account</span><span class='comma'>,</span>
+          <span class='label'>token:</span> <span class='id identifier rubyid_token'>token</span><span class='comma'>,</span>
+          <span class='label'>balance:</span> <span class='id identifier rubyid_balance'>balance</span>
+        <span class='rparen'>)</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="update_balances-instance_method">
+  
+    #<strong>update_balances</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Update the transfer&#39;s token&#39;s balances of the <code>from</code> and <code>to</code> account.</p>
+
+<p>This method will be called after a new transfer record is created.</p>
+
+<p>Excluding 0x0 address.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/transfer.rb', line 50</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_balances'>update_balances</span>
+  <span class='comment'># calc `from` account balance
+</span>  <span class='kw'>unless</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_from'>from</span><span class='period'>.</span><span class='id identifier rubyid_address'>address</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0x0000000000000000000000000000000000000000</span><span class='tstring_end'>&quot;</span></span> <span class='comment'># if not mint
+</span>    <span class='const'><span class='object_link'><a href="" title="Transfer (class)">Transfer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_update_balance'><span class='object_link'><a href="#update_balance-class_method" title="Transfer.update_balance (method)">update_balance</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_from'>from</span><span class='comma'>,</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># calc `to` account balance
+</span>  <span class='kw'>unless</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span><span class='period'>.</span><span class='id identifier rubyid_address'>address</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0x0000000000000000000000000000000000000000</span><span class='tstring_end'>&quot;</span></span> <span class='comment'># if not burn
+</span>    <span class='const'><span class='object_link'><a href="" title="Transfer (class)">Transfer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_update_balance'><span class='object_link'><a href="#update_balance-class_method" title="Transfer.update_balance (method)">update_balance</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span><span class='comma'>,</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_token_last_transfer_time-instance_method">
+  
+    #<strong>update_token_last_transfer_time</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Update the last transfer time of the token.</p>
+
+<p>This method will be called after a new transfer record is created.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+95
+96
+97
+98
+99</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/transfer.rb', line 95</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_token_last_transfer_time'>update_token_last_transfer_time</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span>
+    <span class='label'>last_transfer_time:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_created_at'>created_at</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_token_transfers_count_24h-instance_method">
+  
+    #<strong>update_token_transfers_count_24h</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Update the transfers count of latest 24 hours of the token.</p>
+
+<p>This method will be called after a new transfer record is created.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+116
+117
+118
+119
+120
+121
+122
+123</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/transfer.rb', line 116</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_token_transfers_count_24h'>update_token_transfers_count_24h</span>
+  <span class='id identifier rubyid_count'>count</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Transfer (class)">Transfer</a></span></span>
+    <span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>token:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span><span class='rparen'>)</span>
+    <span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>created_at &gt;= ?</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='int'>1</span><span class='period'>.</span><span class='id identifier rubyid_day'>day</span><span class='period'>.</span><span class='id identifier rubyid_ago'>ago</span><span class='rparen'>)</span>
+    <span class='period'>.</span><span class='id identifier rubyid_count'>count</span>
+
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='label'>transfers_count_24h:</span> <span class='id identifier rubyid_count'>count</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_token_transfers_count_7d-instance_method">
+  
+    #<strong>update_token_transfers_count_7d</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Update the transfers count of latest 7 days of the token.</p>
+
+<p>This method will be called after a new transfer record is created.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+104
+105
+106
+107
+108
+109
+110
+111</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/transfer.rb', line 104</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_token_transfers_count_7d'>update_token_transfers_count_7d</span>
+  <span class='id identifier rubyid_count'>count</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Transfer (class)">Transfer</a></span></span>
+    <span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>token:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span><span class='rparen'>)</span>
+    <span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>created_at &gt;= ?</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='int'>1</span><span class='period'>.</span><span class='id identifier rubyid_week'>week</span><span class='period'>.</span><span class='id identifier rubyid_ago'>ago</span><span class='rparen'>)</span>
+    <span class='period'>.</span><span class='id identifier rubyid_count'>count</span>
+
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='label'>transfers_count_7d:</span> <span class='id identifier rubyid_count'>count</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Fri Oct 22 17:02:54 2021 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.26 (ruby-2.7.2).
+</div>
+
+    </div>
+  </body>
+</html>

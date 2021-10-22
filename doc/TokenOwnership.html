@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: TokenOwnership
+  
+    &mdash; Documentation by YARD 0.9.26
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "TokenOwnership";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (T)</a> &raquo;
+    
+    
+    <span class="title">TokenOwnership</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: TokenOwnership
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="ApplicationRecord.html" title="ApplicationRecord (class)">ApplicationRecord</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveRecord::Base</li>
+          
+            <li class="next"><span class='object_link'><a href="ApplicationRecord.html" title="ApplicationRecord (class)">ApplicationRecord</a></span></li>
+          
+            <li class="next">TokenOwnership</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/models/token_ownership.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>The token is owned by account. This table records the ownership  relationship between them.</p>
+
+<p>The <code>balance</code> records how many tokens the account has. ERC1155 will be more  than 1.</p>
+
+<p>The <code>balance</code> may be negative because the system does not start at the beginning of the blockchain.</p>
+
+<p>TokenOwnership&#39;s update will update </p>
+<ol><li>
+<p>token&#39;s holders and supply. </p>
+</li><li>
+<p>collection&#39;s holders and supply.</p>
+</li></ol>
+
+<p>For example:</p>
+
+<pre class="code ruby"><code class="ruby">token_id, account_id, balance, collection_id
+24        17          1        9
+22        16          2        9
+22        15          1        9            &lt;--- this token_ownership committed
+</code></pre>
+
+<p>The token 22&#39;s holders will be 2.</p>
+
+<p>The token 22&#39;s supply will be 3.</p>
+
+<p>The collection 9&#39;s holders will be 3.</p>
+
+<p>The collection 9&#39;s supply will be 2.</p>
+
+<h2 id="label-Schema+Information">Schema Information</h2>
+
+<p>Table name: token_ownerships</p>
+
+<pre class="code ruby"><code class="ruby">id            :bigint           not null, primary key
+token_id      :integer
+account_id    :integer
+balance       :decimal(65, )    default(1)
+created_at    :datetime         not null
+updated_at    :datetime         not null
+collection_id :integer
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_collection_holders-instance_method" title="#update_collection_holders (instance method)">#<strong>update_collection_holders</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Update the collection&#39;s holders count.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_collection_supply-instance_method" title="#update_collection_supply (instance method)">#<strong>update_collection_supply</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Update the collection&#39;s supply.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_token_holders-instance_method" title="#update_token_holders (instance method)">#<strong>update_token_holders</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Update the token&#39;s holders.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_token_supply-instance_method" title="#update_token_supply (instance method)">#<strong>update_token_supply</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Update the token&#39;s supply.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="update_collection_holders-instance_method">
+  
+    #<strong>update_collection_holders</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Update the collection&#39;s holders count.</p>
+
+<p>This method will be called after the token_ownership&#39;s record is created or updated.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+61
+62
+63
+64
+65
+66
+67</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/token_ownership.rb', line 61</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_collection_holders'>update_collection_holders</span>
+  <span class='id identifier rubyid_holders_count'>holders_count</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="TokenOwnership (class)">TokenOwnership</a></span></span><span class='period'>.</span>
+    <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>collection:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_collection'>collection</span><span class='rparen'>)</span><span class='period'>.</span>
+    <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>balance &gt; 0</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+    <span class='id identifier rubyid_count'>count</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_collection'>collection</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span> <span class='label'>holders_count:</span> <span class='id identifier rubyid_holders_count'>holders_count</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_collection_supply-instance_method">
+  
+    #<strong>update_collection_supply</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Update the collection&#39;s supply.</p>
+
+<p>This method will be called after the token_ownership&#39;s record is created or updated.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+73
+74
+75
+76
+77
+78
+79
+80</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/token_ownership.rb', line 73</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_collection_supply'>update_collection_supply</span>
+  <span class='id identifier rubyid_supply'>supply</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="TokenOwnership (class)">TokenOwnership</a></span></span><span class='period'>.</span>
+    <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>collection:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_collection'>collection</span><span class='rparen'>)</span><span class='period'>.</span>
+    <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>balance &gt; 0</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+    <span class='id identifier rubyid_distinct'>distinct</span><span class='period'>.</span>
+    <span class='id identifier rubyid_count'>count</span><span class='lparen'>(</span><span class='symbol'>:token_id</span><span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_collection'>collection</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span> <span class='label'>supply:</span> <span class='id identifier rubyid_supply'>supply</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_token_holders-instance_method">
+  
+    #<strong>update_token_holders</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Update the token&#39;s holders.</p>
+
+<p>This method will be called after the token_ownership&#39;s record is created or updated.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+86
+87
+88
+89
+90
+91
+92</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/token_ownership.rb', line 86</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_token_holders'>update_token_holders</span>
+  <span class='id identifier rubyid_holders_count'>holders_count</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="TokenOwnership (class)">TokenOwnership</a></span></span><span class='period'>.</span>
+    <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>token:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span><span class='rparen'>)</span><span class='period'>.</span>
+    <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>balance &gt; 0</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+    <span class='id identifier rubyid_count'>count</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span> <span class='label'>holders_count:</span> <span class='id identifier rubyid_holders_count'>holders_count</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_token_supply-instance_method">
+  
+    #<strong>update_token_supply</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Update the token&#39;s supply.</p>
+
+<p>This method will be called after the token_ownership&#39;s record is created or updated.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+98
+99
+100
+101
+102
+103
+104</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/token_ownership.rb', line 98</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_token_supply'>update_token_supply</span>
+  <span class='id identifier rubyid_supply'>supply</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="TokenOwnership (class)">TokenOwnership</a></span></span><span class='period'>.</span>
+    <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>token:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span><span class='rparen'>)</span><span class='period'>.</span>
+    <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>balance &gt; 0</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+    <span class='id identifier rubyid_sum'>sum</span><span class='lparen'>(</span><span class='symbol'>:balance</span><span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span> <span class='label'>supply:</span> <span class='id identifier rubyid_supply'>supply</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Fri Oct 22 17:02:54 2021 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.26 (ruby-2.7.2).
+</div>
+
+    </div>
+  </body>
+</html>

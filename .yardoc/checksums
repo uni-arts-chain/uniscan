@@ -1,7 +1,7 @@
 app/models/token.rb a0a960f758d885c9dc4149f523d6cfe6b969f911
 app/libs/etherscan.rb f07616a7fe56f5ab5cc30f751882cef12a489b6f
 app/models/account.rb fff249f2289850460599eee29b9c088ff9c73c65
-app/models/property.rb 6abf4cdca82ce8bff3cc45766cb01cd1b40770d5
+app/models/property.rb cefc6ebf735db209ac32c7891209a852512d2e14
 app/models/transfer.rb 312592a8ddc39c628a42726bf5688f5c03cda479
 app/libs/image_helper.rb 80efea2b46a2b7f32c99563b93dc27e201a56d27
 app/models/blockchain.rb 2af5e150c010e4363a24cc35afdf4f97b3c80166
