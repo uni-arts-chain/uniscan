@@ -1,3 +1,5 @@
+# An account represents a blockchain account. It should has an address.
+#
 # == Schema Information
 #
 # Table name: accounts
@@ -16,6 +18,11 @@ class Account < ApplicationRecord
 
   validates :address, presence: true
 
+  # Get all the tokens of this account. 
+  # These tokens are classified according to the collection they belong to.
+  #
+  # This method is used by {AccountsController#show}.
+  # @return [Array<HashMap<Collection, Array<Token>>>] tokens by collection
   def tokens_by_collection
     result = {}
     self.tokens.eligible.each do |token|
@@ -29,6 +36,9 @@ class Account < ApplicationRecord
     result
   end
 
+  # Get the explorer url the account's address.
+  #
+  # @return [String]
   def explorer_url
     self.blockchain.explorer_address_url&.gsub("{address}", self.address)
   end

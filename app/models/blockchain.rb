@@ -1,3 +1,5 @@
+# Record the information of the supported blockchains.
+#
 # == Schema Information
 #
 # Table name: blockchains

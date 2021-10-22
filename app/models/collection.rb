@@ -1,3 +1,13 @@
+# A +Collection+ represents a NFT contract on the blockchain.
+#
+# +contract_platform+ can only be +evm+ now.  
+# +nft_type+ can be +erc721+ or +erc1155+.  
+# +total_supply+ is from contract. But it is not used now. See +supply+.  
+# +supply+ is calulated from the transfers. See {TokenOwnership#update_collection_supply}.  
+# +holders_count+. See {TokenOwnership#update_collection_holders}.  
+# +creator+, +creator_address+, +created_at_block+, +created_at_timestamp+,
+# and +created_at_tx+ are now only for Ethereum and are from Etherscan. See {Etherscan}
+#
 # == Schema Information
 #
 # Table name: collections
@@ -37,10 +47,18 @@ class Collection < ApplicationRecord
   enum contract_platform: [ :evm, :wasm ]
   enum nft_type: [ :erc721, :erc1155 ]
 
+  # Get the explorer url the contract address.
+  #
+  # @return [String]
   def explorer_url
-    self.blockchain.explorer_token_url.gsub("{address}", self.contract_address)
+    self.blockchain.explorer_address_url.gsub("{address}", self.contract_address)
   end
 
+  # A representative token used for the collection's cover.
+  # The first token of its token list.
+  #
+  # TODO: add fields to the cover.
+  # @return [Token]
   def representative_token
     self.tokens.first
   end

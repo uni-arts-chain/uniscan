@@ -1,3 +1,5 @@
+# Records all infos from token's metadata except the name, symbol, and image.
+#
 # == Schema Information
 #
 # Table name: properties
