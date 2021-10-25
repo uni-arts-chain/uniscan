@@ -1,3 +1,6 @@
+# Etherscan apis wrapper.
+#
+# Set the environment variable +ETHERSCAN_APIKEY+ to use the etherscan apis.
 class Etherscan
   # Get the creator address of a contract address.
   #
@@ -39,6 +42,9 @@ class Etherscan
     tx
   end
 
+  # Get the contract creation internal transaction.
+  #
+  # It is used by the {get_contract_creation_transacton}.
   def self.get_contract_creation_internal_transacton(address)
     sleep 0.5
     contract_creation_request_url = 

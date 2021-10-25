@@ -1,4 +1,13 @@
+# The controller of the website root index view(welcome/index).
 class WelcomeController < ApplicationController
+  # The action method for +welcome/index+ view.
+  #
+  # It prepares 4 data:
+  #
+  # 1. The latest 50 tokens
+  # 2. The latest 50 transfers
+  # 3. 50 tokens with the most transfers within 24 hours
+  # 4. 50 tokens with the most transfers within 7 days
   def index
     @tokens = Token.eligible
       .includes(collection: [:blockchain])
@@ -32,9 +41,4 @@ class WelcomeController < ApplicationController
     render layout: "welcome"
   end
 
-  def hello
-    @tokens = Token.eligible
-      .order(created_at: :desc)
-      .limit(50)
-  end
 end

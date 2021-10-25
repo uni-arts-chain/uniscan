@@ -166,7 +166,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>video to gif converter.</p>
+</div></span>
   
 </li>
 
@@ -192,7 +194,11 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Download the file of image_uri. Convert to image if the image_uri is a svg</p>
+<p>Download the file of image_uri. If it is not a image, try to convert it into a image </p>
+
+<p>Convert to png if the image_uri is a svg. Convert to gif if the image_uri is a video.</p>
+
+<p>resize image size to 600x600. keep the aspect ratio.</p>
 
 
   </div>
@@ -206,11 +212,6 @@
       <pre class="lines">
 
 
-6
-7
-8
-9
-10
 11
 12
 13
@@ -236,10 +237,15 @@
 33
 34
 35
-36</pre>
+36
+37
+38
+39
+40
+41</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/libs/image_helper.rb', line 6</span>
+      <pre class="code"><span class="info file"># File 'app/libs/image_helper.rb', line 11</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_download_and_convert_image'>download_and_convert_image</span><span class='lparen'>(</span><span class='id identifier rubyid_image_uri'>image_uri</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_tempfile'>tempfile</span> <span class='op'>=</span> <span class='const'>Down</span><span class='period'>.</span><span class='id identifier rubyid_download'>download</span><span class='lparen'>(</span><span class='id identifier rubyid_image_uri'>image_uri</span><span class='comma'>,</span> <span class='label'>max_size:</span> <span class='int'>50</span> <span class='op'>*</span> <span class='int'>1024</span> <span class='op'>*</span> <span class='int'>1024</span><span class='rparen'>)</span> <span class='comment'># 50 MB
@@ -286,20 +292,31 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>video to gif converter.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-38
-39
-40
-41
-42</pre>
+44
+45
+46
+47
+48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/libs/image_helper.rb', line 38</span>
+      <pre class="code"><span class="info file"># File 'app/libs/image_helper.rb', line 44</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_video_to_gif'>video_to_gif</span><span class='lparen'>(</span><span class='id identifier rubyid_video_file'>video_file</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_gif_file'>gif_file</span> <span class='op'>=</span> <span class='const'>Tempfile</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.gif</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
@@ -316,7 +333,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Oct 22 17:02:54 2021 by
+  Generated on Mon Oct 25 10:01:03 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.7.2).
 </div>

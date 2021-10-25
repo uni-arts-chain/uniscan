@@ -1,5 +1,7 @@
 class StringHelper
   # Detect source encoding and converting
+  #
+  # It is used by parsing the content of +token_uri+.
   def self.fix_encoding(s)
     # d: {:type=>:text, :encoding=>"ISO-8859-1", :ruby_encoding=>"ISO-8859-1", :confidence=>70, :language=>"nl"}
     d = CharlockHolmes::EncodingDetector.detect(s)

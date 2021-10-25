@@ -99,7 +99,20 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Etherscan apis wrapper.</p>
 
+<p>Set the environment variable <code>ETHERSCAN_APIKEY</code> to use the etherscan apis.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -131,7 +144,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the contract creation internal transaction.</p>
+</div></span>
   
 </li>
 
@@ -178,18 +193,25 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the contract creation internal transaction.</p>
+
+<p>It is used by the <span class='object_link'><a href="#get_contract_creation_transacton-class_method" title="Etherscan.get_contract_creation_transacton (method)">get_contract_creation_transacton</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-42
-43
-44
-45
-46
-47
 48
 49
 50
@@ -201,10 +223,16 @@
 56
 57
 58
-59</pre>
+59
+60
+61
+62
+63
+64
+65</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/libs/etherscan.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'app/libs/etherscan.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_contract_creation_internal_transacton'>get_contract_creation_internal_transacton</span><span class='lparen'>(</span><span class='id identifier rubyid_address'>address</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_sleep'>sleep</span> <span class='float'>0.5</span>
@@ -257,9 +285,6 @@
       <pre class="lines">
 
 
-7
-8
-9
 10
 11
 12
@@ -290,10 +315,13 @@
 37
 38
 39
-40</pre>
+40
+41
+42
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/libs/etherscan.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'app/libs/etherscan.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_contract_creation_transacton'>get_contract_creation_transacton</span><span class='lparen'>(</span><span class='id identifier rubyid_address'>address</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_sleep'>sleep</span> <span class='float'>0.5</span>
@@ -339,7 +367,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Oct 22 17:02:54 2021 by
+  Generated on Mon Oct 25 10:01:03 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.7.2).
 </div>

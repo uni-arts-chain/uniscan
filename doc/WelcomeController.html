@@ -103,7 +103,18 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>The controller of the website root index view(welcome/index).</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -117,28 +128,6 @@
     </h2>
 
     <ul class="summary">
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#hello-instance_method" title="#hello (instance method)">#<strong>hello</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
       
         <li class="public ">
   <span class="summary_signature">
@@ -157,7 +146,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>The action method for <code>welcome/index</code> view.</p>
+</div></span>
   
 </li>
 
@@ -180,41 +171,7 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="hello-instance_method">
-  
-    #<strong>hello</strong>  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-35
-36
-37
-38
-39</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/welcome_controller.rb', line 35</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_hello'>hello</span>
-  <span class='ivar'>@tokens</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Token.html" title="Token (class)">Token</a></span></span><span class='period'>.</span><span class='id identifier rubyid_eligible'>eligible</span>
-    <span class='period'>.</span><span class='id identifier rubyid_order'>order</span><span class='lparen'>(</span><span class='label'>created_at:</span> <span class='symbol'>:desc</span><span class='rparen'>)</span>
-    <span class='period'>.</span><span class='id identifier rubyid_limit'>limit</span><span class='lparen'>(</span><span class='int'>50</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="index-instance_method">
+  <h3 class="signature first" id="index-instance_method">
   
     #<strong>index</strong>  &#x21d2; <tt>Object</tt> 
   
@@ -222,21 +179,34 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The action method for <code>welcome/index</code> view.</p>
+
+<p>It prepares 4 data:</p>
+<ol><li>
+<p>The latest 50 tokens</p>
+</li><li>
+<p>The latest 50 transfers</p>
+</li><li>
+<p>50 tokens with the most transfers within 24 hours</p>
+</li><li>
+<p>50 tokens with the most transfers within 7 days</p>
+</li></ol>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-2
-3
-4
-5
-6
-7
-8
-9
-10
 11
 12
 13
@@ -259,10 +229,19 @@
 30
 31
 32
-33</pre>
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/welcome_controller.rb', line 2</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/welcome_controller.rb', line 11</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_index'>index</span>
   <span class='ivar'>@tokens</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Token.html" title="Token (class)">Token</a></span></span><span class='period'>.</span><span class='id identifier rubyid_eligible'>eligible</span>
@@ -306,7 +285,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Oct 22 17:02:54 2021 by
+  Generated on Mon Oct 25 10:01:04 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.7.2).
 </div>

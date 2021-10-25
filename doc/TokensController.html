@@ -103,7 +103,18 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>The controller of the token views.</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -135,7 +146,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>The action method for <code>tokens/index</code> view.</p>
+</div></span>
   
 </li>
 
@@ -157,7 +170,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>The action method for <code>tokens/show</code> view.</p>
+</div></span>
   
 </li>
 
@@ -188,20 +203,31 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The action method for <code>tokens/index</code> view. Prepare paged token list by condiction.</p>
+
+<p><code>Push</code> function: If the <code>Push</code> switch is turned on, the tokens index page will start a websocket, and then wait for the server to push the newly discovered NFTs. Once there is a new NFT, it will be displayed at the top of the page. When the <code>Push</code> is turned on, the sorting of the page will be locked to <tt>created_at desc</tt>.</p>
+
+<p>Default sort by <tt>created_at desc</tt>.</p>
+
+<p><code>Push</code> function is disabled by default.</p>
+
+<p>36 token per page.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-2
-3
-4
-5
-6
-7
-8
-9
 10
 11
 12
@@ -231,10 +257,18 @@
 36
 37
 38
-39</pre>
+39
+40
+41
+42
+43
+44
+45
+46
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/tokens_controller.rb', line 2</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/tokens_controller.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_index'>index</span>
   <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:q</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>s</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>created_at desc</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:q</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> 
@@ -288,18 +322,29 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The action method for <code>tokens/show</code> view. Show a token with its metadata</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-41
-42
-43</pre>
+51
+52
+53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/tokens_controller.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/tokens_controller.rb', line 51</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_show'>show</span>
   <span class='ivar'>@token</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Token.html" title="Token (class)">Token</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
@@ -314,7 +359,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Oct 22 17:02:54 2021 by
+  Generated on Mon Oct 25 10:01:04 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.7.2).
 </div>

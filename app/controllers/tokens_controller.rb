@@ -1,4 +1,12 @@
+# The controller of the token views.
 class TokensController < ApplicationController
+  # The action method for +tokens/index+ view. Prepare paged token list by condiction.
+  # 
+  # +Push+ function: If the +Push+ switch is turned on, the tokens index page will start a websocket, and then wait for the server to push the newly discovered NFTs. Once there is a new NFT, it will be displayed at the top of the page. When the +Push+ is turned on, the sorting of the page will be locked to +created_at desc+.
+  #
+  # Default sort by +created_at desc+.  
+  # +Push+ function is disabled by default.   
+  # 36 token per page.
   def index
     params[:q] = { "s" => "created_at desc" } if params[:q].nil? 
     params[:q]["s"] = "created_at desc" if params[:q]["s"].blank?
@@ -38,6 +46,8 @@ class TokensController < ApplicationController
     end
   end
 
+  # The action method for +tokens/show+ view.
+  # Show a token with its metadata
   def show
     @token = Token.find(params[:id])
   end

@@ -103,7 +103,18 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>The controller of the accounts views.</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -135,7 +146,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>The action method for <code>accounts/show</code> view.</p>
+</div></span>
   
 </li>
 
@@ -166,18 +179,31 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The action method for <code>accounts/show</code> view. </p>
+
+<p>Show an account with its collections and tokens. No pagination now.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-2
-3
-4</pre>
+7
+8
+9</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/accounts_controller.rb', line 2</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/accounts_controller.rb', line 7</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_show'>show</span>
   <span class='ivar'>@account</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Account.html" title="Account (class)">Account</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
@@ -192,7 +218,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Oct 22 17:02:54 2021 by
+  Generated on Mon Oct 25 10:01:04 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.7.2).
 </div>

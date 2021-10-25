@@ -1,3 +1,6 @@
+# The sidekiq worker for processing incoming erc1155 events.
+#
+# This is the entrance of ERC1155 NFTs into uniscan.
 class ProcessErc1155EventWorker
   include Sidekiq::Worker
   sidekiq_options queue: 'erc1155_events'

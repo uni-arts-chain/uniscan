@@ -115,7 +115,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the icon based on the name of the blockchain.</p>
+</div></span>
   
 </li>
 
@@ -137,7 +139,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the pretty formatted json.</p>
+</div></span>
   
 </li>
 
@@ -159,30 +163,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#stream_needed%3F-instance_method" title="#stream_needed? (instance method)">#<strong>stream_needed?</strong>(q_string)  &#x21d2; Boolean </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
     <span class="summary_desc"><div class='inline'>
-<p>need stream only in   1.</p>
+<p>Returns the address after omitting the middle part.</p>
 </div></span>
   
 </li>
@@ -205,7 +187,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the big thumbnail url of the nft image.</p>
+</div></span>
   
 </li>
 
@@ -228,24 +212,37 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the icon based on the name of the blockchain.</p>
+
+<p>Conventionally, the name of the icon is bg-downcased-blockchan-name.  For example, for <code>Ethereum</code>, its icon file name is bg-ethereum.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-2
-3
-4
-5
 6
 7
 8
 9
-10</pre>
+10
+11
+12
+13
+14</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/tokens_helper.rb', line 2</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/tokens_helper.rb', line 6</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_bg_of_blockchain'>bg_of_blockchain</span><span class='lparen'>(</span><span class='id identifier rubyid_token'>token</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_blockchain'>blockchain</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Ethereum</span><span class='tstring_end'>&quot;</span></span>
@@ -253,7 +250,7 @@
   <span class='kw'>elsif</span> <span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_blockchain'>blockchain</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Darwinia</span><span class='tstring_end'>&quot;</span></span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bg-darwinia</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>else</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bg-</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_blockchain'>blockchain</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -270,22 +267,33 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the pretty formatted json</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-28
-29
-30
-31
-32
-33
-34</pre>
+34
+35
+36
+37
+38
+39
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/tokens_helper.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/tokens_helper.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_property_value'>property_value</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='kw'>begin</span>
@@ -308,67 +316,16 @@
   
 
   
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-12
-13
-14
-15</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/tokens_helper.rb', line 12</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_short_address'>short_address</span><span class='lparen'>(</span><span class='id identifier rubyid_address'>address</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_len'>len</span> <span class='op'>=</span> <span class='id identifier rubyid_address'>address</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_address'>address</span><span class='lbracket'>[</span><span class='int'>0</span><span class='op'>...</span><span class='int'>6</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'>...</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_address'>address</span><span class='lbracket'>[</span><span class='id identifier rubyid_len'>len</span><span class='op'>-</span><span class='int'>4</span><span class='op'>...</span><span class='id identifier rubyid_len'>len</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="stream_needed?-instance_method">
-  
-    #<strong>stream_needed?</strong>(q_string)  &#x21d2; <tt>Boolean</tt> 
-  
-
-  
-
-  
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>need stream only in</p>
-
-<pre class="code ruby"><code class="ruby">1. empty q string
-or
-1. sort by created_at desc
-2. name_or_description_cont is blank
-</code></pre>
+<p>Returns the address after omitting the middle part.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
 
 </div><table class="source_code">
   <tr>
@@ -376,19 +333,17 @@ or
       <pre class="lines">
 
 
-22
-23
-24
-25
-26</pre>
+17
+18
+19
+20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/tokens_helper.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/tokens_helper.rb', line 17</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_stream_needed?'>stream_needed?</span><span class='lparen'>(</span><span class='id identifier rubyid_q_string'>q_string</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_q'>q</span> <span class='op'>=</span> <span class='const'>Rack</span><span class='op'>::</span><span class='const'>Utils</span><span class='period'>.</span><span class='id identifier rubyid_parse_nested_query'>parse_nested_query</span><span class='lparen'>(</span><span class='id identifier rubyid_q_string'>q_string</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_q'>q</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>q</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_q'>q</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>q</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>s</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>created_at desc</span><span class='tstring_end'>&quot;</span></span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_q'>q</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>q</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name_or_description_cont</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_short_address'>short_address</span><span class='lparen'>(</span><span class='id identifier rubyid_address'>address</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_len'>len</span> <span class='op'>=</span> <span class='id identifier rubyid_address'>address</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_address'>address</span><span class='lbracket'>[</span><span class='int'>0</span><span class='op'>...</span><span class='int'>6</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'>...</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_address'>address</span><span class='lbracket'>[</span><span class='id identifier rubyid_len'>len</span><span class='op'>-</span><span class='int'>4</span><span class='op'>...</span><span class='id identifier rubyid_len'>len</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -404,31 +359,54 @@ or
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the big thumbnail url of the nft image.</p>
+
+<p>production:</p>
+<ol><li>
+<p>it returns the aliyun url with resize params if the image size small than 20971520. </p>
+</li><li>
+<p>it returns the aliyun url without resize params. Because aliyun can not resize too large image.</p>
+</li></ol>
+
+<p>development:</p>
+<ol><li>
+<p>it returns the active storage url.</p>
+</li></ol>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
 50
-51</pre>
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/tokens_helper.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/tokens_helper.rb', line 50</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_token_image_big'>token_image_big</span><span class='lparen'>(</span><span class='id identifier rubyid_token'>token</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_present?'>present?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_attached?'>attached?</span>
@@ -456,7 +434,7 @@ or
 </div>
 
       <div id="footer">
-  Generated on Fri Oct 22 17:02:54 2021 by
+  Generated on Mon Oct 25 10:01:03 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.7.2).
 </div>

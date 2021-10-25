@@ -1,3 +1,6 @@
+# The sidekiq worker for processing incoming erc721 events.
+#
+# This is the entrance of ERC721 NFTs into uniscan.
 class ProcessErc721EventWorker
   include Sidekiq::Worker
   sidekiq_options queue: 'erc721_events'

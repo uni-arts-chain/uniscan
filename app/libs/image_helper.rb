@@ -1,8 +1,13 @@
 # Token image help methods
 class ImageHelper
 
-  # Download the file of image_uri.
-  # Convert to image if the image_uri is a svg
+  # Download the file of image_uri. If it is not a image, try to convert it into a image 
+  #
+  # Convert to png if the image_uri is a svg.
+  # Convert to gif if the image_uri is a video.
+  #
+  # resize image size to 600x600.
+  # keep the aspect ratio.
   def self.download_and_convert_image(image_uri)
     tempfile = Down.download(image_uri, max_size: 50 * 1024 * 1024) # 50 MB
     content_type = tempfile.content_type
@@ -35,6 +40,7 @@ class ImageHelper
     [ tempfile, content_type, ori_content_type ]
   end
 
+  # video to gif converter.
   def self.video_to_gif(video_file)
     gif_file = Tempfile.new(["", ".gif"])
     `#{Rails.root.join("scripts", "vid-to-gif.sh").to_s} -f 10 -w 600 #{video_file.path} #{gif_file.path}`

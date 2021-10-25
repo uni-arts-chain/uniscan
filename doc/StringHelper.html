@@ -161,6 +161,8 @@
     
 <p>Detect source encoding and converting</p>
 
+<p>It is used by parsing the content of <code>token_uri</code>.</p>
+
 
   </div>
 </div>
@@ -173,14 +175,14 @@
       <pre class="lines">
 
 
-3
-4
 5
 6
-7</pre>
+7
+8
+9</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/libs/string_helper.rb', line 3</span>
+      <pre class="code"><span class="info file"># File 'app/libs/string_helper.rb', line 5</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_fix_encoding'>fix_encoding</span><span class='lparen'>(</span><span class='id identifier rubyid_s'>s</span><span class='rparen'>)</span>
   <span class='comment'># d: {:type=&gt;:text, :encoding=&gt;&quot;ISO-8859-1&quot;, :ruby_encoding=&gt;&quot;ISO-8859-1&quot;, :confidence=&gt;70, :language=&gt;&quot;nl&quot;}
@@ -197,7 +199,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Oct 22 17:02:54 2021 by
+  Generated on Mon Oct 25 10:01:03 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.7.2).
 </div>
