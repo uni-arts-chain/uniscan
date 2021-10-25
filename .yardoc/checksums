@@ -3,7 +3,7 @@ app/libs/etherscan.rb e45faf96f05eca3f7f8bb18fd96a5c37dda43953
 app/models/account.rb fff249f2289850460599eee29b9c088ff9c73c65
 app/models/property.rb cefc6ebf735db209ac32c7891209a852512d2e14
 app/models/transfer.rb 312592a8ddc39c628a42726bf5688f5c03cda479
-app/libs/image_helper.rb 485ea39352db76a28decc09f6b6a59449eccd76b
+app/libs/image_helper.rb 88045fa834db13cbe3d1b03e05b51541a5281b00
 app/models/blockchain.rb 2af5e150c010e4363a24cc35afdf4f97b3c80166
 app/models/collection.rb 04374ddad59e304511c70843c86fdb981e955194
 app/libs/string_helper.rb a5a58a123dd109ac3de5695a67611a095ec6551f
