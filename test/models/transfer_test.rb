@@ -17,7 +17,7 @@ require "test_helper"
 
 class TransferTest < ActiveSupport::TestCase
   test "transfer creation will change token ownerships" do
-    # transfer 1
+    # transfer 1: 0 --99--> 1
     transfer = Transfer.create(
       collection: collections[0],
       token: tokens[0],
@@ -36,7 +36,7 @@ class TransferTest < ActiveSupport::TestCase
 
     assert_equal TokenOwnership.count, 2
 
-    # transfer 2
+    # transfer 2: 1 --9--> 0
     transfer = Transfer.create(
       collection: collections[0],
       token: tokens[0],
@@ -55,14 +55,14 @@ class TransferTest < ActiveSupport::TestCase
 
     assert_equal TokenOwnership.count, 2
 
-    # transfer 3
+    # transfer 3: 1 --9--> 90
     transfer = Transfer.create(
       collection: collections[0],
       token: tokens[0],
       from: accounts[1],
       to: accounts[0],
       block_number: 12994592,
-      txhash: "0x0fc19e197956bfaf93420c603c7431bb7b51eb6aa9d92678867ea6bd9f67c6d6",
+      txhash: "0x1fc19e197956bfaf93420c603c7431bb7b51eb6aa9d92678867ea6bd9f67c6d6",
       amount: 90
     )
 

@@ -15,7 +15,7 @@ class ImageHelper
   # content type.
   def self.download_and_convert_image(image_uri)
     ori_tempfile = Down.download(image_uri, max_size: 50 * 1024 * 1024) # 50 MB
-    ori_content_type = tempfile.content_type
+    ori_content_type = ori_tempfile.content_type
 
     tempfile, content_type = convert(ori_tempfile, ori_content_type)
     [ tempfile, content_type, ori_content_type ]

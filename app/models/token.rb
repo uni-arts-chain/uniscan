@@ -125,13 +125,13 @@ class Token < ApplicationRecord
   #
   # This method is called by rake task +token_uri:parse+
   def process_token_uri
-    data = get_token_uri_json
+    data = TokenUriHelper.get_content(get_token_uri)
 
     name = data["name"]
     description = data["description"]
     image_uri = data["image"]
 
-    raise "The `image_uri` is required" if image_uri.blank?
+    raise "The image is required" if image_uri.blank?
     raise "This nft is deprecated" if image_uri == 'https://mcp3d.com/api/image/deprecated'
 
     token_uri = self.token_uri&.strip
@@ -202,35 +202,11 @@ class Token < ApplicationRecord
     end
   end
 
-  # Get the token_uri's content which is a json object.
+  # Get the token_uri's content as a json object.
   #
-  # @return [Object] the token_uri's content.
+  # @return [Object] the token_uri's content which must contains the +image+ item.
   def get_token_uri_json
-    the_token_uri = get_token_uri
 
-    # convert to gateway url if it is an ipfs scheme
-    if the_token_uri.start_with?("ipfs://")
-      the_token_uri = "https://dweb.link/ipfs/#{token_uri[7..]}"
-    end
-
-    faraday = Faraday.new do |f|
-      f.response :follow_redirects
-      f.adapter Faraday.default_adapter
-    end
-    response = faraday.get the_token_uri
-    
-    if response.status == 200
-      # body = response.body.gsub("\xEF\xBB\xBF".force_encoding("ASCII-8BIT"), '')
-      body = response.body
-      fixed_body = StringHelper.fix_encoding(body)
-      if fixed_body.strip.start_with?("{") 
-        return JSON.parse(fixed_body)
-      else
-        raise "token_uri's response body is not json"
-      end
-    else
-      raise "token_uri's response status is #{response.status}"
-    end
   end
 
   # Get the final token uri.
@@ -260,7 +236,15 @@ class Token < ApplicationRecord
     uri.include?("/ipfs/") || uri.start_with?("ipfs://")
   end
 
-  # Download, convert, and attach(upload) the image of the token.
+  # Download, convert, and attach(save or upload) the image of the token.
+  #
+  # production:  
+  # * upload the image to aliyun oss.
+  #
+  # development or test:
+  # * save to local disk.
+  #
+  # See config/storage.yml
   def attach_image
     tempfile, content_type, ori_content_type = ImageHelper.download_and_convert_image(self.image_uri)
 

@@ -113,11 +113,11 @@ class TokenOwnershipTest < ActiveSupport::TestCase
       balance: 99
     )
 
-    assert_equal 99, tokens[0].collection.total_supply
+    assert_equal tokens[0].collection.supply, 1
 
     t.update balance: 199
 
-    assert_equal 199, tokens[0].collection.total_supply
+    assert_equal tokens[0].collection.supply, 1
   end
 
   test "unique by token and account" do

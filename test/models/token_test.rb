@@ -1,3 +1,5 @@
+require "minitest/mock"
+
 # == Schema Information
 #
 # Table name: tokens
@@ -41,15 +43,30 @@ class TokenTest < ActiveSupport::TestCase
     assert_nil token.image_uri
     assert_equal token.token_uri_processed, false
 
-    token.process_token_uri
+    file = File.new("#{Rails.root}/test/assets/1.png")
+    ImageHelper.stub :download_and_convert_image, [file, "image/png", "image/png"] do
+      data = {
+        "name" => "Hello", 
+        "description" => "World", 
+        "image" => "https://hello/world.png"
+      }
+      TokenUriHelper.stub :get_content, data do
+        #####
+        token.process_token_uri
 
-    assert_not_nil token.name
-    assert_not_nil token.description
-    assert_not_nil token.image_uri
-    assert_equal token.token_uri_processed, true
+        assert_equal tokens[0].name, "Hello"
+        assert_equal tokens[0].description, "World"
+        assert_equal tokens[0].image_uri, "https://hello/world.png"
+        assert tokens[0].image.attached?
+        assert_equal tokens[0].token_uri_processed, true
+        #####
+      end
+    end
+    
+
   end
 
-  test "can be clean" do
+  test "can be cleaned" do
     token = tokens[0]
     token.update(
       name: "hello",

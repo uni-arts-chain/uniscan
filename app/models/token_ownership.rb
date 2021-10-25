@@ -47,11 +47,11 @@ class TokenOwnership < ApplicationRecord
   end
 
   after_commit(
-    :update_collection_holders, # 3
-    :update_collection_supply, # 2, how many tokens
+    :update_collection_holders,
+    :update_collection_supply,
 
-    :update_token_holders, # 2
-    :update_token_supply # 3, supply of a token
+    :update_token_holders,
+    :update_token_supply
   )
 
   # Update the collection's holders count.
