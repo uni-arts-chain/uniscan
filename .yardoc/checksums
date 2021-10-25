@@ -1,4 +1,4 @@
-app/models/token.rb 3111c5f8057a8c89207472063ef6816abc4ff037
+app/models/token.rb 163902e5a909d5bd4957f2111a978f34f0749a8c
 app/libs/etherscan.rb e45faf96f05eca3f7f8bb18fd96a5c37dda43953
 app/models/account.rb fff249f2289850460599eee29b9c088ff9c73c65
 app/models/property.rb cefc6ebf735db209ac32c7891209a852512d2e14
@@ -9,6 +9,7 @@ app/models/collection.rb 04374ddad59e304511c70843c86fdb981e955194
 app/libs/string_helper.rb a5a58a123dd109ac3de5695a67611a095ec6551f
 app/jobs/application_job.rb 2d7aea448b6f7b6a9c182cd5369df41b5f338a7c
 app/helpers/tokens_helper.rb 3d2e9e380603e96f603795fcb82bf05d5feffe79
+app/libs/token_uri_helper.rb ad28dc54ca16fce6cbee4ddbce37f2894f74ccdf
 app/helpers/welcome_helper.rb 7860bfeb5bf7ea66cd5f24c3b9ae738c7ed81b20
 app/models/token_ownership.rb bddba20d1f4f66ee4a119efd07aac11d943749bc
 app/helpers/accounts_helper.rb 91bf8ecd20fc761be14ffd96760b3e6ffcc4997a

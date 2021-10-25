@@ -189,7 +189,7 @@ image_size             :integer          default(0)
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Download, convert, and attach(upload) the image of the token.</p>
+<p>Download, convert, and attach(save or upload) the image of the token.</p>
 </div></span>
   
 </li>
@@ -309,7 +309,7 @@ image_size             :integer          default(0)
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Get the token_uri&#39;s content which is a json object.</p>
+<p>Get the token_uri&#39;s content as a json object.</p>
 </div></span>
   
 </li>
@@ -463,7 +463,19 @@ image_size             :integer          default(0)
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Download, convert, and attach(upload) the image of the token.</p>
+<p>Download, convert, and attach(save or upload) the image of the token.</p>
+
+<p>production:</p>
+<ul><li>
+<p>upload the image to aliyun oss.</p>
+</li></ul>
+
+<p>development or test:</p>
+<ul><li>
+<p>save to local disk.</p>
+</li></ul>
+
+<p>See config/storage.yml</p>
 
 
   </div>
@@ -477,22 +489,22 @@ image_size             :integer          default(0)
       <pre class="lines">
 
 
-264
-265
-266
-267
-268
-269
-270
-271
-272
-273
-274
-275
-276</pre>
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/token.rb', line 264</span>
+      <pre class="code"><span class="info file"># File 'app/models/token.rb', line 248</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_attach_image'>attach_image</span>
   <span class='id identifier rubyid_tempfile'>tempfile</span><span class='comma'>,</span> <span class='id identifier rubyid_content_type'>content_type</span><span class='comma'>,</span> <span class='id identifier rubyid_ori_content_type'>ori_content_type</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="ImageHelper.html" title="ImageHelper (class)">ImageHelper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_download_and_convert_image'><span class='object_link'><a href="ImageHelper.html#download_and_convert_image-class_method" title="ImageHelper.download_and_convert_image (method)">download_and_convert_image</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_image_uri'>image_uri</span><span class='rparen'>)</span>
@@ -738,20 +750,20 @@ image_size             :integer          default(0)
       <pre class="lines">
 
 
-241
-242
-243
-244
-245
-246
-247
-248
-249
-250
-251</pre>
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/token.rb', line 241</span>
+      <pre class="code"><span class="info file"># File 'app/models/token.rb', line 217</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_token_uri'>get_token_uri</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>token_uri is blank</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_token_uri'>token_uri</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>
@@ -781,7 +793,7 @@ image_size             :integer          default(0)
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Get the token_uri&#39;s content which is a json object.</p>
+<p>Get the token_uri&#39;s content as a json object.</p>
 
 
   </div>
@@ -800,7 +812,7 @@ image_size             :integer          default(0)
       
         &mdash;
         <div class='inline'>
-<p>the token_uri&#39;s content.</p>
+<p>the token_uri&#39;s content which must contains the <code>image</code> item.</p>
 </div>
       
     </li>
@@ -815,61 +827,13 @@ image_size             :integer          default(0)
 
 208
 209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234</pre>
+210</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/models/token.rb', line 208</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_token_uri_json'>get_token_uri_json</span>
-  <span class='id identifier rubyid_the_token_uri'>the_token_uri</span> <span class='op'>=</span> <span class='id identifier rubyid_get_token_uri'>get_token_uri</span>
 
-  <span class='comment'># convert to gateway url if it is an ipfs scheme
-</span>  <span class='kw'>if</span> <span class='id identifier rubyid_the_token_uri'>the_token_uri</span><span class='period'>.</span><span class='id identifier rubyid_start_with?'>start_with?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ipfs://</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-    <span class='id identifier rubyid_the_token_uri'>the_token_uri</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://dweb.link/ipfs/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_token_uri'>token_uri</span><span class='lbracket'>[</span><span class='int'>7</span><span class='op'>..</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='kw'>end</span>
-
-  <span class='id identifier rubyid_faraday'>faraday</span> <span class='op'>=</span> <span class='const'>Faraday</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span>
-    <span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_response'>response</span> <span class='symbol'>:follow_redirects</span>
-    <span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_adapter'>adapter</span> <span class='const'>Faraday</span><span class='period'>.</span><span class='id identifier rubyid_default_adapter'>default_adapter</span>
-  <span class='kw'>end</span>
-  <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_faraday'>faraday</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span> <span class='id identifier rubyid_the_token_uri'>the_token_uri</span>
-  
-  <span class='kw'>if</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span> <span class='op'>==</span> <span class='int'>200</span>
-    <span class='comment'># body = response.body.gsub(&quot;\xEF\xBB\xBF&quot;.force_encoding(&quot;ASCII-8BIT&quot;), &#39;&#39;)
-</span>    <span class='id identifier rubyid_body'>body</span> <span class='op'>=</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span>
-    <span class='id identifier rubyid_fixed_body'>fixed_body</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="StringHelper.html" title="StringHelper (class)">StringHelper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_fix_encoding'><span class='object_link'><a href="StringHelper.html#fix_encoding-class_method" title="StringHelper.fix_encoding (method)">fix_encoding</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_fixed_body'>fixed_body</span><span class='period'>.</span><span class='id identifier rubyid_strip'>strip</span><span class='period'>.</span><span class='id identifier rubyid_start_with?'>start_with?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>{</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> 
-      <span class='kw'>return</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_fixed_body'>fixed_body</span><span class='rparen'>)</span>
-    <span class='kw'>else</span>
-      <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>token_uri&#39;s response body is not json</span><span class='tstring_end'>&quot;</span></span>
-    <span class='kw'>end</span>
-  <span class='kw'>else</span>
-    <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>token_uri&#39;s response status is </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -980,12 +944,12 @@ image_size             :integer          default(0)
       <pre class="lines">
 
 
-259
-260
-261</pre>
+235
+236
+237</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/token.rb', line 259</span>
+      <pre class="code"><span class="info file"># File 'app/models/token.rb', line 235</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_is_ipfs_uri?'>is_ipfs_uri?</span><span class='lparen'>(</span><span class='id identifier rubyid_uri'>uri</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_uri'>uri</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/ipfs/</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_uri'>uri</span><span class='period'>.</span><span class='id identifier rubyid_start_with?'>start_with?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ipfs://</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -1221,13 +1185,13 @@ image_size             :integer          default(0)
       <pre class="code"><span class="info file"># File 'app/models/token.rb', line 127</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_process_token_uri'>process_token_uri</span>
-  <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_get_token_uri_json'>get_token_uri_json</span>
+  <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="TokenUriHelper.html" title="TokenUriHelper (class)">TokenUriHelper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_get_content'><span class='object_link'><a href="TokenUriHelper.html#get_content-class_method" title="TokenUriHelper.get_content (method)">get_content</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_get_token_uri'>get_token_uri</span><span class='rparen'>)</span>
 
   <span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
   <span class='id identifier rubyid_description'>description</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>description</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
   <span class='id identifier rubyid_image_uri'>image_uri</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>image</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
 
-  <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>The `image_uri` is required</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_image_uri'>image_uri</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>The image is required</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_image_uri'>image_uri</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>This nft is deprecated</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_image_uri'>image_uri</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>https://mcp3d.com/api/image/deprecated</span><span class='tstring_end'>&#39;</span></span>
 
   <span class='id identifier rubyid_token_uri'>token_uri</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_token_uri'>token_uri</span><span class='op'>&amp;.</span><span class='id identifier rubyid_strip'>strip</span>
@@ -1292,7 +1256,7 @@ image_size             :integer          default(0)
 </div>
 
       <div id="footer">
-  Generated on Mon Oct 25 10:01:03 2021 by
+  Generated on Mon Oct 25 21:59:17 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.7.2).
 </div>

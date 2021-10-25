@@ -115,7 +115,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the thumbnail url of the nft image.</p>
+</div></span>
   
 </li>
 
@@ -138,20 +140,35 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the thumbnail url of the nft image.</p>
+
+<p>production:</p>
+<ol><li>
+<p>it returns the aliyun url with resize params if the image size small than 20971520. </p>
+</li><li>
+<p>it returns the aliyun url without resize params. Because aliyun can not resize too large image.</p>
+</li></ol>
+
+<p>development:</p>
+<ol><li>
+<p>it returns the active storage url.</p>
+</li></ol>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-2
-3
-4
-5
-6
-7
-8
-9
 10
 11
 12
@@ -159,10 +176,18 @@
 14
 15
 16
-17</pre>
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/welcome_helper.rb', line 2</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/welcome_helper.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_token_image'>token_image</span><span class='lparen'>(</span><span class='id identifier rubyid_token'>token</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_present?'>present?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_attached?'>attached?</span>
@@ -190,7 +215,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Oct 25 10:01:03 2021 by
+  Generated on Mon Oct 25 21:59:17 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.7.2).
 </div>
