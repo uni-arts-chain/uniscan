@@ -3,7 +3,9 @@
     <div class="row">
       <div class="col-lg-6 col-md-8 mx-auto">
 
-        <%= image_tag @collection.representative_token.get_image.variant(:gravity=>"Center", resize: "300x300^", crop: '300x300+0+0'), size: "160x160", style: "border-radius: 50%" %>
+        <% unless @collection.representative_token.nil? %>
+          <%= image_tag @collection.representative_token&.get_image&.variant(:gravity=>"Center", resize: "300x300^", crop: '300x300+0+0'), size: "160x160", style: "border-radius: 50%" %>
+        <% end %>
         <h1 class="fw-light mt-2"><%= @collection.name %></h1>
 
         <p>

@@ -53,9 +53,41 @@ Controllers handle the incoming web requests and eventually respond with a rende
 3. {CollectionsController}
 4. {AccountsController}
 
+## Test
+
+### Preparation
+
+1. Install Ruby ~> 2.7.0  
+   See [Installing Ruby](https://www.ruby-lang.org/en/documentation/installation/)
+  
+2. Install ImageMagick & FFmpeg  
+
+3. Download code  
+   Download or clone the [code](https://github.com/uni-arts-chain/uniscan) to local, and go to the root directory.
+
+4. Install Rubygems
+
+    ```bash
+    bundle install
+    ```
+
+### Run all tests
+
+```bash
+rails test
+```
+
+### Run a single test file
+
+```bash
+rails test test/models/transfer_test.rb
+```
+
 ## Docker
 
-## Test
+### Run
+
+### Test
 
 ## Contributing
 

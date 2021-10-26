@@ -12,9 +12,9 @@
 
 one:
   address: "0x4c721c77190a44d640ff55be2699fe80a18ae730"
-  blockchain_id: blockchain_one.id
+  blockchain: blockchain_one
 
 two:
   address: "0x63141638f37c77e4ad0189b76d02607a0c80a1e7"
-  blockchain_id: blockchain_one.id
+  blockchain: blockchain_one
 

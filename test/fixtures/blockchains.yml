@@ -15,6 +15,7 @@ blockchain_one:
   name: Ethereum
   testnet: false
   explorer_token_url: "https://etherscan.io/token/{address}"
+  explorer_address_url: "https://etherscan.io/token/{address}"
 
 blockchain_two:
   name: Pangolin
