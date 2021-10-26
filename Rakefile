@@ -7,5 +7,5 @@ require "yard"
 Rails.application.load_tasks
 
 YARD::Rake::YardocTask.new do |t|
-  t.files = ['lib/**/*.rb', "app/**/*.rb"]
+  t.files = ['lib/**/*.rb', "app/**/*.rb", '-', './LICENSE.txt']
 end
