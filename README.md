@@ -1,5 +1,3 @@
-![grants_badge](./grants_badge.png)
-
 # README
 
 Uniscan is a NFT Explorer for blockchains.
@@ -58,3 +56,15 @@ Controllers handle the incoming web requests and eventually respond with a rende
 ## Docker
 
 ## Test
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/uni-arts-chain/uniscan.
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+## Supported by web3 foundation
+![grants_badge](https://snz04pap002files.storage.live.com/y4mLxrj1EO2ik2j5eYT_w1u7aPsDivmGcngm27pLcvzNwApRMTawf8dvwMnl-Gtd5Y0GMVu8ddYUI_nZwBIXUzGLjZ3sU_9zSlvGXhpsXBGfDv__nuS-wOx2rbdpdMp52Umsd94t7vCQPP5PXjrBWjgoc83RIxLyyl7S3q_ZSOrrHz9bQ9RiSMQizMB07gUsol_?width=660&height=264&cropmode=none)
+
