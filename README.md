@@ -4,10 +4,11 @@ Uniscan is a NFT Explorer for blockchains.
 
 ## Dependences
 
-1. Ruby / Rust languages
+1. Ruby
 2. Ruby on Rails - Web framework
 3. [Hotwire](https://hotwired.dev/) - An alternative approach to building modern web applications 
 4. MySQL
+5. Redis
 5. ImageMagick - Convert image, resize image, identify image
 6. FFmpeg - Convert video to gif
 7. [Alibabacloud OSS](https://www.alibabacloud.com/product/oss) - Online image storage and access service
@@ -44,6 +45,10 @@ Additionally, models can have most of the application's logic.
 5. {Property}
 6. {TokenOwnership}
 7. {Transfer}
+
+The relationship between the models:
+
+![relationship](https://snz04pap002files.storage.live.com/y4m5pmLclQaV3Wn6M_am93oL4rDxrXdJduxHz7vav-6iPgaIwIOv679KqaDfPnR8SKG8l-Tn4oV7YNtpmsbJ678Di__1Z5zp45-zBMG1dkinTBCCd_IlrTC40VoYv8G4w5G3_s0fexofUtdMEi72tEzXiTpaiR_PFmKbwnKnuKhawvZ-SfW1EMbHUDFglzyeGqq?width=838&height=359&cropmode=none)
 
 ## Controllers
 Controllers handle the incoming web requests and eventually respond with a rendered view.
