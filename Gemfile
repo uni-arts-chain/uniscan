@@ -42,6 +42,8 @@ gem 'ransack'
 
 gem 'yard'
 
+gem 'substrate-nft-tracker', github: "uni-arts-chain/substrate-nft-tracker", branch: "main"
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
