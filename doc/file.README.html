@@ -58,13 +58,128 @@
       </div>
 
       <div id="content"><div id='filecontents'>
-<p><img src="./grants_badge.png"></p>
-
 <h1 id="label-README">README</h1>
+
+<p>Uniscan is a NFT Explorer for blockchains.</p>
+
+<h2 id="label-Dependences">Dependences</h2>
+<ol><li>
+<p>Ruby / Rust languages</p>
+</li><li>
+<p>Ruby on Rails - Web framework</p>
+</li><li>
+<p><a href="https://hotwired.dev/">Hotwire</a> - An alternative approach to building modern web applications</p>
+</li><li>
+<p>MySQL</p>
+</li><li>
+<p>ImageMagick - Convert image, resize image, identify image</p>
+</li><li>
+<p>FFmpeg - Convert video to gif</p>
+</li><li>
+<p><a href="https://www.alibabacloud.com/product/oss">Alibabacloud OSS</a> - Online image storage and access service</p>
+</li><li>
+<p><a href="https://sidekiq.org/">Sidekiq</a> - Simple, efficient background processing for Ruby</p>
+</li></ol>
+
+<h2 id="label-Architecture+and+components">Architecture and components</h2>
+
+<p><img src="https://snz04pap002files.storage.live.com/y4mIiJvN7g7-MQnj_eP4EjEgmSi2Q8yiR7ZZ2ERg3iGfs98xbdFq9pw__ozpWSHpaAy0XGW6ub3yOvFn6eqncPntrIwya-TzklUOrmtnkRI6DfhoDcNkZpG1XT-f8VF5S6Ag8krwn-4RwmN1YGJhmQhPhIiJvOwLXBFwh9uubcZgwqPG887WRJ9dcXjpsUg8C7k?width=591&height=611&cropmode=none"></p>
+
+<h3 id="label-Web+Server">Web Server</h3>
+
+<p>Provide web pages for users to use.</p>
+
+<h3 id="label-NFT+trackers+for+blockchains">NFT trackers for blockchains</h3>
+
+<p>Track and get the NFT on the blockchains.<br> There are now trackers for Ethereum and Darwinia as examples.</p>
+
+<h3 id="label-NFT+Workers">NFT Workers</h3>
+
+<p>A NFT worker is a long-running process.<br> It is responsible for collecting the NFT discovered by the tracker and storing it in the database.<br> The data from the tracker is packaged into a <code>sidekiq</code> message for delivery.</p>
+
+<h3 id="label-NFT+token_uri+processor">NFT token_uri processor</h3>
+
+<p>It reads the token_uri of NFT from the database, and then obtains the metadata.<br> And, it will download and process the image from the metadata.</p>
+
+<h2 id="label-Models">Models</h2>
+
+<p>A model is a Ruby class that is used to represent data. Additionally, models can have most of the application&#39;s logic.</p>
+<ol><li>
+<p><span class='object_link'><a href="Account.html" title="Account (class)">Account</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="Blockchain.html" title="Blockchain (class)">Blockchain</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="Collection.html" title="Collection (class)">Collection</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="Token.html" title="Token (class)">Token</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="Property.html" title="Property (class)">Property</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="TokenOwnership.html" title="TokenOwnership (class)">TokenOwnership</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="Transfer.html" title="Transfer (class)">Transfer</a></span></p>
+</li></ol>
+
+<h2 id="label-Controllers">Controllers</h2>
+
+<p>Controllers handle the incoming web requests and eventually respond with a rendered view.</p>
+<ol><li>
+<p><span class='object_link'><a href="WelcomeController.html" title="WelcomeController (class)">WelcomeController</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="TokensController.html" title="TokensController (class)">TokensController</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="CollectionsController.html" title="CollectionsController (class)">CollectionsController</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="AccountsController.html" title="AccountsController (class)">AccountsController</a></span></p>
+</li></ol>
+
+<h2 id="label-Test">Test</h2>
+
+<h3 id="label-Preparation">Preparation</h3>
+<ol><li>
+<p>Install Ruby ~&gt; 2.7.0<br>  See <a href="https://www.ruby-lang.org/en/documentation/installation/">Installing Ruby</a></p>
+</li><li>
+<p>Install ImageMagick &amp; FFmpeg</p>
+</li><li>
+<p>Download code<br>  Download or clone the <a href="https://github.com/uni-arts-chain/uniscan">code</a> to local, and go to the root directory.</p>
+</li><li>
+<p>Install Rubygems</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_install'>install</span>
+</code></pre>
+</li></ol>
+
+<h3 id="label-Run+all+tests">Run all tests</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_rails'>rails</span> <span class='id identifier rubyid_test'>test</span>
+</code></pre>
+
+<h3 id="label-Run+a+single+test+file">Run a single test file</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_rails'>rails</span> <span class='id identifier rubyid_test'>test</span> <span class='id identifier rubyid_test'>test</span><span class='op'>/</span><span class='id identifier rubyid_models'>models</span><span class='op'>/</span><span class='id identifier rubyid_transfer_test'>transfer_test</span><span class='period'>.</span><span class='id identifier rubyid_rb'>rb</span>
+</code></pre>
+
+<h2 id="label-Docker">Docker</h2>
+
+<h3 id="label-Run">Run</h3>
+
+<h3 id="label-Test">Test</h3>
+
+<h2 id="label-Contributing">Contributing</h2>
+
+<p>Bug reports and pull requests are welcome on GitHub at <a href="https://github.com/uni-arts-chain/uniscan">github.com/uni-arts-chain/uniscan</a>.</p>
+
+<h2 id="label-License">License</h2>
+
+<p>The gem is available as open source under the terms of the <a href="https://opensource.org/licenses/MIT">MIT License</a>.</p>
+
+<h2 id="label-Supported+by+web3+foundation">Supported by web3 foundation</h2>
+
+<p><img src="https://snz04pap002files.storage.live.com/y4mLxrj1EO2ik2j5eYT_w1u7aPsDivmGcngm27pLcvzNwApRMTawf8dvwMnl-Gtd5Y0GMVu8ddYUI_nZwBIXUzGLjZ3sU_9zSlvGXhpsXBGfDv__nuS-wOx2rbdpdMp52Umsd94t7vCQPP5PXjrBWjgoc83RIxLyyl7S3q_ZSOrrHz9bQ9RiSMQizMB07gUsol_?width=660&height=264&cropmode=none"></p>
 </div></div>
 
       <div id="footer">
-  Generated on Tue Oct 26 10:26:33 2021 by
+  Generated on Wed Oct 27 11:36:17 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.7.2).
 </div>
