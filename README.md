@@ -100,35 +100,23 @@ You can also test in docker container.
 docker-compose up -d db redis
 ```
 
-2. Run server after mysql and redis are running.
+2. Create tables and generate seed data.
 
 ```
-docker-compose up -d uniscan
+docker-compose run --rm uniscan rails db:migrate
+docker-compose run --rm uniscan rails db:seed
 ```
 
-3. Create tables and generate seed data.
+3. Run services
 
 ```
-docker-compose exec uniscan rails db:migrate
-docker-compose exec uniscan rails db:seed
-```
-
-4. Run sidekiq
-
-```
-docker-compose up -d sidekiq 
-```
-
-5. Run ethereum tracker to scan NFTs.
-
-```
-docker-compose up -d eth_scan
+docker-compose up -d uniscan sidekiq eth_scan
 ```
 
 ### Test
 
 ```
-docker-compose exec uniscan rails test
+docker-compose run --rm uniscan rails test
 ```
 
 ## Contributing
