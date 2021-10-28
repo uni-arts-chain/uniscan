@@ -88,11 +88,48 @@ rails test
 rails test test/models/transfer_test.rb
 ```
 
+You can also test in docker container.
+
 ## Docker
 
 ### Run
 
+1. Run mysql and redis.
+
+```
+docker-compose up -d db redis
+```
+
+2. Run server after mysql and redis are running.
+
+```
+docker-compose up -d uniscan
+```
+
+3. Create tables and generate seed data.
+
+```
+docker-compose exec uniscan rails db:migrate
+docker-compose exec uniscan rails db:seed
+```
+
+4. Run sidekiq
+
+```
+docker-compose up -d sidekiq 
+```
+
+5. Run ethereum tracker to scan NFTs.
+
+```
+docker-compose up -d eth_scan
+```
+
 ### Test
+
+```
+docker-compose exec uniscan rails test
+```
 
 ## Contributing
 
