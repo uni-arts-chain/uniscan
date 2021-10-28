@@ -1,0 +1,53 @@
+version: '3.1'
+
+services:
+  uniscan:
+    image: uniscan:latest
+    build:
+      context: .
+    command: ["rails", "server", "-b", "0.0.0.0"]
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - DB_HOST=db
+      - DB_DATABASE=uniscan_development
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+    ports:
+      - '3000:3000'
+
+  sidekiq:
+    image: uniscan:latest
+    build:
+      context: .
+    command: ["bundle", "exec", "sidekiq"]
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - DB_HOST=db
+      - DB_DATABASE=uniscan_development
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+
+  eth_scan:
+    image: uniart/evm-nft-tracker
+    command: ["ethereum-nft-tracker", "12994586", "s"]
+    environment:
+      - REDIS_URL=redis://redis:6379
+
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=uniscan_development
+
+  redis:
+    image: redis:4.0.10
+    volumes:
+      - redis_data:/data
+
+volumes:
+  db_data:
+  redis_data:

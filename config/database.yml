@@ -10,23 +10,28 @@
 #   https://dev.mysql.com/doc/refman/5.7/en/password-hashing.html
 #
 default: &default
-  adapter: mysql2
+  adapter: <%= ENV['DB_ADAPTER'] || 'mysql2' %>
   encoding: utf8mb4
+  username: <%= ENV['DB_USERNAME'] || 'root' %>
+  password: <%= ENV['DB_PASSWORD'] || 'root'%>
+  host: <%= ENV['DB_HOST'] || 'docker.for.mac.host.internal' %>
+  port: <%= ENV['DB_PORT'] || '3306' %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password:
-  host: localhost
-
+  reconnect: true
 development:
   <<: *default
-  database: uniscan_development
+  host: <%= ENV['DB_HOST'] || 'docker.for.mac.host.internal' %>
+  port: <%= ENV['DB_PORT'] || '3306' %>
+  database: <%= ENV['DB_DATABASE'] || 'uniscan_development' %>
+  username: <%= ENV['DB_USERNAME'] || ENV['UNISCAN_DATABASE_USERNAME'] || 'root' %>
+  password: <%= ENV['DB_PASSWORD'] || ENV['UNISCAN_DATABASE_PASSWORD'] || 'root'%>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: uniscan_test
+  database: <%= ENV['DB_DATABASE'] || 'uniscan_test' %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -50,8 +55,8 @@ test:
 #
 production:
   <<: *default
-  host: '127.0.0.1'
-  port: 3306
-  database: uniscan_production
-  username: <%= ENV['UNISCAN_DATABASE_USERNAME'] %>
-  password: <%= ENV['UNISCAN_DATABASE_PASSWORD'] %>
+  host: <%= ENV['DB_HOST'] || 'docker.for.mac.host.internal' %>
+  port: <%= ENV['DB_PORT'] || '3306' %>
+  database: <%= ENV['DB_DATABASE'] || 'uniscan_production' %>
+  username: <%= ENV['DB_USERNAME'] || ENV['UNISCAN_DATABASE_USERNAME'] || 'root' %>
+  password: <%= ENV['DB_PASSWORD'] || ENV['UNISCAN_DATABASE_PASSWORD'] || 'root'%>
