@@ -42,7 +42,7 @@ gem 'ransack'
 
 gem 'yard'
 
-gem 'substrate-nft-tracker', github: "uni-arts-chain/substrate-nft-tracker", branch: "main"
+# gem 'substrate-nft-tracker', github: "uni-arts-chain/substrate-nft-tracker", branch: "main"
 
 
 group :development, :test do
