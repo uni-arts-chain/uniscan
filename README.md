@@ -88,7 +88,7 @@ rails test
 rails test test/models/transfer_test.rb
 ```
 
-You can also test in docker container.
+**You can also test in docker container.** 
 
 ## Docker
 
