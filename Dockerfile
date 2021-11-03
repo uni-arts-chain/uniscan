@@ -9,7 +9,8 @@ RUN apk add --update --no-cache \
     ffmpeg \
     icu-dev \
     tzdata \
-    nodejs
+    nodejs \
+    bash
 
 #Cache bundle install
 ADD Gemfile* /app/
