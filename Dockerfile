@@ -47,7 +47,7 @@ COPY --from=wkhtmltopdf /bin/wkhtmltopdf /bin/
 
 COPY --from=builder /usr/local/bundle /usr/local/bundle
 COPY --from=builder $APP_ROOT $APP_ROOT
-RUN gem install bundler -v 2.1.4 && gem install rake  -v 12.3.3
+RUN gem install bundler -v 2.2.3 && gem install rake  -v 12.3.3
 RUN date -u > BUILD_TIME
 
 EXPOSE  3000
