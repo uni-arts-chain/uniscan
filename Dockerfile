@@ -35,7 +35,8 @@ RUN apk add --update --no-cache \
     icu-dev \
     tzdata \
     ffmpeg \
-    nodejs
+    nodejs \
+    bash
 #     libcrypto1.0 libssl1.0 \
 #     ttf-dejavu ttf-droid ttf-freefont ttf-liberation ttf-ubuntu-font-family \
 ENV LANG C.UTF-8
