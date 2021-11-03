@@ -18,6 +18,7 @@ default: &default
   port: <%= ENV['DB_PORT'] || '3306' %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   reconnect: true
+
 development:
   <<: *default
   host: <%= ENV['DB_HOST'] || 'docker.for.mac.host.internal' %>
