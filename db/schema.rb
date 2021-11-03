@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_10_20_090014) do
 
-  create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "accounts", charset: "utf8mb4", force: :cascade do |t|
     t.string "address"
     t.integer "blockchain_id"
     t.integer "level", default: 0
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2021_10_20_090014) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "active_storage_attachments", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2021_10_20_090014) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "active_storage_blobs", charset: "utf8mb4", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -42,13 +42,13 @@ ActiveRecord::Schema.define(version: 2021_10_20_090014) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_variant_records", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "active_storage_variant_records", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "blockchains", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "blockchains", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.boolean "testnet", default: false
     t.string "explorer_token_url"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2021_10_20_090014) do
     t.string "explorer_address_url"
   end
 
-  create_table "collections", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "collections", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "symbol"
     t.integer "blockchain_id"
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2021_10_20_090014) do
     t.string "created_at_tx"
   end
 
-  create_table "properties", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "properties", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.text "value"
     t.integer "token_id"
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 2021_10_20_090014) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "token_ownerships", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "token_ownerships", charset: "utf8mb4", force: :cascade do |t|
     t.integer "token_id"
     t.integer "account_id"
     t.decimal "balance", precision: 65, default: "1"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 2021_10_20_090014) do
     t.index ["account_id", "token_id"], name: "index_token_ownerships_on_account_id_and_token_id", unique: true
   end
 
-  create_table "tokens", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "tokens", charset: "utf8mb4", force: :cascade do |t|
     t.string "token_id_on_chain"
     t.integer "collection_id"
     t.boolean "unique", default: true
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 2021_10_20_090014) do
     t.integer "image_size", default: 0
   end
 
-  create_table "transfers", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "transfers", charset: "utf8mb4", force: :cascade do |t|
     t.integer "collection_id"
     t.integer "token_id"
     t.decimal "amount", precision: 65, default: "1"
