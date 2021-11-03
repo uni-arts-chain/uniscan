@@ -60,6 +60,8 @@ Controllers handle the incoming web requests and eventually respond with a rende
 
 ## Test
 
+**You can also test in docker container.** 
+
 ### Preparation
 
 1. Install Ruby ~> 2.7.0  
@@ -88,8 +90,6 @@ rails test
 rails test test/models/transfer_test.rb
 ```
 
-**You can also test in docker container.** 
-
 ## Docker
 
 ### Run
@@ -115,6 +115,18 @@ docker-compose up -d uniscan sidekiq eth_scan
 
 ### Test
 
+1. Run mysql if not running
+```
+docker-compose up -d db
+```
+
+2. Create test database
+```
+docker-compose run --rm uniscan_test rails db:create
+docker-compose run --rm uniscan_test rails db:migrate
+```
+
+3. Run tests 
 ```
 docker-compose run --rm uniscan rails test
 ```
