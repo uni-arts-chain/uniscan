@@ -15,6 +15,19 @@ services:
     ports:
       - '3000:3000'
 
+  uniscan_test:
+    image: uniscan:latest
+    build:
+      context: .
+    command: ["rails", "test"]
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - DB_HOST=db
+      - DB_DATABASE=uniscan_test
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+      - RAILS_ENV=test
+
   sidekiq:
     image: uniscan:latest
     build:
@@ -36,10 +49,6 @@ services:
 
   db:
     image: mysql:5.7
-    platform: linux/x86_64
-    volumes:
-      - db_data:/var/lib/mysql
-    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=uniscan_development

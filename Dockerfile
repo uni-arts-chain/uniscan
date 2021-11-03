@@ -14,7 +14,8 @@ RUN apk add --update --no-cache \
 #Cache bundle install
 ADD Gemfile* /app/
 RUN bundle config --global frozen 1 \
- && bundle install -j4 --retry 3 \
+  && gem install bundler -v 2.2.3 && gem install rake  -v 12.3.3 \
+  && bundle install -j4 --retry 3 \
   && rm -rf /usr/local/bundle/cache/*.gem \
   && find /usr/local/bundle/gems/ -name "*.c" -delete \
   && find /usr/local/bundle/gems/ -name "*.o" -delete

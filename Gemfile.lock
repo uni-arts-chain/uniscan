@@ -329,7 +329,7 @@ PLATFORMS
 DEPENDENCIES
   activestorage-aliyun
   annotate
-  bootsnap (>= 1.4.4)
+  bootsnap
   bootstrap (~> 5.1.0)
   byebug
   capybara (>= 3.26)
