@@ -60,7 +60,8 @@ class Token < ApplicationRecord
       "token_uri_err is null and " + 
       "TRIM(token_uri) != '' and " +
       "image_uri is not null and " + 
-      "TRIM(image_uri) != ''"
+      "TRIM(image_uri) != ''" +
+      "collection_id != 19"
     )
   }
 
