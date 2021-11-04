@@ -133,6 +133,9 @@ class Token < ApplicationRecord
 
     raise "The image is required" if image_uri.blank?
     raise "This nft is deprecated" if image_uri == 'https://mcp3d.com/api/image/deprecated'
+    raise "The image uri is too long" if image_uri.length > 2048 # chrome url limit
+    raise "The name is too long" if name.length > 65535
+    raise "The description is too long" if description.length > 65535
 
     token_uri = self.token_uri&.strip
     is_ipfs = is_ipfs_uri?(token_uri) && is_ipfs_uri?(image_uri)
