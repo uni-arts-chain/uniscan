@@ -137,6 +137,7 @@ class Token < ApplicationRecord
     raise "The image uri is too long" if image_uri.length > 2048 # chrome url limit
     raise "The name is too long" if name.length > 65535
     raise "The description is too long" if description.length > 65535
+    raise "Blacklisted" if self.collection.contract_address == "0xd1e5b0ff1287aa9f9a268759062e4ab08b9dacbe" # .crypto
 
     token_uri = self.token_uri&.strip
     is_ipfs = is_ipfs_uri?(token_uri) && is_ipfs_uri?(image_uri)
