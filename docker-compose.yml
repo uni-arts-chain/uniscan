@@ -80,7 +80,6 @@ services:
 
   redis:
     image: redis:4.0.10
-    command: --character-set-server=utf8mb4
     volumes:
       - redis_data:/data
 
