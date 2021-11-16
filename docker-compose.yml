@@ -46,6 +46,28 @@ services:
     environment:
       - REDIS_URL=redis://redis:6379
 
+  parse_token_uri:
+    image: uniscan:latest
+    build:
+      context: .
+    command: ["rails", "token_uri:parse"]
+    environment:
+      - DB_HOST=db
+      - DB_DATABASE=uniscan_development
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+
+  update_creator:
+    image: uniscan:latest
+    build:
+      context: .
+    command: ["rails", "update_creator"]
+    environment:
+      - DB_HOST=db
+      - DB_DATABASE=uniscan_development
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+      - ETHERSCAN_APIKEY=CQZEXX84G6AQ5R8AZCII626EA43VPNJEEU
 
   db:
     image: mysql:5.7
