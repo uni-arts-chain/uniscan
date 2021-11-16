@@ -14,6 +14,8 @@ services:
       - DB_PASSWORD=root
     ports:
       - '3000:3000'
+    volume:
+      - storage_data:/app/storage:ro
 
   uniscan_test:
     image: uniscan:latest
@@ -57,6 +59,8 @@ services:
       - DB_DATABASE=uniscan_development
       - DB_USERNAME=root
       - DB_PASSWORD=root
+    volume:
+      - storage_data:/app/storage
 
   update_creator:
     image: uniscan:latest
@@ -87,3 +91,4 @@ services:
 volumes:
   db_data:
   redis_data:
+  storage_data:
