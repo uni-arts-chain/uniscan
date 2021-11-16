@@ -251,7 +251,12 @@ class Token < ApplicationRecord
   #
   # See config/storage.yml
   def attach_image
-    tempfile, content_type, ori_content_type = ImageHelper.download_and_convert_image(self.image_uri)
+    url = if self.image_uri.start_with?("ipfs://")
+            "https://dweb.link/ipfs/#{self.image_uri[7..]}"
+          else
+            self.image_uri
+          end
+    tempfile, content_type, ori_content_type = ImageHelper.download_and_convert_image(url)
 
     name = Digest::SHA1.hexdigest(self.image_uri)
     ext = MIME::Types[content_type].first.extensions.first
