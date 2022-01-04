@@ -14,13 +14,43 @@ class ImageHelper
   # @return [Tempfile, String, String] the file, the content type, and the original
   # content type.
   def self.download_and_convert_image(image_uri)
-    puts "1-------------"
-    ori_tempfile = Down.download(image_uri, max_size: 50 * 1024 * 1024) # 50 MB
-    puts "2-------------"
-    ori_content_type = ori_tempfile.content_type
+    ori_tempfile, ori_content_type = if image_uri.start_with?("data:")
+      puts "0-------------"
+      to_image_file(image_uri)
+    else
+      puts "1-------------"
+      ori_tempfile = Down.download(image_uri, max_size: 50 * 1024 * 1024) # 50 MB
+      puts "2-------------"
+      ori_content_type = ori_tempfile.content_type
+      [ori_tempfile, ori_content_type]
+    end
 
     tempfile, content_type = convert(ori_tempfile, ori_content_type)
     [ tempfile, content_type, ori_content_type ]
+  end
+
+  def self.to_image_file(image_uri)
+    name = Digest::SHA1.hexdigest(image_uri)
+    filename, content_type, data = 
+      if image_uri.start_with?("data:image/svg+xml;base64,")
+        ["#{name}.svg", "image/svg+xml", image_uri[26..]]
+      elsif image_uri.start_with?("data:image/gif;base64,")
+        ["#{name}.gif", "image/gif", image_uri[22..]]
+      elsif image_uri.start_with?("data:image/jpg;base64,")
+        ["#{name}.jpg", "image/jpeg", image_uri[22..]]
+      elsif image_uri.start_with?("data:image/jpeg;base64,")
+        ["#{name}.jpg", "image/jpeg", image_uri[23..]]
+      elsif image_uri.start_with?("data:image/png;base64,")
+        ["#{name}.png", "image/png", image_uri[22..]]
+      end
+
+    dir = Rails.root.join("tmp", "token_images")
+    FileUtils.mkdir(dir) unless File.exists?(dir)
+    File.open(dir.join(filename), 'wb') do |f|
+      f.write(Base64.decode64(data))
+    end
+
+    [File.open(filename), content_type]
   end
 
   # Convert file
