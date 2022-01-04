@@ -14,7 +14,9 @@ class ImageHelper
   # @return [Tempfile, String, String] the file, the content type, and the original
   # content type.
   def self.download_and_convert_image(image_uri)
+    puts "1-------------"
     ori_tempfile = Down.download(image_uri, max_size: 50 * 1024 * 1024) # 50 MB
+    puts "2-------------"
     ori_content_type = ori_tempfile.content_type
 
     tempfile, content_type = convert(ori_tempfile, ori_content_type)
@@ -27,15 +29,18 @@ class ImageHelper
   # 2. video to gif
   # 3. resize to 600x600 without changing the aspect ratio.
   def self.convert(tempfile, content_type)
+    puts "c3------------- #{content_type}"
     # Convert svg to png
     if content_type.include?("svg")
 
+      puts "c4-------------"
       tempfile = svg_to_png(tempfile)
       content_type = "image/png"
 
     # Convert video to gif
     elsif content_type.start_with?("video")
 
+      puts "c5-------------"
       tempfile = video_to_gif(tempfile)
       content_type = "image/gif"
 
@@ -43,6 +48,7 @@ class ImageHelper
 
     if content_type != "image/gif"
       # Shrink Larger Images
+      puts "c6-------------"
       ext = MIME::Types[content_type].first.extensions.first
       tempfile = ImageProcessing::MiniMagick
         .source(tempfile)
