@@ -41,14 +41,16 @@ class ImageHelper
 
     end
 
-    # Shrink Larger Images
-    ext = MIME::Types[content_type].first.extensions.first
-    tempfile = ImageProcessing::MiniMagick
-      .source(tempfile)
-      .resize_to_limit(600, 600)
-      .convert(ext)
-      .strip
-      .call
+    if content_type != "image/gif"
+      # Shrink Larger Images
+      ext = MIME::Types[content_type].first.extensions.first
+      tempfile = ImageProcessing::MiniMagick
+        .source(tempfile)
+        .resize_to_limit(600, 600)
+        .convert(ext)
+        .strip
+        .call
+    end
 
     [ tempfile, content_type ]
   end
