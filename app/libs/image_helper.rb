@@ -18,6 +18,10 @@ class ImageHelper
       puts "0-------------"
       to_image_file(image_uri)
     else
+      if image_uri.split("?").first.downcase.end_with?(".mp4")
+        raise "Wrong content_type for #{image_uri}"
+      end
+
       puts "1-------------"
       ori_tempfile = Down.download(image_uri, max_size: 50 * 1024 * 1024) # 50 MB
       puts "2-------------"
