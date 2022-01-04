@@ -50,7 +50,7 @@ class ImageHelper
       f.write(Base64.decode64(data))
     end
 
-    [File.open(filename), content_type]
+    [File.open(dir.join(filename)), content_type]
   end
 
   # Convert file
