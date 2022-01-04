@@ -29,7 +29,7 @@ class ImageHelper
       [ori_tempfile, ori_content_type]
     end
 
-    if ori_content_type == "application/octet-stream"
+    if ori_content_type == "application/octet-stream" || ori_content_type.start_with?("video")
       raise "Wrong content_type for #{image_uri}"
     else
       tempfile, content_type = convert(ori_tempfile, ori_content_type)
