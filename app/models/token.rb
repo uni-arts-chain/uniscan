@@ -185,7 +185,7 @@ class Token < ApplicationRecord
         "#{e.class} (#{e.message})"
       end
     puts "  #{token_uri_err}"
-    # puts e.backtrace.join("\n")
+    puts e.backtrace.join("\n")
     self.update(
       token_uri_err: token_uri_err,
       token_uri_processed: true

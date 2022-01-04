@@ -7,7 +7,7 @@ class TokenUriHelper
   def self.get_content(token_uri)
     if token_uri.start_with?("data:")
       # json base64 encoded
-      if token_uri.start_with("data:application/json;base64,")
+      if token_uri.start_with?("data:application/json;base64,")
         return JSON.parse(Base64.decode64(token_uri[29..]))
       else
         raise "Not support data: #{token_uri}"
