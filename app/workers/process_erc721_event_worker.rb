@@ -3,7 +3,7 @@
 # This is the entrance of ERC721 NFTs into uniscan.
 class ProcessErc721EventWorker
   include Sidekiq::Worker
-  sidekiq_options queue: 'erc721_events'
+  sidekiq_options queue: 'erc721_events', retry: false
 
   def perform(args)
     args.symbolize_keys!
