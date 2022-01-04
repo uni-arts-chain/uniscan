@@ -25,8 +25,12 @@ class ImageHelper
       [ori_tempfile, ori_content_type]
     end
 
-    tempfile, content_type = convert(ori_tempfile, ori_content_type)
-    [ tempfile, content_type, ori_content_type ]
+    if ori_content_type == "application/octet-stream"
+      raise "Wrong content_type for #{image_uri}"
+    else
+      tempfile, content_type = convert(ori_tempfile, ori_content_type)
+      [ tempfile, content_type, ori_content_type ]
+    end
   end
 
   def self.to_image_file(image_uri)
@@ -42,6 +46,8 @@ class ImageHelper
         ["#{name}.jpg", "image/jpeg", image_uri[23..]]
       elsif image_uri.start_with?("data:image/png;base64,")
         ["#{name}.png", "image/png", image_uri[22..]]
+      else
+        raise "Not support data, #{image_uri.split(",").first}"
       end
 
     dir = Rails.root.join("tmp", "token_images")
