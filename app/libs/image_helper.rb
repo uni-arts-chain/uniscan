@@ -35,6 +35,8 @@ class ImageHelper
       tempfile, content_type = convert(ori_tempfile, ori_content_type)
       [ tempfile, content_type, ori_content_type ]
     end
+
+
   end
 
   def self.to_image_file(image_uri)

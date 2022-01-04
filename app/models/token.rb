@@ -256,7 +256,12 @@ class Token < ApplicationRecord
           else
             self.image_uri
           end
-    tempfile, content_type, ori_content_type = ImageHelper.download_and_convert_image(url)
+    begin
+      tempfile, content_type, ori_content_type = ImageHelper.download_and_convert_image(url)
+    rescue Down::TimeoutError => ex
+      puts "Retry"
+      tempfile, content_type, ori_content_type = ImageHelper.download_and_convert_image(url)
+    end
 
     name = Digest::SHA1.hexdigest(self.image_uri)
     ext = MIME::Types[content_type].first.extensions.first
