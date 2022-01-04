@@ -59,32 +59,36 @@ class ProcessErc721EventWorker
       )
     end
 
-    token = Token.find_by(collection: collection, token_id_on_chain: token_id)
-    if token.blank?
-      token = Token.create(
-        collection: collection,
-        token_id_on_chain: token_id,
-        token_uri: token_uri
-      )
-    end
+    if token_uri.length > 65535
+      raise "The token_uri of #{address}/#{token_id} is too long" 
+    else
+      token = Token.find_by(collection: collection, token_id_on_chain: token_id)
+      if token.blank?
+        token = Token.create(
+          collection: collection,
+          token_id_on_chain: token_id,
+          token_uri: token_uri
+        )
+      end
 
-    transfer = Transfer.find_by(
-      collection: collection,
-      token: token,
-      from: from_account,
-      to: to_account,
-      txhash: transaction_hash
-    )
-    if transfer.blank?
-      transfer = Transfer.create(
+      transfer = Transfer.find_by(
         collection: collection,
         token: token,
         from: from_account,
         to: to_account,
-        block_number: block_number,
-        txhash: transaction_hash,
-        amount: 1
+        txhash: transaction_hash
       )
+      if transfer.blank?
+        transfer = Transfer.create(
+          collection: collection,
+          token: token,
+          from: from_account,
+          to: to_account,
+          block_number: block_number,
+          txhash: transaction_hash,
+          amount: 1
+        )
+      end
     end
   end
 end
