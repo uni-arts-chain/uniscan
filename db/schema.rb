@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_05_024709) do
+ActiveRecord::Schema.define(version: 2022_01_05_031251) do
 
   create_table "accounts", charset: "utf8mb4", force: :cascade do |t|
     t.string "address"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2022_01_05_024709) do
     t.integer "level", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["address", "blockchain_id"], name: "index_accounts_on_address_and_blockchain_id", unique: true
   end
 
   create_table "active_storage_attachments", charset: "utf8mb4", force: :cascade do |t|
@@ -75,6 +76,7 @@ ActiveRecord::Schema.define(version: 2022_01_05_024709) do
     t.integer "created_at_block"
     t.integer "created_at_timestamp"
     t.string "created_at_tx"
+    t.index ["contract_address"], name: "index_collections_on_contract_address", unique: true
   end
 
   create_table "continuations", charset: "utf8mb4", force: :cascade do |t|
