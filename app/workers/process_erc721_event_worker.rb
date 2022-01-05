@@ -21,7 +21,7 @@ class ProcessErc721EventWorker
     # total_supply = args[:total_supply]
 
     # TODO: Check args
-    return unless token_uri =~ URI::regexp
+    # return unless token_uri =~ URI::regexp
 
     blockchain = Blockchain.find_by_name(blockchain)
     return if blockchain.blank?
@@ -70,25 +70,18 @@ class ProcessErc721EventWorker
           token_uri: token_uri
         )
       end
-
-      transfer = Transfer.find_by(
-        collection: collection,
-        token: token,
-        from: from_account,
-        to: to_account,
-        txhash: transaction_hash
-      )
-      if transfer.blank?
-        transfer = Transfer.create(
-          collection: collection,
-          token: token,
-          from: from_account,
-          to: to_account,
-          block_number: block_number,
-          txhash: transaction_hash,
-          amount: 1
-        )
-      end
     end
+
+    Transfer.create(
+      collection: collection,
+      token: token,
+      contract_address: address,
+      token_id_on_chain: token_id,
+      from: from_account,
+      to: to_account,
+      block_number: block_number,
+      txhash: transaction_hash,
+      amount: 1
+    )
   end
 end

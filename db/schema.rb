@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_20_090014) do
+ActiveRecord::Schema.define(version: 2022_01_05_024709) do
 
   create_table "accounts", charset: "utf8mb4", force: :cascade do |t|
     t.string "address"
@@ -77,6 +77,21 @@ ActiveRecord::Schema.define(version: 2021_10_20_090014) do
     t.string "created_at_tx"
   end
 
+  create_table "continuations", charset: "utf8mb4", force: :cascade do |t|
+    t.string "last"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "nfts", charset: "utf8mb4", force: :cascade do |t|
+    t.string "contract"
+    t.string "token_id"
+    t.text "token_uri"
+    t.text "metadata"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "properties", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.text "value"
@@ -129,7 +144,9 @@ ActiveRecord::Schema.define(version: 2021_10_20_090014) do
     t.string "txhash"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["collection_id", "token_id", "from", "to", "txhash"], name: "transfers_uniq_index", unique: true
+    t.string "contract_address"
+    t.string "token_id_on_chain"
+    t.index ["contract_address", "token_id_on_chain", "from", "to", "txhash"], name: "transfers_uniq_index2", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

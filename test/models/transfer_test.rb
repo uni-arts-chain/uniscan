@@ -2,16 +2,18 @@
 #
 # Table name: transfers
 #
-#  id            :bigint           not null, primary key
-#  collection_id :integer
-#  token_id      :integer
-#  amount        :decimal(65, )    default(1)
-#  from          :integer
-#  to            :integer
-#  block_number  :integer
-#  txhash        :string(255)
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id                :bigint           not null, primary key
+#  collection_id     :integer
+#  token_id          :integer
+#  amount            :decimal(65, )    default(1)
+#  from              :integer
+#  to                :integer
+#  block_number      :integer
+#  txhash            :string(255)
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  contract_address  :string(255)
+#  token_id_on_chain :string(255)
 #
 require "test_helper"
 
