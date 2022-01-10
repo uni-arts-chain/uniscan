@@ -18,9 +18,6 @@ class TokensController < ApplicationController
       .eligible
       .includes(collection: [:blockchain])
       .includes(:accounts)
-      .with_attached_image
-      .where(token_uri_err: nil)
-      .where.not(image_uri: nil)
 
     @pagy, @tokens = pagy(tokens, items: 36)
 

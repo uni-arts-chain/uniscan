@@ -58,12 +58,8 @@ class Token < ApplicationRecord
 
   scope :eligible, -> {
     where(
-      "token_uri_processed=true and " + 
       "token_uri_err is null and " + 
-      "TRIM(token_uri) != '' and " +
-      "image_uri is not null and " + 
-      "TRIM(image_uri) != ''"
-      # "collection_id != 19"
+      "token_uri is not null"
     )
   }
 

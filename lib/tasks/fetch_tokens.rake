@@ -6,13 +6,6 @@ namespace :fetch_tokens do
 
       # loop --------------
       begin
-        # last_token = Token.order(mint_time: :desc).first
-
-        # sql = "select mint_time from tokens where id=(select max(id) as id from tokens)"
-        # records_array = ActiveRecord::Base.connection.execute(sql)
-        # record = records_array.first
-        # last_mint_time = record.nil? ? nil : record[0]
-
         # 假设这条记录是一定存在的
         ctrl = TokensInfo.find_by_key("ctrl").value
         break if ctrl == "1"
@@ -70,7 +63,6 @@ namespace :fetch_tokens do
 end
 
 def create_token(token_contract_address, token_id, token_uri, mint_time)
-
   info = TokensInfo.find_by_key("tokens_count")
   collection = Collection.find_by_contract_address(token_contract_address)
   ori_count = info.value.to_i
@@ -79,7 +71,7 @@ def create_token(token_contract_address, token_id, token_uri, mint_time)
       collection: collection,
       contract_address: token_contract_address,
       token_id_on_chain: token_id,
-      token_uri: token_uri,
+      token_uri: token_uri.blank? ? nil : token_uri,
       mint_time: mint_time
     })
 
