@@ -34,6 +34,7 @@ gem "down", "~> 5.0"
 gem 'image_processing'
 gem 'charlock_holmes'
 gem "activestorage-aliyun"
+gem 'graphql-client'
 
 gem 'importmap-rails'
 gem 'hotwire-rails'

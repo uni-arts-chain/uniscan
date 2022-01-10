@@ -26,23 +26,25 @@ require 'mime/types'
 #  name                   :text(65535)
 #  description            :text(65535)
 #  image_uri              :text(65535)
-#  token_uri              :text(65535)
-#  token_uri_err          :text(65535)
+#  token_uri              :text(16777215)
 #  ipfs                   :boolean          default(FALSE)
 #  transfers_count        :integer          default(0)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  holders_count          :integer          default(0)
+#  token_uri_err          :text(65535)
 #  token_uri_processed    :boolean          default(FALSE)
 #  transfers_count_24h    :integer          default(0)
 #  transfers_count_7d     :integer          default(0)
 #  last_transfer_time     :datetime
 #  image_ori_content_type :string(255)
 #  image_size             :integer          default(0)
+#  mint_time              :integer
+#  contract_address       :string(255)
 #
 class Token < ApplicationRecord
 
-  belongs_to :collection
+  belongs_to :collection, optional: true
   has_many :properties
   has_many :token_ownerships, -> { where('balance > 0') }
   has_many :accounts, through: :token_ownerships

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_05_031251) do
+ActiveRecord::Schema.define(version: 2022_01_10_102116) do
 
   create_table "accounts", charset: "utf8mb4", force: :cascade do |t|
     t.string "address"
@@ -59,8 +59,8 @@ ActiveRecord::Schema.define(version: 2022_01_05_031251) do
   end
 
   create_table "collections", charset: "utf8mb4", force: :cascade do |t|
-    t.string "name"
-    t.string "symbol"
+    t.text "name"
+    t.text "symbol"
     t.integer "blockchain_id"
     t.integer "contract_platform", default: 0
     t.string "contract_address"
@@ -76,7 +76,16 @@ ActiveRecord::Schema.define(version: 2022_01_05_031251) do
     t.integer "created_at_block"
     t.integer "created_at_timestamp"
     t.string "created_at_tx"
+    t.boolean "metadata"
     t.index ["contract_address"], name: "index_collections_on_contract_address", unique: true
+  end
+
+  create_table "collections_infos", charset: "utf8mb4", force: :cascade do |t|
+    t.string "key"
+    t.string "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["key"], name: "index_collections_infos_on_key", unique: true
   end
 
   create_table "continuations", charset: "utf8mb4", force: :cascade do |t|
@@ -121,7 +130,7 @@ ActiveRecord::Schema.define(version: 2022_01_05_031251) do
     t.text "name"
     t.text "description"
     t.text "image_uri"
-    t.text "token_uri"
+    t.text "token_uri", size: :medium
     t.boolean "ipfs", default: false
     t.integer "transfers_count", default: 0
     t.datetime "created_at", precision: 6, null: false
@@ -134,6 +143,17 @@ ActiveRecord::Schema.define(version: 2022_01_05_031251) do
     t.datetime "last_transfer_time"
     t.string "image_ori_content_type"
     t.integer "image_size", default: 0
+    t.integer "mint_time"
+    t.string "contract_address"
+    t.index ["contract_address", "token_id_on_chain"], name: "index_tokens_on_contract_address_and_token_id_on_chain"
+  end
+
+  create_table "tokens_infos", charset: "utf8mb4", force: :cascade do |t|
+    t.string "key"
+    t.string "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["key"], name: "index_tokens_infos_on_key", unique: true
   end
 
   create_table "transfers", charset: "utf8mb4", force: :cascade do |t|

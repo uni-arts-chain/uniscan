@@ -129,6 +129,10 @@ GEM
     ffi (1.15.3-x64-mingw32)
     globalid (0.5.2)
       activesupport (>= 5.0)
+    graphql (1.13.0)
+    graphql-client (0.17.0)
+      activesupport (>= 3.0)
+      graphql (~> 1.10)
     hotwire-rails (0.1.3)
       rails (>= 6.0.0)
       stimulus-rails
@@ -338,6 +342,7 @@ DEPENDENCIES
   faker
   faraday
   faraday_middleware
+  graphql-client
   hotwire-rails
   image_processing
   importmap-rails

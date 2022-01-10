@@ -3,8 +3,8 @@
 # Table name: collections
 #
 #  id                   :bigint           not null, primary key
-#  name                 :string(255)
-#  symbol               :string(255)
+#  name                 :text(65535)
+#  symbol               :text(65535)
 #  blockchain_id        :integer
 #  contract_platform    :integer          default("evm")
 #  contract_address     :string(255)
@@ -20,6 +20,7 @@
 #  created_at_block     :integer
 #  created_at_timestamp :integer
 #  created_at_tx        :string(255)
+#  metadata             :boolean
 #
 
 one:
