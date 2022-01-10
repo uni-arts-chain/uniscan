@@ -15,23 +15,29 @@ Blockchain.create(
       explorer_token_url: "https://etherscan.io/token/{address}", 
       explorer_address_url: "https://etherscan.io/address/{address}"
     },
+    # { 
+    #   name: 'Darwinia', 
+    #   testnet: false,
+    #   explorer_token_url: "https://darwinia.subscan.io/account/{address}",
+    #   explorer_address_url: "https://darwinia.subscan.io/account/{address}"
+    # },
+    # { 
+    #   name: 'Moonriver', 
+    #   testnet: false,
+    #   explorer_token_url: "https://moonbeam-explorer.netlify.app/address/{address}?network=Moonriver",
+    #   explorer_address_url: "https://moonbeam-explorer.netlify.app/address/{address}?network=Moonriver"
+    # },
+    # { 
+    #   name: 'Pangolin', 
+    #   testnet: true,
+    #   explorer_token_url: "https://pangolin.subscan.io/account/{address}",
+    #   explorer_address_url: "https://pangolin.subscan.io/account/{address}"
+    # },
     { 
-      name: 'Darwinia', 
+      name: 'Crab', 
       testnet: false,
-      explorer_token_url: "https://darwinia.subscan.io/account/{address}",
-      explorer_address_url: "https://darwinia.subscan.io/account/{address}"
+      explorer_token_url: "https://crab.subscan.io/account/{address}",
+      explorer_address_url: "https://crab.subscan.io/account/{address}"
     },
-    { 
-      name: 'Moonriver', 
-      testnet: false,
-      explorer_token_url: "https://moonbeam-explorer.netlify.app/address/{address}?network=Moonriver",
-      explorer_address_url: "https://moonbeam-explorer.netlify.app/address/{address}?network=Moonriver"
-    },
-    { 
-      name: 'Pangolin', 
-      testnet: true,
-      explorer_token_url: "https://pangolin.subscan.io/account/{address}",
-      explorer_address_url: "https://pangolin.subscan.io/account/{address}"
-    }
   ]
 )
