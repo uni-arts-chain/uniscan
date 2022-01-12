@@ -28,6 +28,7 @@
 #  updated_at        :datetime         not null
 #  contract_address  :string(255)
 #  token_id_on_chain :string(255)
+#  timestamp         :integer
 #
 class Transfer < ApplicationRecord
   belongs_to :collection, counter_cache: true
@@ -38,11 +39,21 @@ class Transfer < ApplicationRecord
   # validates_uniqueness_of :txhash, scope: [:contract_address, :token_id_on_chain, :from, :to]
 
   after_create( 
+    :delete_old,
     :update_balances, 
     :update_token_last_transfer_time
-    # :update_token_transfers_count_7d,
+    :update_token_transfers_count_7d,
     # :update_token_transfers_count_24h
   )
+
+  def delete_old
+    transfers = Transfer.where(contract_address: self.contract_address, token_id_on_chain: self.token_id_on_chain)
+    transfers.each do |transfer|
+      if transfer.timestamp < self.timestamp - 259200
+        transfer.delete
+      end
+    end
+  end
 
   # Update the transfer's token's balances of the +from+ and +to+ account.
   #
@@ -97,11 +108,7 @@ class Transfer < ApplicationRecord
   # This method will be called after a new transfer record is created.
   def update_token_transfers_count_7d
     if self.token
-      count = Transfer
-        .where(token: self.token)
-        .where('created_at >= ?', 1.week.ago)
-        .count
-
+      count = Transfer.where(contract_address: self.contract_address, token_id_on_chain: self.token_id_on_chain).count
       self.token.update(transfers_count_7d: count)
     end
   end

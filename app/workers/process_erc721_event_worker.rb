@@ -10,10 +10,11 @@ class ProcessErc721EventWorker
 
     blockchain = args[:blockchain]
     block_number = args[:block_number]
-    address = args[:address]
+    contract_address = args[:address]
     transaction_hash = args[:transaction_hash]
     from = args[:from]
     to = args[:to]
+    timestamp = args[:timestamp]
     token_id = args[:token_id]
     token_uri = args[:token_uri]&.strip
     name = args[:name]
@@ -26,11 +27,11 @@ class ProcessErc721EventWorker
     blockchain = Blockchain.find_by_name(blockchain)
     return if blockchain.blank?
 
-    collection = Collection.find_by_contract_address(address)
+    collection = Collection.find_by_contract_address(contract_address)
     if collection.blank?
       collection = Collection.create(
         blockchain: blockchain,
-        contract_address: address,
+        contract_address: contract_address,
         name: name,
         symbol: symbol
         # total_supply: total_supply
@@ -59,27 +60,25 @@ class ProcessErc721EventWorker
       )
     end
 
-    if token_uri.length > 65535
-      raise "The token_uri of #{address}/#{token_id} is too long" 
-    else
-      # ActiveRecord::Migration.add_index :tokens, [:collection_id, :token_id_on_chain], unique: true
-      token = Token.find_by(collection: collection, token_id_on_chain: token_id)
-      if token.blank?
-        token = Token.create(
-          collection: collection,
-          token_id_on_chain: token_id,
-          token_uri: token_uri
-        )
-      end
+    token = Token.find_by(contract_address: contract_address, token_id_on_chain: token_id)
+    if token.blank?
+      token = Token.create(
+        collection: collection,
+        token_id_on_chain: token_id,
+        token_uri: token_uri
+      )
     end
 
     Transfer.create(
       collection: collection,
       token: token,
-      contract_address: address,
+      contract_address: contract_address,
       token_id_on_chain: token_id,
       from: from_account,
+      from_address: from,
       to: to_account,
+      to_address: to,
+      timestamp: timestamp,
       block_number: block_number,
       txhash: transaction_hash,
       amount: 1

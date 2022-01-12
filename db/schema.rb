@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_10_122842) do
+ActiveRecord::Schema.define(version: 2022_01_12_015131) do
 
   create_table "accounts", charset: "utf8mb4", force: :cascade do |t|
     t.string "address"
@@ -168,7 +168,10 @@ ActiveRecord::Schema.define(version: 2022_01_10_122842) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "contract_address"
     t.string "token_id_on_chain"
-    t.index ["contract_address", "token_id_on_chain", "from", "to", "txhash"], name: "transfers_uniq_index2", unique: true
+    t.integer "timestamp"
+    t.string "from_address"
+    t.string "to_address"
+    t.index ["contract_address", "token_id_on_chain"], name: "index_transfers_on_contract_address_and_token_id_on_chain"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

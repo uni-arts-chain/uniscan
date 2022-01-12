@@ -9,7 +9,7 @@
 #  contract_platform    :integer          default("evm")
 #  contract_address     :string(255)
 #  nft_type             :integer          default("erc721")
-#  total_supply         :decimal(65, )
+#  total_supply         :decimal(65, )    default(0)
 #  holders_count        :integer          default(0)
 #  transfers_count      :integer          default(0)
 #  creator_id           :integer

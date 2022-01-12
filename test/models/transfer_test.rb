@@ -14,6 +14,7 @@
 #  updated_at        :datetime         not null
 #  contract_address  :string(255)
 #  token_id_on_chain :string(255)
+#  timestamp         :integer
 #
 require "test_helper"
 
