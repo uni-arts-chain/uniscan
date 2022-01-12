@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_10_102116) do
+ActiveRecord::Schema.define(version: 2022_01_10_122842) do
 
   create_table "accounts", charset: "utf8mb4", force: :cascade do |t|
     t.string "address"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2022_01_10_102116) do
     t.integer "contract_platform", default: 0
     t.string "contract_address"
     t.integer "nft_type", default: 0
-    t.decimal "total_supply", precision: 65
+    t.decimal "total_supply", precision: 65, default: "0"
     t.integer "holders_count", default: 0
     t.integer "transfers_count", default: 0
     t.integer "creator_id"

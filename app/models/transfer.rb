@@ -39,9 +39,9 @@ class Transfer < ApplicationRecord
 
   after_create( 
     :update_balances, 
-    :update_token_last_transfer_time,
-    :update_token_transfers_count_7d,
-    :update_token_transfers_count_24h
+    :update_token_last_transfer_time
+    # :update_token_transfers_count_7d,
+    # :update_token_transfers_count_24h
   )
 
   # Update the transfer's token's balances of the +from+ and +to+ account.
@@ -51,46 +51,34 @@ class Transfer < ApplicationRecord
   # Excluding 0x0 address.
   def update_balances
     if self.token
-      # calc `from` account balance
+      # sub `from` account balance
       unless self.from.address == "0x0000000000000000000000000000000000000000" # if not mint
-        Transfer.update_balance(self.from, self.token)
-      end
-
-      # calc `to` account balance
-      unless self.to.address == "0x0000000000000000000000000000000000000000" # if not burn
-        Transfer.update_balance(self.to, self.token)
-      end
-    end
-  end
-
-  # Update a nft's balance of a account.
-  #
-  # @param account [Account] the account to update
-  # @param token [Token] the token of the account to update
-  def self.update_balance(account, token)
-      sub = Transfer.where(from: account, token: token).sum(:amount)
-      add = Transfer.where(to: account, token: token).sum(:amount)
-      balance = add - sub
-
-      token_ownership = TokenOwnership.find_by(account: account, token: token)
-      if token_ownership.present?
-
-        if balance == 0
-          token_ownership.destroy
+        token_ownership = TokenOwnership.find_by(account: self.from, token: self.token)
+        if token_ownership.present?
+          token_ownership.update balance: token_ownership.balance - self.amount
         else
-          token_ownership.update balance: balance
-        end
-
-      else
-        
-        if balance != 0
           TokenOwnership.create(
-            account: account,
+            account: self.from,
             token: token,
-            balance: balance
+            balance: -self.amount
           )
         end
       end
+
+      # add `to` account balance
+      unless self.to.address == "0x0000000000000000000000000000000000000000" # if not burn
+        token_ownership = TokenOwnership.find_by(account: self.to, token: self.token)
+        if token_ownership.present?
+          token_ownership.update balance: token_ownership.balance + self.amount
+        else
+          TokenOwnership.create(
+            account: self.to,
+            token: token,
+            balance: self.amount
+          )
+        end
+      end
+    end
   end
 
   # Update the last transfer time of the token.

@@ -62,6 +62,7 @@ class ProcessErc721EventWorker
     if token_uri.length > 65535
       raise "The token_uri of #{address}/#{token_id} is too long" 
     else
+      # ActiveRecord::Migration.add_index :tokens, [:collection_id, :token_id_on_chain], unique: true
       token = Token.find_by(collection: collection, token_id_on_chain: token_id)
       if token.blank?
         token = Token.create(

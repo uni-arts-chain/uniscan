@@ -76,5 +76,8 @@ def create_token(token_contract_address, token_id, token_uri, mint_time)
     })
 
     info.update({value: ori_count + 1})
+
+    ori_total_supply = collection.total_supply
+    collection.update(total_supply: ori_total_supply + 1)
   end
 end
