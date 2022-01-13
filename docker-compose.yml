@@ -42,25 +42,41 @@ services:
       - DB_USERNAME=root
       - DB_PASSWORD=root
 
-  eth_scan:
-    image: uniart/evm-nft-tracker
-    command: ["ethereum-nft-tracker", "12994586", "s"]
-    environment:
-      - REDIS_URL=redis://redis:6379
-
-  parse_token_uri:
+  fetch_collections:
     image: uniscan:latest
     build:
       context: .
-    command: ["rails", "token_uri:parse"]
+    command: ["rails", "fetch_collections:fetch"]
     environment:
       - REDIS_URL=redis://redis:6379
       - DB_HOST=db
       - DB_DATABASE=uniscan_development
       - DB_USERNAME=root
       - DB_PASSWORD=root
-    volumes:
-      - storage_data:/app/storage
+
+  fetch_tokens:
+    image: uniscan:latest
+    build:
+      context: .
+    command: ["rails", "fetch_tokens:fetch"]
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - DB_HOST=db
+      - DB_DATABASE=uniscan_development
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+
+  fetch_transfers:
+    image: uniscan:latest
+    build:
+      context: .
+    command: ["rails", "fetch_transfers:fetch"]
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - DB_HOST=db
+      - DB_DATABASE=uniscan_development
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
 
   update_creator:
     image: uniscan:latest
