@@ -13,7 +13,7 @@ services:
       - DB_USERNAME=root
       - DB_PASSWORD=root
     ports:
-      - '3000:3000'
+      - '3002:3000'
     volumes:
       - storage_data:/app/storage:ro
 
