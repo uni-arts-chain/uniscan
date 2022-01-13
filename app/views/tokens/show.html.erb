@@ -27,18 +27,18 @@
     <div class="col-lg-6 mx-auto">
       <h2 class="text-start">ERC721</h2>
 
-      <% if @token.owners&.length > 0 %>
+      <% if @token.owner %>
         <div class="text-muted mb-2 text-start"><strong>Owner</strong></div>
         <div class="text-muted mb-2 text-start">
-            <%= link_to account_path(@token.owners[0]) do %>
+            <%= link_to account_path(@token.owner) do %>
               <%= @token.owner&.address %>
             <% end %>
         </div>
-        <div class="text-muted mb-2 text-start">Who owns <%= @token.owner&.tokens&.count %> NFTs</div>
+        <%# <div class="text-muted mb-2 text-start">Who owns <%= @token.owner&.tokens&.count %1> NFTs</div> %>
       <% end %>
 
-      <div class="text-muted mb-2 text-start"><strong>Historically owned by</strong></div>
-      <div class="text-muted mb-2 text-start"><%= pluralize(@token.historical_owners_count, 'address') %></div>
+      <%# <div class="text-muted mb-2 text-start"><strong>Historically owned by</strong></div> %>
+      <%# <div class="text-muted mb-2 text-start"><%= pluralize(@token.historical_owners_count, 'address') %1></div> %>
     </div>
   <% else %>
     <div class="col-lg-6 mx-auto">

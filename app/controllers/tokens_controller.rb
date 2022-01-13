@@ -6,20 +6,20 @@ class TokensController < ApplicationController
   #
   # Default sort by +created_at desc+.  
   # +Push+ function is disabled by default.   
-  # 36 token per page.
+  # 72 token per page.
   def index
     params[:q] = { "s" => "created_at desc" } if params[:q].nil? 
     params[:q]["s"] = "created_at desc" if params[:q]["s"].blank?
     
-    @push = params[:push].blank? ? false : params[:push] == "true"
+    # @push = params[:push].blank? ? false : params[:push] == "true"
 
     @q = Token.ransack(params[:q])
     tokens = @q.result
       .eligible
       .includes(collection: [:blockchain])
-      .includes(:accounts)
+      # .includes(:accounts)
 
-    @pagy, @tokens = pagy(tokens, items: 36)
+    @pagy, @tokens = pagy(tokens, items: 72)
 
     @q_string = build_q_string(params[:q])
     if @pagy.page == @pagy.last
@@ -30,7 +30,7 @@ class TokensController < ApplicationController
         + "&" \
         + @q_string
     end
-    @stream_sub_name = build_stream_sub_name(params[:q])
+    # @stream_sub_name = build_stream_sub_name(params[:q])
 
     respond_to do |format|
       format.html
@@ -49,18 +49,21 @@ class TokensController < ApplicationController
     @token = Token.find(params[:id])
   end
 
+  def list
+  end
+
   private
 
   def build_q_string(q)
     return "" if q.blank?
 
     result_arr = []
-    if q["collection_blockchain_id_eq"].present?
-      result_arr << "q[collection_blockchain_id_eq]=#{q["collection_blockchain_id_eq"]}"
-    end
-    if q["collection_nft_type_eq"].present?
-      result_arr << "q[collection_nft_type_eq]=#{q["collection_nft_type_eq"]}"
-    end
+    # if q["collection_blockchain_id_eq"].present?
+    #   result_arr << "q[collection_blockchain_id_eq]=#{q["collection_blockchain_id_eq"]}"
+    # end
+    # if q["collection_nft_type_eq"].present?
+    #   result_arr << "q[collection_nft_type_eq]=#{q["collection_nft_type_eq"]}"
+    # end
     if q["name_or_description_cont"].present?
       result_arr << "q[name_or_description_cont=#{q["name_or_description_cont"]}"
     end

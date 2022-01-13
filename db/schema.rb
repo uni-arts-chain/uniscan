@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_12_015131) do
+ActiveRecord::Schema.define(version: 2022_01_13_015630) do
 
   create_table "accounts", charset: "utf8mb4", force: :cascade do |t|
     t.string "address"
@@ -145,6 +145,8 @@ ActiveRecord::Schema.define(version: 2022_01_12_015131) do
     t.integer "image_size", default: 0
     t.integer "mint_time"
     t.string "contract_address"
+    t.integer "bad", default: 0
+    t.index ["bad"], name: "index_tokens_on_bad"
     t.index ["contract_address", "token_id_on_chain"], name: "index_tokens_on_contract_address_and_token_id_on_chain"
   end
 

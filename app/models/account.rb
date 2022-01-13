@@ -13,8 +13,8 @@
 #
 class Account < ApplicationRecord
   belongs_to :blockchain
-  has_many :token_ownerships, -> { where('balance > 0') }
-  has_many :tokens, through: :token_ownerships
+  # has_many :token_ownerships, -> { where('balance > 0') }
+  # has_many :tokens, through: :token_ownerships
 
   validates :address, presence: true
 

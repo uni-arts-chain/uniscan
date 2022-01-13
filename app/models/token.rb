@@ -46,7 +46,7 @@ class Token < ApplicationRecord
 
   belongs_to :collection, optional: true
   has_many :properties
-  belongs_to :owner, class_name: 'Account'
+  belongs_to :owner, class_name: 'Account', optional: true
   # has_many :token_ownerships, -> { where('balance > 0') }
   # has_many :accounts, through: :token_ownerships
 
@@ -59,8 +59,7 @@ class Token < ApplicationRecord
 
   scope :eligible, -> {
     where(
-      "token_uri_err is null and " + 
-      "token_uri is not null"
+      "bad=0"
     )
   }
 
@@ -176,7 +175,7 @@ class Token < ApplicationRecord
     ) 
 
     # 4.
-    broadcast
+    #broadcast
   rescue => e
     token_uri_err = 
       if e.class == RuntimeError

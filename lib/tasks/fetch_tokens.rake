@@ -65,9 +65,12 @@ end
 def create_token(token_contract_address, token_id, token_uri, mint_time)
   info = TokensInfo.find_by_key("tokens_count")
   collection = Collection.find_by_contract_address(token_contract_address)
+  if collection.nil?
+    raise "collection #{contract_address} not exist"
+  end
   ori_count = info.value.to_i
   ActiveRecord::Base.transaction do
-    Token.create({
+    Token.create!({
       collection: collection,
       contract_address: token_contract_address,
       token_id_on_chain: token_id,
@@ -75,9 +78,9 @@ def create_token(token_contract_address, token_id, token_uri, mint_time)
       mint_time: mint_time
     })
 
-    info.update({value: ori_count + 1})
+    info.update!({value: ori_count + 1})
 
     ori_total_supply = collection.total_supply
-    collection.update(total_supply: ori_total_supply + 1)
+    collection.update!(total_supply: ori_total_supply + 1)
   end
 end
