@@ -32,9 +32,11 @@
       <div class="text-truncate py-1" style="font-size: 0.7rem;">
         <%= image_tag("#{token.blockchain.name.downcase}.png", size: "16x16", class: "rounded-circle") %>
         <span class="small align-bottom">
+          <% if token.owner %>
             <%= link_to account_path(token.owner) do %>
               <%= short_address(token.owner.address) %>
             <% end %>
+          <% end %>
         </span>
       </div>
 
