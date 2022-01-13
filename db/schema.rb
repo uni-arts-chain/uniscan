@@ -171,7 +171,7 @@ ActiveRecord::Schema.define(version: 2022_01_12_015131) do
     t.integer "timestamp"
     t.string "from_address"
     t.string "to_address"
-    t.index ["contract_address", "token_id_on_chain"], name: "index_transfers_on_contract_address_and_token_id_on_chain"
+    t.index ["contract_address", "token_id_on_chain", "timestamp"], name: "transfers_index3"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

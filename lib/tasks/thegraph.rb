@@ -6,7 +6,7 @@ module TGAPI
   HTTP = GraphQL::Client::HTTP.new("https://api.thegraph.com/subgraphs/name/wighawag/eip721-subgraph") do
     def headers(context)
       # Optionally set any HTTP headers
-      { "User-Agent": "Club721 Tools" }
+      { "User-Agent": "Uniscan" }
     end
   end  
 

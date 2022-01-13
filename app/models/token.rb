@@ -46,8 +46,9 @@ class Token < ApplicationRecord
 
   belongs_to :collection, optional: true
   has_many :properties
-  has_many :token_ownerships, -> { where('balance > 0') }
-  has_many :accounts, through: :token_ownerships
+  belongs_to :owner, class_name: 'Account'
+  # has_many :token_ownerships, -> { where('balance > 0') }
+  # has_many :accounts, through: :token_ownerships
 
   has_one_attached :image
 
@@ -66,23 +67,24 @@ class Token < ApplicationRecord
   # Owned by how many people in history.
   # @return [Integer] the owners count in history.
   def historical_owners_count
-    Transfer.where(token: self).distinct.count(:token_id)
+    0
+    # Transfer.where(token: self).distinct.count(:token_id)
   end
 
   # The current owner of the token.
   #
   # Returns the first owner if it is a ERC1155 token that can have multi owners.
   # @return [Account] the token's owner.
-  def owner
-    self.accounts[0]
-  end
+  # def owner
+  #   self.accounts[0]
+  # end
 
   # The current owners of the token.
   #
   # @return [Array<Account>] the token's owners.
-  def owners
-    self.accounts
-  end
+  # def owners
+    # self.accounts
+  # end
 
   # Broadcast the token html segemnt to user's browser through websocket.
   def broadcast
