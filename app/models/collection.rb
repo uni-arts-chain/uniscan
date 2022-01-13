@@ -37,7 +37,6 @@ class Collection < ApplicationRecord
   belongs_to :creator, class_name: "Account", optional: true
   has_many :tokens, -> { 
     includes(collection: [:blockchain])
-      .includes(:accounts)
       .eligible
       .with_attached_image
   }
