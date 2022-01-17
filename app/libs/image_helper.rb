@@ -88,6 +88,8 @@ class ImageHelper
 
     end
 
+    content_type = "image/jpeg" if content_type == 'image/jpg' 
+
     if content_type != "image/gif"
       # Shrink Larger Images
       puts "c6-------------"
