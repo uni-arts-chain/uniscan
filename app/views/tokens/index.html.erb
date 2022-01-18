@@ -1,7 +1,7 @@
   <div data-controller="tokens">
     <%= search_form_for @q, { class: "row justify-content-md-left g-3 pb-4" } do |f| %>
 
-      <div class="col-md-8">
+      <div class="col-md-11">
         <%= 
           f.search_field(
             :name_or_description_cont,
@@ -25,14 +25,14 @@
       <%#   </a> %>
       <%# </div> %>
 
-      <div class="col-md-3 text-end">
-        <% unless @push %>
-          <%= sort_link @q, :created_at, "Time", { default_order: :desc }, { class: "btn btn-link link-dark" } %>
-          <%= sort_link @q, :transfers_count_24h, "TR24H", {}, { class: "btn btn-link link-secondary px-1" } %>
-          <%= sort_link @q, :transfers_count_7d, "TR7D", {}, { class: "btn btn-link link-secondary px-1" } %>
-          <%# <%= sort_link @q, :last_transfer_time, "LTR", {}, { class: "btn btn-link link-secondary px-1" } %1> %>
-        <% end %>
-      </div>
+      <%# <div class="col-md-3 text-end"> %>
+      <%#   <% unless @push %1> %>
+      <%#     <%= sort_link @q, :created_at, "Time", { default_order: :desc }, { class: "btn btn-link link-dark" } %1> %>
+      <%#     <%= sort_link @q, :transfers_count_24h, "TR24H", {}, { class: "btn btn-link link-secondary px-1" } %1> %>
+      <%#     <%= sort_link @q, :transfers_count_7d, "TR7D", {}, { class: "btn btn-link link-secondary px-1" } %1> %>
+      <%#     <%1# <%= sort_link @q, :last_transfer_time, "LTR", {}, { class: "btn btn-link link-secondary px-1" } %2> %1> %>
+      <%#   <% end %1> %>
+      <%# </div> %>
     <% end %>
 
     <%# <% if @push %1> %>
