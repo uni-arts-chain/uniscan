@@ -19,7 +19,7 @@ class TokensController < ApplicationController
       .includes(collection: [:blockchain])
       # .includes(:accounts)
 
-    @pagy, @tokens = pagy(tokens, items: 72)
+    @pagy, @tokens = pagy_countless(tokens, items: 72)
 
     @q_string = build_q_string(params[:q])
     if @pagy.page == @pagy.last
