@@ -8,8 +8,8 @@ class TokensController < ApplicationController
   # +Push+ function is disabled by default.   
   # 72 token per page.
   def index
-    params[:q] = { "s" => "created_at desc" } if params[:q].nil? 
-    params[:q]["s"] = "created_at desc" if params[:q]["s"].blank?
+    params[:q] = { "s" => "id desc" } if params[:q].nil? 
+    params[:q]["s"] = "id desc" if params[:q]["s"].blank?
     
     # @push = params[:push].blank? ? false : params[:push] == "true"
 
