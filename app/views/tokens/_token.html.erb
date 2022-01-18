@@ -4,7 +4,7 @@
     <div class="position-relative">
       <%= link_to url_for("tokens/#{token.contract_address}/#{token.token_id_on_chain}"), class: "" do %>
         <%# <img src="<%= image_path("logo-uniscan.png") %1>" data-src="<%= token_image(token) %1>" alt="<%= token.name.nil? ? '' : token.name %1>" style="width: 100%" class="nft-img" /> %>
-        <img loading="lazy" src="<%= token_image(token) %>" alt="<%= token.name.nil? ? '' : token.name %>" style="width: 100%" class="nft-img" />
+        <img loading="lazy" src="<%= token.image_uri %>" alt="<%= token.name.nil? ? '' : token.name %>" style="width: 100%" class="nft-img" />
       <% end %>
 
       <% if token.ipfs? %>

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="col col-lg-7 p-0 position-relative">
-        <img src="<%= token_image_big(@token) %>" alt="<%= @token.name.nil? ? '' : @token.name %>" style="width: 100%" class="nft-img shadow-lg" />
+        <img src="<%= @token.image_uri %>" alt="<%= @token.name.nil? ? '' : @token.name %>" style="width: 100%" class="nft-img shadow-lg" />
         <% if @token.ipfs? %>
           <span class="badge position-absolute bottom-0 end-0" style="background-color: #6acad1">
             IPFS
