@@ -11,6 +11,10 @@ class CollectionsController < ApplicationController
 
   def show2
     @collection = Collection.find_by_contract_address(params[:address])
-    @pagy, @tokens= pagy(@collection.tokens, items: 24)
+    if @collection.nil?
+      not_found
+    else
+      @pagy, @tokens= pagy(@collection.tokens, items: 24)
+    end
   end
 end
