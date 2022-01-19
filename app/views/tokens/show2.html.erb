@@ -3,7 +3,7 @@
     <div class="row justify-content-md-center">
       <div class="col col-lg-7 p-0 position-relative">
         <% if @token.image_uri.present? %>
-          <img src="<%= @token.image_uri %>" alt="<%= @token.name.nil? ? '' : @token.name %>" style="width: 100%" class="nft-img shadow-lg" />
+          <img src="<%= @token.get_image_url %>" alt="<%= @token.name.nil? ? '' : @token.name %>" style="width: 100%" class="nft-img shadow-lg" />
         <% else %>
           <img src="<%= image_path("logo-uniscan.png") %>" alt="<%= @token.name.nil? ? '' : @token.name %>" style="width: 100%" class="nft-img shadow-lg" />
         <% end %>

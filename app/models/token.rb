@@ -166,7 +166,7 @@ class Token < ApplicationRecord
     end
 
     # 3. attach image
-    attach_image
+    # attach_image
 
     # 4. fininshed
     self.update(
@@ -271,6 +271,15 @@ class Token < ApplicationRecord
       image_size: tempfile.size, # it is not the originally image file size
       image_ori_content_type: ori_content_type
     )
+  end
+
+  def get_image_url
+    url = if self.image_uri.start_with?("ipfs://")
+            "https://dweb.link/ipfs/#{self.image_uri[7..]}"
+          else
+            self.image_uri
+          end
+    return url
   end
 
 end
