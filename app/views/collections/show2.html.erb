@@ -1,0 +1,32 @@
+<div data-controller="collections">
+  <section class="py-5 text-center container">
+    <div class="row">
+      <div class="col-lg-6 col-md-8 mx-auto">
+
+        <h1 class="fw-light mt-2"><%= @collection.name %></h1>
+
+        <p>
+          <span><%= @collection.supply %> <%= @collection.symbol %></span>
+          <span><%= @collection.holders_count %> Holders</span>
+          <span><%= @collection.transfers_count %> Tranfers</span>
+        </p>
+
+        <p>
+          <span>Contract: <%= link_to @collection.contract_address, @collection.explorer_url %></span>
+        </p>
+        <p>
+          <span>Created by: <%= link_to @collection.creator&.address, @collection.creator&.explorer_url %></span>
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="row gx-3 gy-4">
+    <%= render partial: "token", collection: @tokens %>
+  </div>
+
+  <div class="pt-5">
+    <%== pagy_bootstrap_nav(@pagy) %>
+  </div>
+</div>

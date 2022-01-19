@@ -23,7 +23,8 @@
     <div class="card-body px-2 py-1">
 
       <div class="text-truncate small py-1">
-        <%= link_to url_for(token_path(token)) do %>
+        <%= link_to url_for("../tokens/#{token.contract_address}/#{token.token_id_on_chain}"), class: "" do %>
+        <%# <%= link_to url_for(token_path(token)) do %1> %>
           <%= token.name.nil? ? '_' : token.name %>
         <% end %>
       </div>
