@@ -53,7 +53,8 @@ class TokensController < ApplicationController
   end
 
   def show2
-    @token = Token.find_by(contract_address: params[:address], token_id_on_chain: params[:token_id])
+    collection = Collection.find_by(contract_address: params[:address])
+    @token = Token.find_by(collection: collection, token_id_on_chain: params[:token_id])
   end
 
   private
