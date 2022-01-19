@@ -78,6 +78,18 @@ services:
       - DB_USERNAME=root
       - DB_PASSWORD=root
 
+  token_uri:
+    image: uniscan:latest
+    build:
+      context: .
+    command: ["rails", "token_uri:parse"]
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - DB_HOST=db
+      - DB_DATABASE=uniscan_development
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+
   update_creator:
     image: uniscan:latest
     build:
