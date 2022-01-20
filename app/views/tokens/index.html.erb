@@ -1,18 +1,13 @@
   <div data-controller="tokens">
-    <%= search_form_for @q, { class: "row justify-content-md-left g-3 pb-4" } do |f| %>
+    <form class="row justify-content-md-left g-3 pb-4" id="token_search" action="/tokens" accept-charset="UTF-8" method="get">
 
       <div class="col-md-11">
-        <%= 
-          f.search_field(
-            :name_or_description_cont,
-            { class: "form-control rounded-pill", placeholder: "Name or description contains" } 
-          )
-          %>
+        <input class="form-control rounded-pill" placeholder="Name or description contains" type="search" name="q[name_or_description_cont]" id="q_name_or_description_cont">
       </div>
 
       <div class="col-md-1">
-        <input name="push" type="hidden" value="<%= @push ? "true" : "false" %>">
-        <%= f.submit class: "btn btn-dark rounded-pill" %>
+        <%# <input name="push" type="hidden" value="<%= @push ? "true" : "false" %1>"> %>
+        <input type="submit" name="commit" value="Search" class="btn btn-dark rounded-pill" data-disable-with="Search">
       </div>
 
       <%# <div class="col-md-1" style="margin-top:23px"> %>
@@ -33,7 +28,7 @@
       <%#     <%1# <%= sort_link @q, :last_transfer_time, "LTR", {}, { class: "btn btn-link link-secondary px-1" } %2> %1> %>
       <%#   <% end %1> %>
       <%# </div> %>
-    <% end %>
+    </form>
 
     <%# <% if @push %1> %>
     <%#   <% if @stream_sub_name.blank? %1> %>

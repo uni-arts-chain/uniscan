@@ -8,13 +8,14 @@ class TokensController < ApplicationController
   # +Push+ function is disabled by default.   
   # 72 token per page.
   def index
-    params[:q] = { "s" => "id desc" } if params[:q].nil? 
-    params[:q]["s"] = "id desc" if params[:q]["s"].blank?
+    # params[:q] = { "s" => "id desc" } if params[:q].nil? 
+    # params[:q]["s"] = "id desc" if params[:q]["s"].blank?
     
     # @push = params[:push].blank? ? false : params[:push] == "true"
 
-    @q = Token.ransack(params[:q])
-    tokens = @q.result
+    query = params[:q]["name_or_description_cont"]
+    @q = Token.where("MATCH (name,description) AGAINST ('+#{query}' IN BOOLEAN MODE)")
+    tokens = @q
       .eligible
       .includes(collection: [:blockchain])
       # .includes(:accounts)
@@ -71,9 +72,9 @@ class TokensController < ApplicationController
     if q["name_or_description_cont"].present?
       result_arr << "q[name_or_description_cont=#{q["name_or_description_cont"]}"
     end
-    if q["s"].present?
-      result_arr << "q[s]=#{q["s"]}"
-    end
+    # if q["s"].present?
+    #   result_arr << "q[s]=#{q["s"]}"
+    # end
 
     return "" if result_arr.length == 0
 
