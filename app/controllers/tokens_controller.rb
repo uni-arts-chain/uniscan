@@ -13,7 +13,7 @@ class TokensController < ApplicationController
     
     # @push = params[:push].blank? ? false : params[:push] == "true"
 
-    if params[:q].present?
+    if params[:q].present? && params[:q]["name_or_description_cont"].present?
       @query = params[:q]["name_or_description_cont"]
       @q = Token.where("MATCH (name,description) AGAINST ('+#{@query}' IN BOOLEAN MODE)").order(id: :desc)
     else
