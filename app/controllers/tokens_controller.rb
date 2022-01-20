@@ -13,8 +13,13 @@ class TokensController < ApplicationController
     
     # @push = params[:push].blank? ? false : params[:push] == "true"
 
-    query = params[:q]["name_or_description_cont"]
-    @q = Token.where("MATCH (name,description) AGAINST ('+#{query}' IN BOOLEAN MODE)")
+    if params[:q].present?
+      @query = params[:q]["name_or_description_cont"]
+      @q = Token.where("MATCH (name,description) AGAINST ('+#{@query}' IN BOOLEAN MODE)")
+    else
+      @query = ""
+      @q = Token.all
+    end
     tokens = @q
       .eligible
       .includes(collection: [:blockchain])
@@ -23,6 +28,7 @@ class TokensController < ApplicationController
     @pagy, @tokens = pagy_countless(tokens, items: 72)
 
     @q_string = build_q_string(params[:q])
+    puts @q_string
     if @pagy.page == @pagy.last
       @next_page_url = nil
     else
@@ -32,6 +38,7 @@ class TokensController < ApplicationController
         + @q_string
     end
     # @stream_sub_name = build_stream_sub_name(params[:q])
+    
 
     respond_to do |format|
       format.html
@@ -70,7 +77,7 @@ class TokensController < ApplicationController
     #   result_arr << "q[collection_nft_type_eq]=#{q["collection_nft_type_eq"]}"
     # end
     if q["name_or_description_cont"].present?
-      result_arr << "q[name_or_description_cont=#{q["name_or_description_cont"]}"
+      result_arr << "q[name_or_description_cont]=#{q["name_or_description_cont"]}"
     end
     # if q["s"].present?
     #   result_arr << "q[s]=#{q["s"]}"

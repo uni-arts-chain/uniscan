@@ -2,7 +2,7 @@
     <form class="row justify-content-md-left g-3 pb-4" id="token_search" action="/tokens" accept-charset="UTF-8" method="get">
 
       <div class="col-md-11">
-        <input class="form-control rounded-pill" placeholder="Name or description contains" type="search" name="q[name_or_description_cont]" id="q_name_or_description_cont">
+        <input class="form-control rounded-pill" placeholder="Name or description contains" type="search" value="<%= @query %>" name="q[name_or_description_cont]" id="q_name_or_description_cont">
       </div>
 
       <div class="col-md-1">
