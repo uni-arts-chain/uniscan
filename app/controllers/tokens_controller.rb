@@ -15,10 +15,10 @@ class TokensController < ApplicationController
 
     if params[:q].present?
       @query = params[:q]["name_or_description_cont"]
-      @q = Token.where("MATCH (name,description) AGAINST ('+#{@query}' IN BOOLEAN MODE)")
+      @q = Token.where("MATCH (name,description) AGAINST ('+#{@query}' IN BOOLEAN MODE)").order(id: :desc)
     else
       @query = ""
-      @q = Token.all
+      @q = Token.all.order(id: :desc)
     end
     tokens = @q
       .eligible
