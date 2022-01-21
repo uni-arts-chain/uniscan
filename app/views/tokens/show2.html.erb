@@ -24,11 +24,13 @@
       </div>
   </div>
 
-  <% if @token.update_metadata_time.nil? || @token.update_metadata_time < (Time.now - 5.minutes) %>
-    <%= form_with url: "/tokens/#{@token.contract_address}/#{@token.token_id_on_chain}/update_metadata", method: :post do |form| %>
-      <%= form.submit "Update Metadata" %>
+  <div class="pt-5">
+    <% if @token.update_metadata_time.nil? || @token.update_metadata_time < (Time.now - 5.minutes) %>
+      <%= form_with url: "/tokens/#{@token.contract_address}/#{@token.token_id_on_chain}/update_metadata", method: :post do |form| %>
+        <%= form.submit "Update Metadata" %>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 
   <h1 class="display-4 fw-bold mt-5"><%= @token.name %></h1>
   <div class="col-lg-6 mx-auto">
