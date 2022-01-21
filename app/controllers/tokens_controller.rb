@@ -64,6 +64,11 @@ class TokensController < ApplicationController
   def list
   end
 
+  def update_metadata
+    UpdateMetadataWorker.perform_async(params[:id])
+    redirect_back(fallback_location: root_path)
+  end
+
   private
 
   def build_q_string(q)

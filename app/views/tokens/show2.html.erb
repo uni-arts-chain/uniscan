@@ -8,6 +8,8 @@
           <img src="<%= image_path("logo-uniscan.png") %>" alt="<%= @token.name.nil? ? '' : @token.name %>" style="width: 100%" class="nft-img shadow-lg" />
         <% end %>
 
+        <%= link_to "Update metadata", "/tokens/#{@token.id}/update_metadata", method: :post, class: "btn btn-outline-dark btn-sm position-absolute top-0 end-0" %>
+
         <% if @token.ipfs? %>
           <span class="badge position-absolute bottom-0 end-0" style="background-color: #6acad1">
             IPFS
@@ -22,6 +24,7 @@
         <% end %>
       </div>
   </div>
+
 
   <h1 class="display-4 fw-bold mt-5"><%= @token.name %></h1>
   <div class="col-lg-6 mx-auto">

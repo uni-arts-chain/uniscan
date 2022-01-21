@@ -3,6 +3,8 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   root 'tokens#index'
   get 'welcome/index'
+
+  get 'tokens/:id/update_metadata', to: 'tokens#update_metadata'
   resources :tokens, only: [:index, :show]
   resources :collections, only: [:show]
   resources :accounts, only: [:show]
