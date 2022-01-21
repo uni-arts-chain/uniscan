@@ -39,11 +39,15 @@ class Transfer < ApplicationRecord
   # validates_uniqueness_of :txhash, scope: [:contract_address, :token_id_on_chain, :from, :to]
 
   after_create( 
-    # :update_balances, 
+    :update_token_owner, 
     # :update_token_last_transfer_time,
     :update_token_transfers_count_7d,
     :update_token_transfers_count_24h
   )
+
+  def update_token_owner
+    self.token.update(owner: self.to)
+  end
 
   # Update the transfer's token's balances of the +from+ and +to+ account.
   #

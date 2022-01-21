@@ -6,3 +6,4 @@ production:
   - default
   - erc721_events
   - erc1155_events
+  - update_metadata_events
