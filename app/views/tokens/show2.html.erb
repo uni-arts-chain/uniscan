@@ -8,9 +8,6 @@
           <img src="<%= image_path("logo-uniscan.png") %>" alt="<%= @token.name.nil? ? '' : @token.name %>" style="width: 100%" class="nft-img shadow-lg" />
         <% end %>
 
-        <% if @token.update_metadata_time.nil? || @token.update_metadata_time < (Time.now - 5.minutes) %>
-          <%= link_to "Update metadata", "/tokens/#{@token.contract_address}/#{@token.token_id_on_chain}/update_metadata", method: :post, class: "btn btn-outline-dark btn-sm position-absolute top-0 end-0" %>
-        <% end %>
 
         <% if @token.ipfs? %>
           <span class="badge position-absolute bottom-0 end-0" style="background-color: #6acad1">
@@ -27,6 +24,11 @@
       </div>
   </div>
 
+  <% if @token.update_metadata_time.nil? || @token.update_metadata_time < (Time.now - 5.minutes) %>
+    <%= form_with url: "/tokens/#{@token.contract_address}/#{@token.token_id_on_chain}/update_metadata", method: :post do |form| %>
+      <%= form.submit "Update Metadata" %>
+    <% end %>
+  <% end %>
 
   <h1 class="display-4 fw-bold mt-5"><%= @token.name %></h1>
   <div class="col-lg-6 mx-auto">

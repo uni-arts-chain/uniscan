@@ -110,8 +110,8 @@ docker-compose run --rm uniscan rails db:seed
 3. Run services
 
 ```
-docker-compose up -d fetch_collections fetch_tokens fetch_transfers update_creator
-docker-compose up -d uniscan
+docker-compose up -d fetch_collections fetch_tokens token_uri fetch_transfers update_creator
+docker-compose up -d sidekiq uniscan
 ```
 
 ### Test
