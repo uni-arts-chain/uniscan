@@ -65,7 +65,11 @@ class TokensController < ApplicationController
   end
 
   def update_metadata
-    UpdateMetadataWorker.perform_async(params[:id])
+    token = Token.find_by(contract_address: params[:address], token_id_on_chain: params[:token_id])
+    if token.update_metadata_time.nil? || token.update_metadata_time < (Time.now - 5.minutes)
+      token.update(update_metadata_time: Time.now)
+      UpdateMetadataWorker.perform_async(token.id)
+    end
     redirect_back(fallback_location: root_path)
   end
 

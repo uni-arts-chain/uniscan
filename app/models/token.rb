@@ -171,7 +171,8 @@ class Token < ApplicationRecord
     # 4. fininshed
     self.update(
       token_uri_err: nil,
-      token_uri_processed: true
+      token_uri_processed: true,
+      update_metadata_time: Time.now
     ) 
 
     # 4.
