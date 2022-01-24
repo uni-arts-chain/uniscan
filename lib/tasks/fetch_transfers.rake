@@ -36,9 +36,9 @@ namespace :fetch_transfers do
             timestamp = t.timestamp
             from = t.from.id
             to = t.to.id
-            a2 = Time.now
+            # a2 = Time.now
             Transfer.create_transfer("Ethereum", block_number, contract_address, txhash, from, to, timestamp, token_id, token_uri, name, symbol)
-            puts Time.now - a2
+            # puts Time.now - a2
           end
         else
           puts "There is no more transfers, wait 1 minute."

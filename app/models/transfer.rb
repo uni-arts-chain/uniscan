@@ -185,11 +185,11 @@ class Transfer < ApplicationRecord
       amount: 1
     )
 
-    a5 = Time.now
-    puts "0: #{a1-a0}"
-    puts "1: #{a2-a1}"
-    puts "2: #{a3-a2}"
-    puts "3: #{a4-a3}"
-    puts "4: #{a5-a4}"
+    # a5 = Time.now
+    # puts "0: #{a1-a0}"
+    # puts "1: #{a2-a1}"
+    # puts "2: #{a3-a2}"
+    # puts "3: #{a4-a3}"
+    # puts "4: #{a5-a4}"
   end
 end
