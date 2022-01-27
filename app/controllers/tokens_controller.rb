@@ -20,34 +20,39 @@ class TokensController < ApplicationController
       @query = ""
       @q = Token.all.order(id: :desc)
     end
-    tokens = @q
-      .eligible
-      .includes(collection: [:blockchain])
-      # .includes(:accounts)
 
-    @pagy, @tokens = pagy_countless(tokens, items: 72)
-
-    @q_string = build_q_string(params[:q])
-    puts @q_string
-    if @pagy.page == @pagy.last
-      @next_page_url = nil
+    if @query.start_with?("0x") && @query.length == 42
+      redirect_to "/contracts/#{@query}"
     else
-      @next_page_url = 
-        tokens_url(page: @pagy.next) \
-        + "&" \
-        + @q_string
-    end
-    # @stream_sub_name = build_stream_sub_name(params[:q])
-    
+      tokens = @q
+        .eligible
+        .includes(collection: [:blockchain])
+        # .includes(:accounts)
 
-    respond_to do |format|
-      format.html
-      format.json {
-        render json: { 
-          entries: render_to_string(partial: "tokens", formats: [:html]),
-          next_page_url: @next_page_url
+      @pagy, @tokens = pagy_countless(tokens, items: 72)
+
+      @q_string = build_q_string(params[:q])
+      puts @q_string
+      if @pagy.page == @pagy.last
+        @next_page_url = nil
+      else
+        @next_page_url = 
+          tokens_url(page: @pagy.next) \
+          + "&" \
+          + @q_string
+      end
+      # @stream_sub_name = build_stream_sub_name(params[:q])
+      
+
+      respond_to do |format|
+        format.html
+        format.json {
+          render json: { 
+            entries: render_to_string(partial: "tokens", formats: [:html]),
+            next_page_url: @next_page_url
+          }
         }
-      }
+      end
     end
   end
 
